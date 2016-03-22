@@ -1,0 +1,4 @@
+baseurl = "/"
+canonifyurls = true
+languageCode = "en-us"
+title = "Sparkfabrik tech blog"
