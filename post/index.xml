@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Sparkfabrik tech blog</title>
-    <link>sparkfabrik.github.io/post/</link>
+    <link>http://sparkfabrik.github.io/post/</link>
     <description>Recent content in Posts on Sparkfabrik tech blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Mar 2016 16:31:55 +0000</lastBuildDate>
-    <atom:link href="sparkfabrik.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://sparkfabrik.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>good to great</title>
-      <link>/sparkfabrik.github.io/post/good-to-great/</link>
+      <link>http://sparkfabrik.github.io/post/good-to-great/</link>
       <pubDate>Wed, 23 Mar 2016 16:31:55 +0000</pubDate>
       
-      <guid>/sparkfabrik.github.io/post/good-to-great/</guid>
+      <guid>http://sparkfabrik.github.io/post/good-to-great/</guid>
       <description></description>
     </item>
     
