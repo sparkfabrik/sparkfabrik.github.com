@@ -2,8 +2,9 @@ hugo:
   build: .
   dockerfile: Dockerfile
   ports:
-    - "8080:8080"
+    - "80:80"
   volumes:
     - ./src:/app
     - ./output:/output
-  command: 'hugo server --bind 0.0.0.0 --port=8080 --buildDrafts --theme=default --baseUrl=tech.sparkfabrik.loc'
+  environment:
+    - DNSDOCK_ALIAS=tech.sparkfabrik.loc

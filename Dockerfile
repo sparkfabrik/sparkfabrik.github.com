@@ -15,14 +15,15 @@ RUN tar xzf /usr/local/${HUGO_BINARY}.tar.gz -C /usr/local/ \
 
 # Create working directory
 VOLUME /app
-VOLUME /output
 WORKDIR /app
 
 # Add sources.
 ADD src/ /app
+ADD build.sh /usr/local/bin/build
+RUN chmod +x /usr/local/bin/build
 
 # By default, serve site.
-EXPOSE 8080
+EXPOSE 80
 ENV HUGO_URL 0.0.0.0
-ENV HUGO_PORT 8080
-CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --theme=default
+ENV HUGO_PORT 80
+CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --renderToDisk=true  --theme=default --baseUrl=tech.sparkfabrik.loc
