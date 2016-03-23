@@ -1,6 +1,7 @@
 FROM alpine:3.3
 MAINTAINER paolo.mainardi@sparkfabrik.com
-ENV DEBIAN_FRONTEND noninteractive
+RUN apk add --no-cache vim py-pip python && \
+  pip install Pygments
 
 # Download and install hugo
 ENV HUGO_VERSION 0.15
@@ -13,14 +14,14 @@ RUN tar xzf /usr/local/${HUGO_BINARY}.tar.gz -C /usr/local/ \
   && rm /usr/local/${HUGO_BINARY}.tar.gz
 
 # Create working directory
-RUN mkdir /app
+VOLUME /app
+VOLUME /output
 WORKDIR /app
 
-# Automatically build site
+# Add sources.
 ADD src/ /app
-RUN hugo -d /app
 
-# By default, serve site
+# By default, serve site.
 EXPOSE 8080
 ENV HUGO_URL 0.0.0.0
 ENV HUGO_PORT 8080

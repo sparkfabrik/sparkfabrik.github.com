@@ -1,8 +1,0 @@
-hugo:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-    - "8080:8080"
-  volumes:
-    - ./src:/app
-  command: 'hugo server --bind 0.0.0.0 --port=8080 --buildDrafts --theme=default --baseUrl=localhost'
