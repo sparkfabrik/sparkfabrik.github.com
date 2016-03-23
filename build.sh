@@ -1,2 +1,2 @@
 #!/bin/sh
-hugo --buildDrafts --theme default
+hugo --buildDrafts --theme spark

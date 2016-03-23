@@ -26,4 +26,4 @@ RUN chmod +x /usr/local/bin/build
 EXPOSE 80
 ENV HUGO_URL 0.0.0.0
 ENV HUGO_PORT 80
-CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --renderToDisk=true  --theme=default --baseUrl=tech.sparkfabrik.loc
+CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --renderToDisk=true  --theme=spark --baseUrl=tech.sparkfabrik.loc
