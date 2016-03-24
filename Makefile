@@ -1,7 +1,7 @@
 BASE_URL="http://sparkfabrik.github.io"
 DEPLOY_DIR=output
 DEPLOY_BRANCH=master
-REPO=https://${GH_TOKEN}@github.com/sparkfabrik/sparkfabrik.github.com.git
+REPO=https://$GH_TOKEN@github.com/sparkfabrik/sparkfabrik.github.com.git
 DEPLOY_USERNAME="Travis CI"
 
 all: docker build deploy
