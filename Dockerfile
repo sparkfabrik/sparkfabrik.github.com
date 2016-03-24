@@ -19,7 +19,7 @@ WORKDIR /app
 
 # Add sources.
 ADD src/ /app
-ADD build.sh /usr/local/bin/build
+ADD scripts/build.sh /usr/local/bin/build
 RUN chmod +x /usr/local/bin/build
 
 # By default, serve site.
