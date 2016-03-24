@@ -5,5 +5,5 @@ title = "Hello world"
 
 +++
 
-Hello worlds, posts are coming.
+Hello world, posts are coming.
 
