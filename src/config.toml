@@ -1,6 +1,6 @@
 canonifyurls = true
 languageCode = "en-us"
-title = "Sparkfabrik tech blog"
+title = "Tech @ Sparkfabrik"
 pygmentsUseClasses = true
 
 [[menu.main]]
