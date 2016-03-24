@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -o errexit #abort if any command fails
+
+if [ "$TRAVIS_BRANCH" != "dev" ]
+then
+  echo "This commit was made against the $TRAVIS_BRANCH and not the dev! No deploy!"
+  exit 0
+fi
+
 me=$(basename "$0")
 
 help_message="\
