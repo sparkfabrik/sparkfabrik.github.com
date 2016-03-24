@@ -1,0 +1,16 @@
+secure: "BmjYfyllpWMCwzq8stC+1xafXXcjkAz5igogE/WYPJUIIJo/Ga2nm+y+HAbymwLaNzw/IM2olJvHwzGYHBv9aTUaH7OHzuciJ8T6tu0ru0VjTsWTG6O0hK/AGJVQln/w+HCwcpCOEsEfT+Rhp6SXQ4p1odQ0f6BwRjWGVZaYFZh8jb6m03kBRALMBekBb5ID77KOp1y4DTemIKPT7Vko4CBDQL3ZEFhxe8ffPtuRRbxmSxcVBhb8LZp463CILXb4dLWOITIAkS4TEoPYFbnuo+9K4U/22PkbhD+Zx+UfZOUH2ud3dlLCearcmQMwT0PGQWPJzEPBxWBMOIfg+FJTysnpFjsKyyo7ETbzWgdRqju56ELRTVCk1nk4ofBGHMTF1iq1O4hEjb1A1q0cBbk8POmvhazREdliYkUXWQirkEx4MyoGY8hXBJpUIcd/1x3lGThRZ3w346VRlLMWJ23KMs0xkvHtE5RE9pDYTcNn9onnF/+nrOUOfQYVH3U/FlGpPKHjRssYzRFpFmscM05ICpoi/pWaZ8UHHkOUVjQj98uKzYyJ78QwG4/WcMyoK3eGzlZ+3fi8L0nYH2fGnq400D8Wp1Bdta9UPCvpchSWwca/6LEETxVvmWipZM/O8ZGYXCDjdtQT3AVaA5lplOyWCfLnm8qpwE5+5Rotp/7Qi6Y="
+sudo: required
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.5.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+script: make deploy
