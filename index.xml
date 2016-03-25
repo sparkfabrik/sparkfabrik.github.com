@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sparkfabrik tech blog</title>
+    <title>Tech @ Sparkfabrik</title>
     <link>http://sparkfabrik.github.io/</link>
-    <description>Recent content on Sparkfabrik tech blog</description>
+    <description>Recent content on Tech @ Sparkfabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Mar 2016 16:31:55 +0000</lastBuildDate>
