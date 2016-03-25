@@ -3,12 +3,34 @@ languageCode = "en-us"
 title = "Tech @ Sparkfabrik"
 pygmentsUseClasses = true
 
+[Params]
+  logo = "img/avatar-icon.png"
+  description = "Sparkfabrik tech blog"
+
+[Author]
+  name = "Sparkfabrik"
+  email = "info@sparkfabrik.com"
+  facebook = "sparkfabrik"
+  twitter = "sparkfabrik"
+  phone = "+39-02-83631284"
+
 [[menu.main]]
     name = "Blog"
     url = "/"
     weight = 1
 
 [[menu.main]]
+    name = "Team"
+    url = "/page/team/"
+    weight = 2
+
+[[menu.main]]
     name = "About"
     url = "/page/about/"
-    weight = 2
+    weight = 3
+
+[[menu.main]]
+    name = "Archive"
+    url = "/archive/"
+    weight = 3
+

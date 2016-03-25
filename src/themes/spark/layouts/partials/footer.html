@@ -3,16 +3,22 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-          {{ if .Site.Author.facebook }}
           <li>
-            <a href="https://www.facebook.com/{{ .Site.Author.facebook }}" title="Facebook">
+            <a href="https://www.sparkfabrik.com" title="home">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
               </span>
             </a>
           </li>
-          {{ end }}
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           {{ if .Site.Author.github }}
           <li>
             <a href="https://github.com/{{ .Site.Author.github }}" title="GitHub">
@@ -63,7 +69,6 @@
             </a>
           </li>
           {{ end }}
-
     		  <li>
       			<a href="{{ .Site.BaseURL}}index.xml" title="RSS">
       			  <span class="fa-stack fa-lg">

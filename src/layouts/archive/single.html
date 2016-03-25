@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {{ partial "head.html" . }}
+
+  <body>
+
+    {{ partial "nav.html" . }}
+
+    <div role="main" class="container main-content">
+       <h1>{{ .Title }}</h1>
+       <div id="archive">
+         {{ range (where .Site.Pages "Type" "post") }}
+           <div class="row row-top-margin">
+             <div class="col-md-2">
+               <div class="article-year">{{ .Date | dateFormat "2006" }}</div>
+               <div class="article-month">
+                 <time>
+                   <span class="month">{{ .Date | dateFormat "Jan" }}</span>
+                   <span class="day">{{ .Date | dateFormat "2" }}</span>
+                 </time>
+               </div>
+             </div>
+             <div class="col-md-10">
+              <div class="article-title">
+                 <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+              </div>
+             </div>
+           </div>
+         {{ end }}
+      </div>
+    </div>
+
+    {{ partial "footer.html" . }}
+
+  </body>
+</html>

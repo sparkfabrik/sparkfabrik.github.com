@@ -169,14 +169,14 @@ img {
     width: 100px;
     margin-top: -50px;
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img-border {
     width: 100%;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img {
     width: 100%;
   }
@@ -221,7 +221,7 @@ footer .theme-by {
     font-size: 16px;
   }
 }
- 
+
 /* --- Post preview --- */
 
 .post-preview {
@@ -409,4 +409,33 @@ table tr td :first-child {
 table tr th :last-child,
 table tr td :last-child {
   margin-bottom: 0;
+}
+
+.team-page img {
+  width: 180px;
+  margin-right: 20px;
+}
+
+.row-top-margin {
+  margin-top: 25px;
+}
+
+#archive {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#archive .article-year {
+  font-size: 30px;
+  color: #808080;
+}
+
+#archive .article-month {
+  font-size: 16px;
+  font-style: italic;
+  color: #808080;
+}
+
+#archive .article-title a {
+  font-size: 36px;
+  color: #404040;
 }
