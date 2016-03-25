@@ -6,6 +6,8 @@
     <description>Recent content in Posts on Tech @ Sparkfabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
+    <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Wed, 23 Mar 2016 16:31:55 +0000</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +15,7 @@
       <title>Hello world</title>
       <link>http://sparkfabrik.github.io/post/hello-world/</link>
       <pubDate>Wed, 23 Mar 2016 16:31:55 +0000</pubDate>
-      
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
       <guid>http://sparkfabrik.github.io/post/hello-world/</guid>
       <description>&lt;p&gt;Hello world, posts are coming.&lt;/p&gt;
 </description>
