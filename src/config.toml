@@ -1,7 +1,6 @@
 canonifyurls = true
 languageCode = "en-us"
 title = "Tech @ Sparkfabrik"
-pygmentsUseClasses = true
 
 [Params]
   logo = "img/avatar-icon.png"
