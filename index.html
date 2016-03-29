@@ -21,7 +21,11 @@
   <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/rouge.css" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/solarized-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
   
   <meta property="og:title" content="Tech @ Sparkfabrik" />
@@ -103,7 +107,7 @@
           </p>
 
           <div class="post-entry">
-            Hello world, posts are coming.
+            Hello world, posts are coming. /** * Gathers a listing of links to nodes. * * @param $result * A database result object from a query to fetch node entities. If your * query joins the {node_comment_statistics} table so that the comment_count * field is available, a title attribute will be added to show the number of * comments. * @param $title * A heading for the resulting list. * * @return * A renderable array containing a list of linked node titles fetched from * $result, or FALSE if there are no rows in $result.
       	  <a href="http://sparkfabrik.github.io/post/hello-world/" class="post-read-more">[Read&nbsp;More]</a>
           </div>
 
