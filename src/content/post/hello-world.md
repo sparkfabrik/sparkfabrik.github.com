@@ -9,18 +9,29 @@ Hello world, posts are coming.
 
 ~~~php
 /**
- * Implements hook_init().
+ * Gathers a listing of links to nodes.
+ *
+ * @param $result
+ *   A database result object from a query to fetch node entities. If your
+ *   query joins the {node_comment_statistics} table so that the comment_count
+ *   field is available, a title attribute will be added to show the number of
+ *   comments.
+ * @param $title
+ *   A heading for the resulting list.
+ *
+ * @return
+ *   A renderable array containing a list of linked node titles fetched from
+ *   $result, or FALSE if there are no rows in $result.
  */
-function elite_base_init() {
-  module_load_include('inc', 'token', 'token.tokens');
-  drupal_add_js(drupal_get_path('module', 'elite_base') . '/js/elite_base_utils.js');
-  $cur_domain = elite_base_get_domain();
-  if ($cur_domain['elite_type'] === 'elite_exchange') {
-    drupal_add_js(drupal_get_path('module', 'elite_base') . '/js/elite_base_ec_modals.js');
+function node_title_list($result, $title = NULL) {
+  $items = array();
+  $num_rows = FALSE;
+  foreach ($result as $node) {
+    $items[] = l($node->title, 'node/' . $node->nid, !empty($node->comment_count) ? array('attributes' => array('title' => format_plural($node->comment_count, '1 comment', '@count comments'))) : array());
+    $num_rows = TRUE;
   }
-  if ($plugin = context_get_plugin('condition', 'elite_base_elite_domain_type')) {
-    $plugin->execute();
-  }
+
+  return $num_rows ? array('#theme' => 'item_list__node', '#items' => $items, '#title' => $title) : FALSE;
 }
 ~~~
 
