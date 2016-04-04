@@ -7,6 +7,8 @@ description = "Subtitle of the post (also used as meta description)"
 
 Hello world, posts are coming.
 
+<!--more-->
+
 ~~~php
 /**
  * Gathers a listing of links to nodes.
