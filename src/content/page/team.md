@@ -6,6 +6,18 @@ title: Team
 ### Tech team
 <div class="team-page">
 
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <h4> Paolo Mainardi </h4>
+      <img src="http://www.sparkfabrik.com/images/team/paolo.jpg" alt="Paolo Mainardi" class="img-rounded pull-left avatar">
+      <i> CTO, Founder </i>
+      <p class="small">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <ul class="list-inline">
+        <li> <i class="fa fa-github"></i> <a href="http://www.github.com/paolomainardi">Github</a></li>
+        <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/paolomainardi">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
 
   <div class="row row-top-margin">
     <div class="col-md-12">
@@ -16,19 +28,6 @@ title: Team
       <ul class="list-inline">
         <li> <i class="fa fa-github"></i> <a href="http://www.github.com/mgdesign">Github</a></li>
         <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/mgdesign">Twitter</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row row-top-margin">
-    <div class="col-md-12">
-      <h4> Paolo Mainardi </h4>
-      <img src="http://www.sparkfabrik.com/images/team/paolo.jpg" alt="Paolo Mainardi" class="img-rounded pull-left avatar">
-      <i> CTO, Founder </i>
-      <p class="small">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      <ul class="list-inline">
-        <li> <i class="fa fa-github"></i> <a href="http://www.github.com/paolomainardi">Github</a></li>
-        <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/paolomainardi">Twitter</a></li>
       </ul>
     </div>
   </div>
