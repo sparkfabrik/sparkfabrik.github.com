@@ -23,7 +23,6 @@ ADD scripts/build.sh /usr/local/bin/build
 RUN chmod +x /usr/local/bin/build
 
 # By default, serve site.
-EXPOSE 80
+EXPOSE 1313 35729
 ENV HUGO_URL 0.0.0.0
-ENV HUGO_PORT 80
-CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --renderToDisk=true  --theme=spark --baseUrl=tech.sparkfabrik.loc
+CMD hugo server --bind ${HUGO_URL} --buildDrafts --theme=spark --baseUrl=tech.sparkfabrik.loc

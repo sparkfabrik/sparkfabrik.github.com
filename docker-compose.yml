@@ -2,7 +2,8 @@ hugo:
   build: .
   dockerfile: Dockerfile
   ports:
-    - "80:80"
+    - "1313:1313"
+    - "35729:35729"
   volumes:
     - ./src:/app
     - ./output:/output
