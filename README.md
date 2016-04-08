@@ -6,7 +6,7 @@
 
 You can run everything needed to start developing with hugo, just running
 `docker-compose up -d`, just make sure to have `dnsdock` container up and running or
-point `tech.sparkfabrik.loc` to the docker-machine host.
+point `tech.sparkfabrik.loc:1313` or `localhost:1313`.
 
 The `hugo` container expose a fixed port 80 to the docker host.
 
