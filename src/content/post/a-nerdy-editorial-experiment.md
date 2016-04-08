@@ -9,15 +9,15 @@ OK, I admit there's nothing more [hipster](/img/hipster.png) than describe thems
 
 ### Would you ever say there is still room to evolve the concept of blogging?
 
-We do! But let's start from the beginning.
+We do! But let's start from the beginning.  
 One year from the company inception the time has come to blog about the technology we love. But we'd like to do this in  our commitment to transparency and openness.
 
-We thought about it a bit and came to the conclusion that **we want to treat our knowledge as we treat our code**.
+We thought about it a bit and came to the conclusion that **we want to treat our knowledge as we treat our code**.  
 We like to share and we like to contribute. We also leverage what others share and love to receive contributions! While there are established practices to contribute code in 2016, that's not the case for knowledge.
 
 Comments are not the right way to collect contributions. They allow for arguments to rise, require effort to integrate (and devs are often too busy to go back on an old post) and they are sooo Web 2.0.
 
-The solution was there to see: we just need to raise our hipster-o-meter level a bit! ;)
+The solution was there to see: we just need to raise our hipster-o-meter level a bit! ;)  
 So start from a static site generator, which is all the rage now uh? Middleman can do but... a Ruby oldie? Really?! Nah! Let's go with (wait for it...) [Go](http://golang.org) and throw [Hugo](https://gohugo.io) in the soup! And of course pack it all up with [Docker](https://www.docker.com/), which is just what the doctor ordered. And of course, all should be [available on GitHub](https://github.com/sparkfabrik/sparkfabrik.github.com), for the world to enjoy.
 
 Spice it up with [Creative Common Attribution-ShareAlike 4.0 license](http://creativecommons.org/licenses/by-sa/4.0/) for contents (hey, it's safe for work and "Free Culture approved!") and a [GNU GPLv3 License](http://choosealicense.com/licenses/gpl-3.0/) for the rest of the code, and you're done!
@@ -38,8 +38,8 @@ Actually, the sky is the limit. Our business as a company is currently heavily b
 
 Se expect to find here dumps of our [brown bag happy-hours](http://humanresources.about.com/od/trainingtransfer/g/brown-bag-lunch.htm), bits of hard-earned wisdom, analysis of our achievements, micro-tutorial, gotchas, weird discoveries and tools reviews. And don't forget your contributions! :)
 
-The rule of thumb is: **it has to do with technology, not philosophy or other blurbs!**
+The rule of thumb is: **it has to do with technology, not philosophy or other blurbs!**  
 And sure, this post is an exception :P *er...*
 
-We really hope you'll enjoy reading this blog as we enjoy writing it. And you are encouraged to treat it as the piece of software it is!
+We really hope you'll enjoy reading this blog as we enjoy writing it. And you are encouraged to treat it as the piece of software it is!  
 See you around! ;)
