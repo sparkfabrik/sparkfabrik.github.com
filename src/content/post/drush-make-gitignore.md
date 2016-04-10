@@ -22,10 +22,10 @@ In recent upgrades, the `--overwrite` option has been added to Drush in order to
 
 ## How the problem was investigated
 
- * I created a couple of docker containers based on SparkFabrik image ready to be used for PHP/Drupal development: https://hub.docker.com/r/sparkfabrik/docker-php-base-image/
+ * I created a couple of docker containers based on [SparkFabrik base PHP image](https://hub.docker.com/r/sparkfabrik/docker-php-base-image/) well suitable for PHP/Drupal development.
  * In both containers, I replaced the default Drush version (8.0.5 installed with phar) so that I could debug and alter the code on the fly
  * In a container I installed version 6.7.0 (downloading the [release tarball](https://github.com/drush-ops/drush/releases/tag/6.7.0)) in the other I installed the "source" version of Drush 8.0.5 ([via composer](http://docs.drush.org/en/master/install-alternative/))
- * I created a small repository containing a .gitignore slightly different than Drupal's, and a makefile with some dependencies
+ * I created a small repository containing a .gitignore slightly different than Drupal's one, and a makefile with some dependencies
  * Then I executed `drush make` in both containers, with the `--debug` option that enhance output
 
 ## Execution flow
