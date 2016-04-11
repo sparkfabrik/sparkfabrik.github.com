@@ -38,7 +38,7 @@ title: Team
       <h4> Paolo Pustorino </h4>
       <img src="http://www.sparkfabrik.com/images/team/pusto.png" alt="Paolo Pustorino" class="img-rounded pull-left avatar">
       <i> CEO, Founder </i>
-      <p class="small">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <p class="small">I'm a drummer that writes code, a coder that plays RPGs and a gamer that plays drums. Through this, other people and from my children, I constantly try to learn. Incidentally CEO from 2013, I do my best to be the servant leader my smart mates deserve.</p>
       <ul class="list-inline">
         <li> <i class="fa fa-github"></i> <a href="http://www.github.com/stickgrinder">Github</a></li>
         <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/stickgrinder">Twitter</a></li>
