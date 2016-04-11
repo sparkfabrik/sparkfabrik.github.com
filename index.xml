@@ -13,10 +13,10 @@
     
     <item>
       <title>Hello world</title>
-      <link>http://sparkfabrik.github.io/post/hello-world/</link>
+      <link>http://sparkfabrik.github.io/2016/03/23/hello-world</link>
       <pubDate>Wed, 23 Mar 2016 16:31:55 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/post/hello-world/</guid>
+      <guid>http://sparkfabrik.github.io/2016/03/23/hello-world</guid>
       <description>&lt;p&gt;Hello world, posts are coming.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;/**
