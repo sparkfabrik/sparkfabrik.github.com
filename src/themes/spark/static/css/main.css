@@ -457,3 +457,70 @@ table tr td :last-child {
   font-size: 36px;
   color: #404040;
 }
+
+.spark-icon
+    {
+      font-family: "fontello";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+
+      /*display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;*/
+      /* opacity: .8; */
+
+      /* For safety - reset parent styles, that can break glyph codes*/
+      font-variant: normal;
+      text-transform: none;
+
+      /* fix buttons height, for twitter bootstrap */
+/*      line-height: 1em;
+*/
+      /* Animation center compensation - margins should be symmetric */
+      /* remove if not needed */
+      /*margin-left: .2em;*/
+
+      /* You can be more comfortable with increased icons size */
+      /* font-size: 120%; */
+
+      /* Font smoothing. That was taken from TWBS */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      /* Uncomment for 3D effect */
+      /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+      font-size: 35px;
+      margin-right: -10px;
+      color: #E60000;
+      float:left;
+      margin-left:-17px;
+    }
+
+
+/* --- Author block below posts --- */
+
+div.author-block {
+      margin-top: 30px;
+}
+
+div.author-block p.about {
+      font-style: italic;
+      margin: 10px 0;
+      font-size: 1.2em;
+      border-top: 1px solid #ddd;
+      color: #808080;
+}
+div.author-block h4 {
+      margin: 0 0 10px 0;
+}
+div.author-block h4 small {
+      position: relative;
+      top: -0.1em;
+}
+div.author-block p.bio {
+      margin: 0;
+      font-size: 0.9em;
+}

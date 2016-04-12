@@ -6,6 +6,40 @@ title = "Tech @ SparkFabrik"
   logo = "img/sfgear.png"
   description = "Sparkfabrik tech blog"
 
+  [Params.Authors]
+
+    [Params.Authors.Stick]
+      name = "Paolo Pustorino"
+      role = "CEO"
+      picture = "http://www.sparkfabrik.com/images/team/pusto.png"
+      bio = "Drummer, tabletop role-player and developer. Incidentally CEO and striving servant leader from 2013."
+      github = "http://www.github.com/stickgrinder"
+      twitter = "http://www.twitter.com/stickgrinder"
+
+    [Params.Authors.Paolo]
+      name = "Paolo Mainardi"
+      role = "CTO"
+      picture = "http://www.sparkfabrik.com/images/team/paolo.jpg"
+      bio = "Hacker, open-source enthusiast, reddit addicted and now proud founder of Sparkfabrik."
+      github = "http://www.github.com/paolomainardi"
+      twitter = "http://www.twitter.com/paolomainardi"
+
+    [Params.Authors.Pinolo]
+      name = "Marcello Testi"
+      role = "Lead Developer"
+      picture = "http://www.sparkfabrik.com/images/team/pinolo.jpg"
+      bio = "Long-time open-source contributor, avid music listener. In Sparkfabrik since day-1."
+      github = "http://www.github.com/pinolo"
+      twitter = "http://www.twitter.com/pinolo"
+
+    [Params.Authors.Marcello]
+      name = "Marcello Gorla"
+      role = "Frontend Developer"
+      picture = "http://www.sparkfabrik.com/images/team/mg.png"
+      bio = "Designer, developer and games addicted. Sometimes all three of them apply."
+      github = "http://www.github.com/mgdesign"
+      twitter = "http://www.twitter.com/mgdesign"
+
 [Author]
   name = "Sparkfabrik"
   email = "info@sparkfabrik.com"

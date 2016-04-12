@@ -1,0 +1,13 @@
+{{ $author := index .Site.Params.Authors .Params.author }}
+<div class="author-block">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="{{ $author.picture }}" alt="{{ $author.name }}" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="/page/team#{{ .Params.author }}" >{{ $author.name }} </a> <small>[ {{ $author.role }} ]</small></h4>
+     <p class="bio">{{ $author.bio }}</p>
+  </div>
+</div>
