@@ -8,8 +8,63 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Wed, 23 Mar 2016 16:31:55 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 Apr 2016 08:51:09 +0200</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Brown bag happy-hour, April 5th 2016</title>
+      <link>http://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</link>
+      <pubDate>Wed, 06 Apr 2016 08:51:09 +0200</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</guid>
+      <description>
+
+&lt;p&gt;In the first BBH of spring 2016 Marcello Testi discussed about Drush Make related issues within Drush8, and Paolo Mainardi introduced the Hugo static site generator to the team in order to kickstart the &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; Tech Blog. We also talked a little about design thanks to our weekly news digest.&lt;/p&gt;
+
+&lt;p&gt;By &lt;a href=&#34;http://sparkfabrik.github.io/page/team#marcello_gorla&#34;&gt;Marcello Gorla&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;weekly-news:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;Weekly News&lt;/h1&gt;
+
+&lt;p&gt;This week we discussed mainly design-related news, brought by Marcello Gorla.&lt;/p&gt;
+
+&lt;h3 id=&#34;adobe-xd:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;Adobe XD&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_adobexd.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Originally know as “Project Comet&amp;rdquo;, Adobe has released the preview of &lt;a href=&#34;http://blogs.adobe.com/creativecloud/introducing-adobe-experience-design-cc-preview/&#34;&gt;Adobe XD&lt;/a&gt;, it&amp;rsquo;s own tool intended for design and prototyping of user experience projects. The tool it&amp;rsquo;s an early stage release that still does not offer a full stack of features as we are used to with more advanced (and mature) softwares like Sketch or Adobe Photoshop, but there&amp;rsquo;s a &lt;a href=&#34;https://www.youtube.com/playlist?list=PLD8AMy73ZVxXvBQcZAnOcu57JCFxLi7bQ&#34;&gt;lot of stuff moving on&lt;/a&gt; and we think it&amp;rsquo;s worth trying.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://medium.com/user-experience-design-1/first-impressions-with-adobe-experience-design-107904b5efbe#.25cvqr3ys&#34;&gt;Some opinions&lt;/a&gt; of course have been &lt;a href=&#34;http://techcrunch.com/2016/03/14/adobe-launches-experience-design-cc-a-new-tool-for-ux-designers/&#34;&gt;already popped out&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;frog-will-have-no-more-cco:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;Frog will have no more CCO&lt;/h3&gt;
+
+&lt;p&gt;After the departure of Hans Neubert, the international design firm &lt;a href=&#34;http://www.frogdesign.com/&#34;&gt;Frog&lt;/a&gt; recently decided &lt;a href=&#34;http://designmind.frogdesign.com/2016/03/evolving-creative-leadership-at-frog/&#34;&gt;not to replace it&amp;rsquo;s Chief Creative Officer with a new one&lt;/a&gt;, implementing a more agile structure with many Creative Officers around the world leading the single design teams. From a wider perspective, this event has an interesting impact.  A &lt;a href=&#34;http://www.fastcodesign.com/3058517/frog-will-have-no-more-chief-creative-officers&#34; title=&#34;Fast Co Design&#34;&gt;Fast Co Design&lt;/a&gt; article made a good point over this, trying to consider what is happening to the design consultancies and firms and to the field in general.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;While design is more in demand than ever, the business of design consultancies has been in flux. Mega business consultants Accenture and IBM have each been making $100 million-plus bets on increasing their design fluency. Meanwhile, design firms ranging from Lunar to Ideo have reassessed their business strategies, and firms like Yves Behar&amp;rsquo;s Fuseproject have sold outright to foreign investors.
+(Via &lt;a href=&#34;http://www.fastcodesign.com/3058517/frog-will-have-no-more-chief-creative-officers&#34; title=&#34;Fast Co Design&#34;&gt;Fast Co Design&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;olo-reached-founding-goal:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;OLO reached founding goal&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_olo.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Italian Kickstarter project &lt;a href=&#34;https://www.kickstarter.com/projects/olo3d/olo-the-first-ever-smartphone-3d-printer&#34;&gt;Olo&lt;/a&gt;, a 3D printer suited for the smartphones screen, has reached the funding goal and is running fast towards more stellar ones. Promising very good print resolution at low costs, this 3D printer could be a step forward to unchain the potential of personal projects prototyping and experimentation, but also a new frontier to many other unexplored fields like the home-productions of games.&lt;/p&gt;
+
+&lt;h3 id=&#34;bonus-track-trend-to-follow-conversational-interfaces:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;Bonus Track, trend to follow: conversational interfaces&lt;/h3&gt;
+
+&lt;p&gt;Conversational Interfaces could be a good trend to follow, in our opinion. &lt;a href=&#34;http://www.fastcodesign.com/3058546/conversational-interfaces-explained?partner=rss&#34;&gt;Fast Co Design&lt;/a&gt; article on the topic points out how this pattern is quite interesting from a design point of view, because it elitminates a barrier, the UI, between the human and the machine languages. And this is particularly interesting considering the great hype that is surrounding the new wave of virtual reality interfaces, as the Oculus Rift, and the augmented reality in general.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So for most of computer history, we&amp;rsquo;ve communicated with computers essentially through Rosetta stones: We point at a symbol representing what we want a computer to do, and then it does it. For example, clicking an icon to open an app. With conversational interfaces, computers and humans can finally speak the same language without a Rosetta stone in between.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;On &lt;a href=&#34;https://medium.com/life-learning/the-future-of-cui-isn-t-conversational-fa3d9458c2b5&#34;&gt;Medium, Daniel Eckler&lt;/a&gt; wrote a very good article about how the design impacts this topic.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The &lt;em&gt;BBH (Brown bag happy-hour)&lt;/em&gt; it&amp;rsquo;s a &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; regular activity where we share discoveries and techniques with each other and discuss the last two week tech and innovation world novelties.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hello world</title>
@@ -135,13 +190,14 @@ Both entities core businesses were founded on Drupal and other strategic tools a
 
 &lt;p&gt;&lt;div class=&#34;row row-top-margin&#34;&gt;
     &lt;div class=&#34;col-md-12&#34;&gt;
-      &lt;h4&gt; Marcello Gorla &lt;/h4&gt;
+      &lt;h4 id=&#34;marcello_gorla&#34;&gt; Marcello Gorla &lt;/h4&gt;
       &lt;img src=&#34;http://www.sparkfabrik.com/images/team/mg.png&#34; alt=&#34;Marcello Gorla&#34; class=&#34;img-rounded pull-left avatar&#34;&gt;
-      &lt;i&gt; Senior frontend developer &lt;/i&gt;
-      &lt;p class=&#34;small&#34;&gt;Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
+      &lt;i&gt; Frontend developer &lt;/i&gt;
+      &lt;p class=&#34;small&#34;&gt;Designer, developer and games addicted. Sometimes all three of them apply.&lt;/p&gt;
       &lt;ul class=&#34;list-inline&#34;&gt;
         &lt;li&gt; &lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.github.com/mgdesign&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt; &lt;i class=&#34;fa fa-twitter&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.twitter.com/mgdesign&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt; &lt;i class=&#34;fa fa-behance&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.behance.net/mgorla&#34;&gt;Behance&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/p&gt;
