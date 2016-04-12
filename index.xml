@@ -8,67 +8,8 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Fri, 08 Apr 2016 01:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 06 Apr 2016 08:51:09 +0200</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Drush Make overwrites your custom .gitignore file</title>
-      <link>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</link>
-      <pubDate>Fri, 08 Apr 2016 01:00:00 -0400</pubDate>
-      <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</guid>
-      <description>
-
-&lt;h1 id=&#34;managing-a-customized-gitignore-file-across-drush-make-builds:a0167166354a1579d70789b020f359e4&#34;&gt;Managing a customized .gitignore file across drush make builds&lt;/h1&gt;
-
-&lt;h2 id=&#34;the-problem:a0167166354a1579d70789b020f359e4&#34;&gt;The problem&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/drush-ops/drush&#34;&gt;Drush&lt;/a&gt; 8&lt;/strong&gt; overwrites the .gitignore file after a successful makefile execution.&lt;/p&gt;
-
-&lt;p&gt;This affects complex projects where multiple dependency sources are present, and where other reasons might require a significant override of the &lt;strong&gt;.gitignore&lt;/strong&gt; file provided by Drupal, which ends up diffed, causing &lt;code&gt;git status&lt;/code&gt; to produce an ugly output, until the committed .gitignore is restored.&lt;/p&gt;
-
-&lt;h2 id=&#34;origin-of-the-problem:a0167166354a1579d70789b020f359e4&#34;&gt;Origin of the problem&lt;/h2&gt;
-
-&lt;p&gt;In recent upgrades, the &lt;code&gt;--overwrite&lt;/code&gt; option has been added to Drush in order to force the overwrite of existing folders (the command docs don&amp;rsquo;t  mention files, althought some file reference is present in the code comments), while the default behavior is to &lt;em&gt;merge&lt;/em&gt;, which means keeping existing folder content. This option has only an impact on &lt;strong&gt;directories&lt;/strong&gt; inside the project&amp;rsquo;s root and doesn&amp;rsquo;t affect the files in the root.&lt;/p&gt;
-
-&lt;h2 id=&#34;how-the-problem-was-investigated:a0167166354a1579d70789b020f359e4&#34;&gt;How the problem was investigated&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I created a couple of docker containers based on &lt;a href=&#34;https://hub.docker.com/r/sparkfabrik/docker-php-base-image/&#34;&gt;SparkFabrik base PHP image&lt;/a&gt; well suitable for PHP/Drupal development.&lt;/li&gt;
-&lt;li&gt;In both containers, I replaced the default Drush version (8.0.5 installed with phar) so that I could debug and alter the code on the fly&lt;/li&gt;
-&lt;li&gt;In a container I installed version 6.7.0 (downloading the &lt;a href=&#34;https://github.com/drush-ops/drush/releases/tag/6.7.0&#34;&gt;release tarball&lt;/a&gt;) in the other I installed the &amp;ldquo;source&amp;rdquo; version of Drush 8.0.5 (&lt;a href=&#34;http://docs.drush.org/en/master/install-alternative/&#34;&gt;via composer&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;I created a small repository containing a .gitignore slightly different than Drupal&amp;rsquo;s one, and a makefile with some dependencies&lt;/li&gt;
-&lt;li&gt;Then I executed &lt;code&gt;drush make&lt;/code&gt; in both containers, with the &lt;code&gt;--debug&lt;/code&gt; option that enhance output&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;execution-flow:a0167166354a1579d70789b020f359e4&#34;&gt;Execution flow&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;During makefile processing, files are downloaded in a temp directory and only at the end they are copied to the final destination by the function &lt;a href=&#34;https://github.com/drush-ops/drush/blob/8.0.5/commands/make/make.drush.inc#L739&#34;&gt;&lt;code&gt;make_move_build&lt;/code&gt;&lt;/a&gt;. The process is basically a recursive copy of the elements found in the root of the downloaded codebase.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make_move_build&lt;/code&gt; is also responsible for reading the &lt;code&gt;--overwrite&lt;/code&gt; option and pass a consequent value to the function in charge of copying both files and directories: &lt;a href=&#34;https://github.com/drush-ops/drush/blob/8.0.5/includes/filesystem.inc#L215&#34;&gt;&lt;code&gt;drush_copy_dir&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Before calling &lt;code&gt;drush_copy_dir&lt;/code&gt;, &lt;code&gt;make_move_build&lt;/code&gt; loops through root-level items and treats directories differently (see &lt;a href=&#34;https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316&#34;&gt;https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;drush_copy_dir&lt;/code&gt; the value passed when &lt;code&gt;--overwrite&lt;/code&gt; is set is only used to create a log entry (&lt;a href=&#34;https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224&#34;&gt;https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224&lt;/a&gt;), but not in order to avoid overwriting files.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;workaround-and-solutions:a0167166354a1579d70789b020f359e4&#34;&gt;Workaround and solutions&lt;/h2&gt;
-
-&lt;p&gt;As a workaround, we set the build system (we&amp;rsquo;re currently using &lt;a href=&#34;https://www.phing.info/&#34;&gt;Phing&lt;/a&gt;) to execute a &lt;code&gt;git checkout&lt;/code&gt; of the committed version of .gitignore.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;real&lt;/em&gt; solution might consist in applying the &lt;code&gt;--override&lt;/code&gt; option (or lack of) also for root-level files, but I doubt this was intended by drush contributors, until now. In the following links, you can read a handful of relevant issues, for reference.&lt;/p&gt;
-
-&lt;h2 id=&#34;links:a0167166354a1579d70789b020f359e4&#34;&gt;Links&lt;/h2&gt;
-
-&lt;p&gt;This was the issue that originated the change from the previous behavior: &lt;a href=&#34;https://github.com/drush-ops/drush/pull/1450&#34;&gt;https://github.com/drush-ops/drush/pull/1450&lt;/a&gt; (commit &lt;a href=&#34;https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316&#34;&gt;https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Other issues discussing the same subject:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/drush-ops/drush/issues/1468&#34;&gt;https://github.com/drush-ops/drush/issues/1468&lt;/a&gt; &amp;ldquo;drush make does not overwrite root core files&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/NuCivic/dkan/issues/824&#34;&gt;https://github.com/NuCivic/dkan/issues/824&lt;/a&gt; &amp;ldquo;Move dkan modules downloaded via drush make to their own folder&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/drush-ops/drush/issues/1269&#34;&gt;https://github.com/drush-ops/drush/issues/1269&lt;/a&gt; &amp;ldquo;drush make &lt;code&gt;--overwrite&lt;/code&gt; should respect &lt;code&gt;--projects=&lt;/code&gt;?&amp;rdquo;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
     
     <item>
       <title>Brown bag happy-hour, April 5th 2016</title>
