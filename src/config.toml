@@ -27,7 +27,7 @@ title = "Tech @ SparkFabrik"
     [Params.Authors.Pinolo]
       name = "Marcello Testi"
       role = "Lead Developer"
-      picture = "http://www.sparkfabrik.com/images/team/pinolo.jpg"
+      picture = "http://www.sparkfabrik.com/images/team/pinolo.png"
       bio = "Long-time open-source contributor, avid music listener. In Sparkfabrik since day-1."
       github = "http://www.github.com/pinolo"
       twitter = "http://www.twitter.com/pinolo"

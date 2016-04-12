@@ -5,7 +5,7 @@ description = "An investigation about an undesired behavior: bug or feature?"
 tags        = [ "development", "drupal", "drush"  ]
 topics      = [ "Drupal" ]
 slug        = "drush-make-gitignore"
-author      = "Marcello Testi"
+author      = "Pinolo"
 +++
 
 # Managing a customized .gitignore file across drush make builds
