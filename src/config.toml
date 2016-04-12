@@ -2,9 +2,10 @@ canonifyurls = true
 languageCode = "en-us"
 title = "Tech @ SparkFabrik"
 
+
 [Params]
-  logo = "img/sfgear.png"
-  description = "Sparkfabrik tech blog"
+  og_logo = "img/full_logo.png"
+  description = "Sparkfabrik tech blog - PHP, Drupal, Docker and web trending technologies"
 
   [Params.Authors]
 
