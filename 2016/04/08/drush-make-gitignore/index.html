@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Drush Make overwrites your custom .gitignore file | SparkFabrik </title>
+
+  <meta name="author" content="Sparkfabrik" />
+
+  
+  <meta name="description" content="An investigation about an undesired behavior: bug or feature?">
+  
+
+  <meta name="generator" content="Hugo 0.15" />
+
+  <link rel="alternate" href="http://sparkfabrik.github.io/index.xml" type="application/rss+xml" title="Tech @ SparkFabrik">
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/spark.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/gruvbox-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <meta property="og:title" content="Drush Make overwrites your custom .gitignore file" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="img/sfgear.png" />
+
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <i class="spark-icon icon-sparkfabrik">&#xe800;</i> <a class="navbar-brand navtitle" href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li>
+        <a title="Blog" href="http://sparkfabrik.github.io/">Blog </a>
+	      </li>
+	    
+        <li>
+        <a title="Team" href="http://sparkfabrik.github.io/page/team/">Team </a>
+	      </li>
+	    
+        <li>
+        <a title="About" href="http://sparkfabrik.github.io/page/about/">About </a>
+	      </li>
+	    
+        <li>
+        <a title="Archive" href="http://sparkfabrik.github.io/archive/">Archive </a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+
+      
+        <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Drush Make overwrites your custom .gitignore file</h1>
+        
+        <h2 class="post-subheading">An investigation about an undesired behavior: bug or feature?</h2>
+        
+        <span class="post-meta">Posted on April 8, 2016</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  
+
+<h1 id="managing-a-customized-gitignore-file-across-drush-make-builds:a0167166354a1579d70789b020f359e4">Managing a customized .gitignore file across drush make builds</h1>
+
+<h2 id="the-problem:a0167166354a1579d70789b020f359e4">The problem</h2>
+
+<p><strong><a href="https://github.com/drush-ops/drush">Drush</a> 8</strong> overwrites the .gitignore file after a successful makefile execution.</p>
+
+<p>This affects complex projects where multiple dependency sources are present, and where other reasons might require a significant override of the <strong>.gitignore</strong> file provided by Drupal, which ends up diffed, causing <code>git status</code> to produce an ugly output, until the committed .gitignore is restored.</p>
+
+<h2 id="origin-of-the-problem:a0167166354a1579d70789b020f359e4">Origin of the problem</h2>
+
+<p>In recent upgrades, the <code>--overwrite</code> option has been added to Drush in order to force the overwrite of existing folders (the command docs don&rsquo;t  mention files, althought some file reference is present in the code comments), while the default behavior is to <em>merge</em>, which means keeping existing folder content. This option has only an impact on <strong>directories</strong> inside the project&rsquo;s root and doesn&rsquo;t affect the files in the root.</p>
+
+<h2 id="how-the-problem-was-investigated:a0167166354a1579d70789b020f359e4">How the problem was investigated</h2>
+
+<ul>
+<li>I created a couple of docker containers based on <a href="https://hub.docker.com/r/sparkfabrik/docker-php-base-image/">SparkFabrik base PHP image</a> well suitable for PHP/Drupal development.</li>
+<li>In both containers, I replaced the default Drush version (8.0.5 installed with phar) so that I could debug and alter the code on the fly</li>
+<li>In a container I installed version 6.7.0 (downloading the <a href="https://github.com/drush-ops/drush/releases/tag/6.7.0">release tarball</a>) in the other I installed the &ldquo;source&rdquo; version of Drush 8.0.5 (<a href="http://docs.drush.org/en/master/install-alternative/">via composer</a>)</li>
+<li>I created a small repository containing a .gitignore slightly different than Drupal&rsquo;s one, and a makefile with some dependencies</li>
+<li>Then I executed <code>drush make</code> in both containers, with the <code>--debug</code> option that enhance output</li>
+</ul>
+
+<h2 id="execution-flow:a0167166354a1579d70789b020f359e4">Execution flow</h2>
+
+<ul>
+<li>During makefile processing, files are downloaded in a temp directory and only at the end they are copied to the final destination by the function <a href="https://github.com/drush-ops/drush/blob/8.0.5/commands/make/make.drush.inc#L739"><code>make_move_build</code></a>. The process is basically a recursive copy of the elements found in the root of the downloaded codebase.</li>
+<li><code>make_move_build</code> is also responsible for reading the <code>--overwrite</code> option and pass a consequent value to the function in charge of copying both files and directories: <a href="https://github.com/drush-ops/drush/blob/8.0.5/includes/filesystem.inc#L215"><code>drush_copy_dir</code></a>.</li>
+<li>Before calling <code>drush_copy_dir</code>, <code>make_move_build</code> loops through root-level items and treats directories differently (see <a href="https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316">https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316</a>).</li>
+<li>In <code>drush_copy_dir</code> the value passed when <code>--overwrite</code> is set is only used to create a log entry (<a href="https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224">https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224</a>), but not in order to avoid overwriting files.</li>
+</ul>
+
+<h2 id="workaround-and-solutions:a0167166354a1579d70789b020f359e4">Workaround and solutions</h2>
+
+<p>As a workaround, we set the build system (we&rsquo;re currently using <a href="https://www.phing.info/">Phing</a>) to execute a <code>git checkout</code> of the committed version of .gitignore.</p>
+
+<p>The <em>real</em> solution might consist in applying the <code>--override</code> option (or lack of) also for root-level files, but I doubt this was intended by drush contributors, until now. In the following links, you can read a handful of relevant issues, for reference.</p>
+
+<h2 id="links:a0167166354a1579d70789b020f359e4">Links</h2>
+
+<p>This was the issue that originated the change from the previous behavior: <a href="https://github.com/drush-ops/drush/pull/1450">https://github.com/drush-ops/drush/pull/1450</a> (commit <a href="https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316">https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316</a>)</p>
+
+<p>Other issues discussing the same subject:</p>
+
+<ul>
+<li><a href="https://github.com/drush-ops/drush/issues/1468">https://github.com/drush-ops/drush/issues/1468</a> &ldquo;drush make does not overwrite root core files&rdquo;</li>
+<li><a href="https://github.com/NuCivic/dkan/issues/824">https://github.com/NuCivic/dkan/issues/824</a> &ldquo;Move dkan modules downloaded via drush make to their own folder&rdquo;</li>
+<li><a href="https://github.com/drush-ops/drush/issues/1269">https://github.com/drush-ops/drush/issues/1269</a> &ldquo;drush make <code>--overwrite</code> should respect <code>--projects=</code>?&rdquo;</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="row">
+    
+<div class="author-block clearfix">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="http://www.sparkfabrik.com/images/team/pinolo.png" alt="Marcello Testi" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Pinolo" >Marcello Testi </a> <small>[ Lead Developer ]</small></h4>
+     <p class="bio">Long-time open-source contributor, avid music listener. In Sparkfabrik since day-1.</p>
+  </div>
+</div>
+
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="http://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour" data-toggle="tooltip" data-placement="top" title="Brown bag happy-hour, April 5th 2016">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+
+      
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <li>
+            <a href="https://www.sparkfabrik.com" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="https://twitter.com/sparkfabrik" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="mailto:info@sparkfabrik.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+	    	  
+    		  <li>
+      			<a href="http://sparkfabrik.github.io/index.xml" title="RSS">
+      			  <span class="fa-stack fa-lg">
+        				<i class="fa fa-circle fa-stack-2x"></i>
+        				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      			  </span>
+      			</a>
+    		  </li>
+
+        </ul>
+        <p class="copyright text-muted">
+    		  
+    		  <a href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    		  
+  	    </p>
+  	        
+    		<p class="theme-by text-muted">
+    		  Theme by
+    		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+    		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="http://sparkfabrik.github.io/js/jquery-1.11.2.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/bootstrap.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/main.js"></script>
+
+
+
+
+  </body>
+</html>

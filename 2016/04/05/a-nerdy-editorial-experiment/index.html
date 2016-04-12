@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Hello world | SparkFabrik </title>
+  <title>A nerdy editorial experiment | SparkFabrik </title>
 
   <meta name="author" content="Sparkfabrik" />
 
   
-  <meta name="description" content="Subtitle of the post (also used as meta description)">
+  <meta name="description" content="Our attempt to create a new concept in social blogging. By hackers, for hackers.">
   
 
   <meta name="generator" content="Hugo 0.15" />
@@ -31,7 +31,7 @@
   <script>hljs.initHighlightingOnLoad();</script>
 
   
-  <meta property="og:title" content="Hello world" />
+  <meta property="og:title" content="A nerdy editorial experiment" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="/" />
   <meta property="og:image" content="img/sfgear.png" />
@@ -88,11 +88,11 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <div class="post-heading">
-        <h1>Hello world</h1>
+        <h1>A nerdy editorial experiment</h1>
         
-        <h2 class="post-subheading">Subtitle of the post (also used as meta description)</h2>
+        <h2 class="post-subheading">Our attempt to create a new concept in social blogging. By hackers, for hackers.</h2>
         
-        <span class="post-meta">Posted on March 23, 2016</span>
+        <span class="post-meta">Posted on April 5, 2016</span>
       </div>
      </div>
   </div>
@@ -101,80 +101,65 @@
 <article>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	  <p>Hello world, posts are coming.</p>
+	  
 
-<pre><code class="language-php">/**
- * Gathers a listing of links to nodes.
- *
- * @param $result
- *   A database result object from a query to fetch node entities. If your
- *   query joins the {node_comment_statistics} table so that the comment_count
- *   field is available, a title attribute will be added to show the number of
- *   comments.
- * @param $title
- *   A heading for the resulting list.
- *
- * @return
- *   A renderable array containing a list of linked node titles fetched from
- *   $result, or FALSE if there are no rows in $result.
- */
-function node_title_list($result, $title = NULL) {
-  $items = array();
-  $num_rows = FALSE;
-  foreach ($result as $node) {
-    $items[] = l($node-&gt;title, 'node/' . $node-&gt;nid, !empty($node-&gt;comment_count) ? array('attributes' =&gt; array('title' =&gt; format_plural($node-&gt;comment_count, '1 comment', '@count comments'))) : array());
-    $num_rows = TRUE;
-  }
+<p>OK, I admit there&rsquo;s nothing more <a href="http://sparkfabrik.github.io/img/hipster.png">hipster</a> than describe themselves as <a href="http://sparkfabrik.github.io/img/nerd.png">nerds</a>. But I had to draw your attention somehow.</p>
 
-  return $num_rows ? array('#theme' =&gt; 'item_list__node', '#items' =&gt; $items, '#title' =&gt; $title) : FALSE;
-}
-</code></pre>
+<h3 id="would-you-ever-say-there-is-still-room-to-evolve-the-concept-of-blogging:aa8805dea155bcaea150b85f7d77fe7a">Would you ever say there is still room to evolve the concept of blogging?</h3>
 
-<pre><code class="language-docker">FROM alpine:3.3
-MAINTAINER paolo.mainardi@sparkfabrik.com
-RUN apk add --no-cache vim py-pip python &amp;&amp; \
-  pip install Pygments
+<p>We do! But let&rsquo;s start from the beginning.<br />
+One year from the company inception the time has come to blog about the technology we love. But we&rsquo;d like to do this in  our commitment to transparency and openness.</p>
 
-# Download and install hugo
-ENV HUGO_VERSION 0.15
-ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux_amd64
-ENV PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
+<p>We thought about it a bit and came to the conclusion that <strong>we want to treat our knowledge as we treat our code</strong>.<br />
+We like to share and we like to contribute. We also leverage what others share and love to receive contributions! While there are established practices to contribute code in 2016, that&rsquo;s not the case for knowledge.</p>
 
-ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /usr/local/
-RUN tar xzf /usr/local/${HUGO_BINARY}.tar.gz -C /usr/local/ \
-  &amp;&amp; ln -s /usr/local/${HUGO_BINARY}/${HUGO_BINARY} /usr/local/bin/hugo \
-  &amp;&amp; rm /usr/local/${HUGO_BINARY}.tar.gz
+<p>Comments are not the right way to collect contributions. They allow for arguments to rise, require effort to integrate (and devs are often too busy to go back on an old post) and they are sooo Web 2.0.</p>
 
-# Create working directory
-VOLUME /app
-WORKDIR /app
+<p>The solution was there to see: we just need to raise our hipster-o-meter level a bit! ;)<br />
+So start from a static site generator, which is all the rage now uh? Middleman can do but&hellip; a Ruby oldie? Really?! Nah! Let&rsquo;s go with (wait for it&hellip;) <a href="http://golang.org">Go</a> and throw <a href="https://gohugo.io">Hugo</a> in the soup! And of course pack it all up with <a href="https://www.docker.com/">Docker</a>, which is just what the doctor ordered. And of course, all should be <a href="https://github.com/sparkfabrik/sparkfabrik.github.com">available on GitHub</a>, for the world to enjoy.</p>
 
-# Add sources.
-ADD src/ /app
-ADD scripts/build.sh /usr/local/bin/build
-RUN chmod +x /usr/local/bin/build
+<p>Spice it up with <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Common Attribution-ShareAlike 4.0 license</a> for contents (hey, it&rsquo;s safe for work and &ldquo;Free Culture approved!&rdquo;) and a <a href="http://choosealicense.com/licenses/gpl-3.0/">GNU GPLv3 License</a> for the rest of the code, and you&rsquo;re done!</p>
 
-# By default, serve site.
-EXPOSE 80
-ENV HUGO_URL 0.0.0.0
-ENV HUGO_PORT 80
-CMD hugo server --bind ${HUGO_URL} --port=${HUGO_PORT} --buildDrafts --renderToDisk=true  --theme=spark --baseUrl=tech.sparkfabrik.loc
-</code></pre>
+<blockquote>
+<p>Hipster-o-meter is on fire! &lowast;_&lowast;</p>
+</blockquote>
+
+<p>But most of all, now everybody can fork the project on GitHub and do one of the following:</p>
+
+<ul>
+<li>Modify and use it for her own purpose. It&rsquo;s like Christmas, only everyday.</li>
+<li>Fix or update a post which is imprecise, outdated or unclear and send us a PR. Because we like our blog to be relevant and if it helped you somehow, you can give back (spoiler: you can credit yourself!).</li>
+<li>Write a guest article you&rsquo;d like to see published and become a guest writer.</li>
+</ul>
+
+<p>Sure, we don&rsquo;t expect to become the next interweb sensation overnight, but we are excited to test this new approach to social blogging out.</p>
+
+<h3 id="ok-but-what-will-we-blog-about:aa8805dea155bcaea150b85f7d77fe7a">OK, but what will we blog about?</h3>
+
+<p>Actually, the sky is the limit. Our business as a company is currently heavily based on Drupal, so we&rsquo;ll naturally blog about Drupal and PHP in general. But we can&rsquo;t keep our mind off novelties, innovations and <em>&lowast;cough cough&lowast;</em> buzz <em>&lowast;cough&lowast;</em> words.</p>
+
+<p>Se expect to find here dumps of our <a href="http://humanresources.about.com/od/trainingtransfer/g/brown-bag-lunch.htm">brown bag happy-hours</a>, bits of hard-earned wisdom, analysis of our achievements, micro-tutorial, gotchas, weird discoveries and tools reviews. And don&rsquo;t forget your contributions! :)</p>
+
+<p>The rule of thumb is: <strong>it has to do with technology, not philosophy or other blurbs!</strong><br />
+And sure, this post is an exception :P <em>er&hellip;</em></p>
+
+<p>We really hope you&rsquo;ll enjoy reading this blog as we enjoy writing it. And you are encouraged to treat it as the piece of software it is!<br />
+See you around! ;)</p>
 
     </div>
   </div>
   <div class="row">
     
-<div class="author-block">
+<div class="author-block clearfix">
   <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
     <p class="about">About the author</p>
   </div>
   <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
-    <img src="http://www.sparkfabrik.com/images/team/paolo.jpg" alt="Paolo Mainardi" class="img-rounded pull-left avatar">
+    <img src="http://www.sparkfabrik.com/images/team/pusto.png" alt="Paolo Pustorino" class="img-rounded pull-left avatar">
   </div>
   <div class="col-lg-7 col-md-7">
-     <h4> <a href="http://sparkfabrik.github.io/page/team#Paolo" >Paolo Mainardi </a> <small>[ CTO ]</small></h4>
-     <p class="bio">Hacker, open-source enthusiast, reddit addicted and now proud founder of Sparkfabrik.</p>
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Stick" >Paolo Pustorino </a> <small>[ CEO ]</small></h4>
+     <p class="bio">Drummer, tabletop role-player and developer. Incidentally CEO and striving servant leader from 2013.</p>
   </div>
 </div>
 
