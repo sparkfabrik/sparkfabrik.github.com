@@ -1,5 +1,5 @@
 +++
-date = "2016-04-08T11:02:30Z"
+date = "2016-04-05T11:02:30Z"
 draft = false
 title = "A nerdy editorial experiment"
 description = "Our attempt to create a new concept in social blogging. By hackers, for hackers."
