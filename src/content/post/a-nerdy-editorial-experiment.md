@@ -3,6 +3,9 @@ date = "2016-04-05T11:02:30Z"
 draft = false
 title = "A nerdy editorial experiment"
 description = "Our attempt to create a new concept in social blogging. By hackers, for hackers."
+tags        = [ "presentation", "sparkfabrik", "blog"  ]
+topics      = [ "Blogging" ]
+author = "Stick"
 +++
 
 OK, I admit there's nothing more [hipster](/img/hipster.png) than describe themselves as [nerds](/img/nerd.png). But I had to draw your attention somehow.
