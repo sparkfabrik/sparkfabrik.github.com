@@ -49,7 +49,6 @@ blockquote p {
   float:left;
   margin-left:-17px;
 }
-
 @media only screen and (max-width: 768px) {
   .spark-icon { margin-left: 0px; }
 }
