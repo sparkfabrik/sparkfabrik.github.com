@@ -4,7 +4,7 @@ title = "Tech @ SparkFabrik"
 
 
 [Params]
-  og_logo = "img/full_logo.png"
+  og_logo = "http://sparkfabrik.github.io/img/full_logo.png"
   description = "Sparkfabrik tech blog - PHP, Drupal, Docker and web trending technologies"
 
   [Params.Authors]
