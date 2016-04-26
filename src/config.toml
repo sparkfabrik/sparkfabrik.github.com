@@ -41,6 +41,14 @@ title = "Tech @ SparkFabrik"
       github = "http://www.github.com/mgdesign"
       twitter = "http://www.twitter.com/mgdesign"
 
+    [Params.Authors.Enrico]
+      name = "Enrico Sato"
+      role = "Frontend Developer"
+      picture = "http://www.sparkfabrik.com/images/team/mg.png"
+      bio = "Designer, developer and games addicted. Sometimes all three of them apply."
+      github = "http://www.github.com/mgdesign"
+      twitter = "http://www.twitter.com/mgdesign"
+
 [Author]
   name = "Sparkfabrik"
   email = "info@sparkfabrik.com"
