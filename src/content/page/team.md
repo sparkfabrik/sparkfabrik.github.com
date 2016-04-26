@@ -64,7 +64,7 @@ title: Team
       <h4> Enrico Sato </h4>
       <img src="http://www.sparkfabrik.com/images/team/enrico.jpg" alt="Enrico Sato" class="img-rounded pull-left avatar">
       <i> Frontend Developer </i>
-      <p class="small"></p>
+      <p class="small">Web developer, bass player, tech lover. And a really really curious man.</p>
       <ul class="list-inline">
         <li> <i class="fa fa-github"></i> <a href="http://www.github.com/pinolo">Github</a></li>
         <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/pinolo">Twitter</a></li>

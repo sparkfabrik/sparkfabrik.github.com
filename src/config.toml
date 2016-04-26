@@ -45,9 +45,9 @@ title = "Tech @ SparkFabrik"
       name = "Enrico Sato"
       role = "Frontend Developer"
       picture = "http://www.sparkfabrik.com/images/team/enrico.jpg"
-      bio = ""
-      github = "http://www.github.com/mgdesign"
-      twitter = "http://www.twitter.com/mgdesign"
+      bio = "Web developer, bass player, tech lover. And a really really curious man."
+      github = "https://github.com/enricosato"
+      twitter = "https://twitter.com/RetiAlternative"
 
 [Author]
   name = "Sparkfabrik"
