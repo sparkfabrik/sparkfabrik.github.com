@@ -8,8 +8,91 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Wed, 06 Apr 2016 08:51:09 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 19 Apr 2016 08:51:09 +0200</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/tags/drush8/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Brown bag happy-hour, April 19th 2016</title>
+      <link>http://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</link>
+      <pubDate>Tue, 19 Apr 2016 08:51:09 +0200</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</guid>
+      <description>
+
+&lt;p&gt;News about Drupal, Telegram and Youtube for this new appointment of BBH!&lt;/p&gt;
+
+&lt;h1 id=&#34;weekly-news:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Weekly News&lt;/h1&gt;
+
+&lt;p&gt;Drupal, Telegram API and YouTube for this new appointment of BBH. By Enrico Sato.&lt;/p&gt;
+
+&lt;h3 id=&#34;drupal-8-1-0-is-now-available:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Drupal 8.1.0 is now available&lt;/h3&gt;
+
+&lt;p&gt;The testing for the &lt;a href=&#34;https://www.drupal.org/drupal-8.1.0-rc1&#34;&gt;first release candidate&lt;/a&gt; is concluded and now the drupal community published the first minor release of Drupal 8.1.0 version.&lt;/p&gt;
+
+&lt;p&gt;What is new?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Experimental UI for migrations from older Drupal versions;&lt;/li&gt;
+&lt;li&gt;Integration with BigPipe for performance of site;&lt;/li&gt;
+&lt;li&gt;CKEditor WYSIWYG spellchecking and language button;&lt;/li&gt;
+&lt;li&gt;Rendered entities in Views fields;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See all details at &lt;a href=&#34;https://www.drupal.org/blog/drupal-8-1-0&#34;&gt;drupal.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To update from 8.0.6 to 8.1.0 use the update procedure (it is the same as updating from 8.0.5 to 8.0.6). Drupal community recommends to test the update carefully before updating your production site.&lt;/p&gt;
+
+&lt;h3 id=&#34;a-drupal-distribution-for-publishers-thunder:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;A drupal distribution for publishers: Thunder&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_thunder.jpg&#34; alt=&#34;Thunder distribution&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Media group &lt;a href=&#34;http://www.hubert-burda-media.com/&#34;&gt;Huber Burda Media&lt;/a&gt; released its Drupal 8 distribution, &lt;a href=&#34;http://www.thunder.org/&#34;&gt;Thunder&lt;/a&gt;, that includes contrib and custom modules selected for publisher’s world. This distribution is born thanks to a strong collaboration between publishers and developers and the final product shows a particularly care to UX that make easier the publisher’s workflow.
+And, last but not least, it is build with Drupal 8!&lt;/p&gt;
+
+&lt;p&gt;You can download Thunder from &lt;a href=&#34;https://www.drupal.org/project/thunder&#34;&gt;https://www.drupal.org/project/thunder&lt;/a&gt; or test it here: &lt;a href=&#34;https://simplytest.me/project/thunder&#34;&gt;https://simplytest.me/project/thunder&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;telegram-bot-api-2-0:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Telegram Bot API 2.0&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_telegram.jpg&#34; alt=&#34;Telegram Bot API 2.0&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After one year from the release launch of first Bot Platform, Telegram announces new tools for its platform: Bot Platform 2.0&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Today we are giving bot developers a whole new dimension with Bots 2.0: inline keyboards, callback and URL buttons, location permissions and on-the-fly message editing. The new bots can also generate any type of content for you to share with friends, including documents, MP3s, videos, stickers, animations and contacts.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Telegram have already built some of Bot’s example to try the new possibilities:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://telegram.me/music&#34;&gt;@music&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://telegram.me/youtube&#34;&gt;@youtube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://telegram.me/foursquare&#34;&gt;@foursquare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://telegram.me/sticker&#34;&gt;@sticker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(only for last update of your app).&lt;/p&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;https://core.telegram.org/bots/2-0-intro&#34;&gt;Documentation about Telegram Bot API 2.0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;But, if you are not a coder and you would like to test the potentiality of Telegram’s Bot, you can start with &lt;a href=&#34;http://chatfuel.com&#34;&gt;Chatfuel&lt;/a&gt; and the possible integration with &lt;a href=&#34;https://zapier.com/zapbook/chatfuel&#34;&gt;Zapier&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;youtube-introduces-360-degree-live-streaming-and-spatial-audio:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Youtube introduces 360-degree live streaming and spatial audio&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DvouWzN1dRdQtjATPUAXVkH2zcxEQpPdKlnvsY7i6aTxIl8NbcpUAJncUukeTb4igklbRWrleCFksDDVojv1GN6AiZk4v_2opy8cGX-C7hO2c0dgTx52gUQBJ_hc_5GBEMKAbkpb&#34; alt=&#34;Youtube 360-degree live streaming&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After the launch of support for 360 degrees videos, Youtube makes another step to the virtual reality: now its platform allows the streaming with 360 degree technology and spacial audio effects&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Just as watching a concert in 360 degrees can give you an unmatched immersive experience, spatial audio allows you to listen along as you do in real life, where depth, distance and intensity all play a role.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Youtube works with companies like VideoStitch and Two Big Ears to make their software compatible with 360-degree live streams or spatial audio on YouTube. 360-degree live streaming and spatial audio technologies are avaliable at all YouTube &lt;a href=&#34;https://www.youtube.com/yt/space/&#34;&gt;Space locations around the globe&lt;/a&gt;, for people who wants to try this experience.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The &lt;em&gt;BBH (Brown bag happy-hour)&lt;/em&gt; it&amp;rsquo;s a &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; regular activity where we share discoveries and techniques with each other and discuss the last two week tech and innovation world novelties.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Brown bag happy-hour, April 5th 2016</title>
