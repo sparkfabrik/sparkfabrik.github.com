@@ -46,22 +46,22 @@
 
 &lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_thunder.jpg&#34; alt=&#34;Thunder distribution&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Media group &lt;a href=&#34;http://www.hubert-burda-media.com/&#34;&gt;Huber Burda Media&lt;/a&gt; released its Drupal 8 distribution, &lt;a href=&#34;http://www.thunder.org/&#34;&gt;Thunder&lt;/a&gt;, that includes contrib and custom modules selected for publisher’s world. This distribution is born thanks to a strong collaboration between publishers and developers and the final product shows a particularly care to UX that make easier the publisher’s workflow.
-And, last but not least, it is build with Drupal 8!&lt;/p&gt;
+&lt;p&gt;Media group &lt;a href=&#34;http://www.hubert-burda-media.com/&#34;&gt;Huber Burda Media&lt;/a&gt; released its Drupal 8 distribution, &lt;a href=&#34;http://www.thunder.org/&#34;&gt;Thunder&lt;/a&gt;, that includes contrib and custom modules selected for publisher’s world. This distribution is born thanks to a strong collaboration between publishers and developers and the final product shows a particularly care to UX that soothes the publisher’s workflow.
+And, last but not least, it is built on Drupal 8!&lt;/p&gt;
 
-&lt;p&gt;You can download Thunder from &lt;a href=&#34;https://www.drupal.org/project/thunder&#34;&gt;https://www.drupal.org/project/thunder&lt;/a&gt; or test it here: &lt;a href=&#34;https://simplytest.me/project/thunder&#34;&gt;https://simplytest.me/project/thunder&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can &lt;a href=&#34;https://www.drupal.org/project/thunder&#34;&gt;download Thunder&lt;/a&gt; or &lt;a href=&#34;https://simplytest.me/project/thunder&#34;&gt;test it out&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;telegram-bot-api-2-0:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Telegram Bot API 2.0&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_telegram.jpg&#34; alt=&#34;Telegram Bot API 2.0&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;After one year from the release launch of first Bot Platform, Telegram announces new tools for its platform: Bot Platform 2.0&lt;/p&gt;
+&lt;p&gt;One year after the the first release of its Bot Platform, Telegram announces new tools for it: Bot Platform 2.0&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Today we are giving bot developers a whole new dimension with Bots 2.0: inline keyboards, callback and URL buttons, location permissions and on-the-fly message editing. The new bots can also generate any type of content for you to share with friends, including documents, MP3s, videos, stickers, animations and contacts.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Telegram have already built some of Bot’s example to try the new possibilities:&lt;/p&gt;
+&lt;p&gt;Telegram have already released some Bot’s example to try out the new capabilities:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://telegram.me/music&#34;&gt;@music&lt;/a&gt;&lt;/li&gt;
@@ -70,23 +70,23 @@ And, last but not least, it is build with Drupal 8!&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;https://telegram.me/sticker&#34;&gt;@sticker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;(only for last update of your app).&lt;/p&gt;
+&lt;p&gt;(you must update your app to the last version).&lt;/p&gt;
 
 &lt;p&gt;See the &lt;a href=&#34;https://core.telegram.org/bots/2-0-intro&#34;&gt;Documentation about Telegram Bot API 2.0&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;But, if you are not a coder and you would like to test the potentiality of Telegram’s Bot, you can start with &lt;a href=&#34;http://chatfuel.com&#34;&gt;Chatfuel&lt;/a&gt; and the possible integration with &lt;a href=&#34;https://zapier.com/zapbook/chatfuel&#34;&gt;Zapier&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But, if you are not a coder and you would like to test the potential of Telegram’s Bot, you can start with &lt;a href=&#34;http://chatfuel.com&#34;&gt;Chatfuel&lt;/a&gt; and the possible integration with &lt;a href=&#34;https://zapier.com/zapbook/chatfuel&#34;&gt;Zapier&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;youtube-introduces-360-degree-live-streaming-and-spatial-audio:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Youtube introduces 360-degree live streaming and spatial audio&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DvouWzN1dRdQtjATPUAXVkH2zcxEQpPdKlnvsY7i6aTxIl8NbcpUAJncUukeTb4igklbRWrleCFksDDVojv1GN6AiZk4v_2opy8cGX-C7hO2c0dgTx52gUQBJ_hc_5GBEMKAbkpb&#34; alt=&#34;Youtube 360-degree live streaming&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;After the launch of support for 360 degrees videos, Youtube makes another step to the virtual reality: now its platform allows the streaming with 360 degree technology and spacial audio effects&lt;/p&gt;
+&lt;p&gt;After the launch of support for 360 degrees videos, Youtube makes another step towards virtual reality: now its platform allows for streaming with 360 degree technology and spacial audio effects&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Just as watching a concert in 360 degrees can give you an unmatched immersive experience, spatial audio allows you to listen along as you do in real life, where depth, distance and intensity all play a role.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Youtube works with companies like VideoStitch and Two Big Ears to make their software compatible with 360-degree live streams or spatial audio on YouTube. 360-degree live streaming and spatial audio technologies are avaliable at all YouTube &lt;a href=&#34;https://www.youtube.com/yt/space/&#34;&gt;Space locations around the globe&lt;/a&gt;, for people who wants to try this experience.&lt;/p&gt;
+&lt;p&gt;Youtube works with companies like &lt;strong&gt;VideoStitch&lt;/strong&gt; and &lt;strong&gt;Two Big Ears&lt;/strong&gt; to make their software compatible with 360-degree live streams or spatial audio. 360-degree live streaming and spatial audio technologies are avaliable at all &lt;a href=&#34;https://www.youtube.com/yt/space/&#34;&gt;YouTube Space locations around the globe&lt;/a&gt;, for people who wants to try this experience.&lt;/p&gt;
 
 &lt;hr /&gt;
 
