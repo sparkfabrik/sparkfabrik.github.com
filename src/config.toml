@@ -49,6 +49,14 @@ title = "Tech @ SparkFabrik"
       github = "https://github.com/enricosato"
       twitter = "https://twitter.com/RetiAlternative"
 
+    [Params.Authors.Osvaldo]
+      name = "Osvaldo Tulini"
+      role = "backend Developer"
+      picture = "http://www.sparkfabrik.com/images/team/osvaldo.png"
+      bio = "Developer, Snowboarder"
+      github = "https://github.com/osvaldot"
+      twitter = "https://twitter.com/osvaldotulini"
+
 [Author]
   name = "Sparkfabrik"
   email = "info@sparkfabrik.com"
