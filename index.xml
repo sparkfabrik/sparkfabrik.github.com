@@ -8,8 +8,69 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Tue, 19 Apr 2016 08:51:09 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 10 May 2016 08:51:09 +0200</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Brown bag happy-hour, May 4th 2016</title>
+      <link>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</link>
+      <pubDate>Tue, 10 May 2016 08:51:09 +0200</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</guid>
+      <description>
+
+&lt;p&gt;News about Drupal, Backtrac Casestudy, Drupal Developer Days and PHP for this new appointment of BBH!&lt;/p&gt;
+
+&lt;h1 id=&#34;weekly-news:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Weekly News&lt;/h1&gt;
+
+&lt;h3 id=&#34;a-new-design-system-for-drupal-org:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;A new design system for Drupal.org&lt;/h3&gt;
+
+&lt;p&gt;A new visual system for Drupal.org is expected for this year.
+The goal is &amp;ldquo;Update Drupal.org to reflect the flexibility, modernity, and community of Drupal itself&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;See all details at &lt;a href=&#34;https://www.drupal.org/drupalorg/blog/a-new-design-system&#34;&gt;drupal.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;drupal-developer-days-keynotes:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Drupal Developer Days keynotes&lt;/h3&gt;
+
+&lt;p&gt;Drupal Developer Days, the developer-oriented international event that offers opportunities for learning and actually using Drupal, comes to Italy for the very first time in 2016. It will be held in Milan, June 21-26.&lt;/p&gt;
+
+&lt;p&gt;Annunced keynotes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bojan Živanović - Making a Drupal shaped dent in the universe&lt;/li&gt;
+&lt;li&gt;Alessia Rullo - Aesthetics of interaction: an update&lt;/li&gt;
+&lt;li&gt;Jessica Rose - Automating Access to Development&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See all details at &lt;a href=&#34;http://milan2016.drupaldays.org/program/keynotes&#34;&gt;drupaldays.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;backtrac-casestudy:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Backtrac Casestudy&lt;/h3&gt;
+
+&lt;p&gt;BackTrac is visual regression testing tool, the case study explain a real life example, Drupal.org.&lt;/p&gt;
+
+&lt;p&gt;See all detail at &lt;a href=&#34;https://backtrac.io/blog/case-study-drupalorg&#34;&gt;backtrac.io&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;php-nette:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;PHP, Nette&lt;/h3&gt;
+
+&lt;p&gt;According to the survey result at &lt;a href=&#34;http;//http://www.sitepoint.com&#34;&gt;sitepoint&lt;/a&gt; SitePoint statistics , it ranked number 3 in both “at Work” and “in Personal Projects”, just tailing the two giants: Laravel and Symfony2.
+Nette Framework is an Open Source framework for creating web applications in PHP&lt;/p&gt;
+
+&lt;p&gt;Features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Full PHP 7 compatibility&lt;/li&gt;
+&lt;li&gt;Revolutionary technology that eliminates security holes and their misuse, such as XSS, CSRF, session hijacking, session fixation, etc&lt;/li&gt;
+&lt;li&gt;Tracy debug tools, which will help you discover all bugs in timely fashion.&lt;/li&gt;
+&lt;li&gt;Thoughtful and pure object-oriented design using the new features in PHP 5, components and event driven modeling.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See all detail at &lt;a href=&#34;https://nette.org&#34;&gt;nette.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The &lt;em&gt;BBH (Brown bag happy-hour)&lt;/em&gt; it&amp;rsquo;s a &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; regular activity where we share discoveries and techniques with each other and discuss the last two week tech and innovation world novelties.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Brown bag happy-hour, April 19th 2016</title>
@@ -360,8 +421,8 @@ Both entities core businesses were founded on Drupal and other strategic tools a
       &lt;i&gt; Frontend Developer &lt;/i&gt;
       &lt;p class=&#34;small&#34;&gt;Web developer, bass player, tech lover. And a really really curious man.&lt;/p&gt;
       &lt;ul class=&#34;list-inline&#34;&gt;
-        &lt;li&gt; &lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.github.com/pinolo&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt; &lt;i class=&#34;fa fa-twitter&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.twitter.com/pinolo&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt; &lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://github.com/enricosato&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt; &lt;i class=&#34;fa fa-twitter&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://twitter.com/RetiAlternative&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/p&gt;
