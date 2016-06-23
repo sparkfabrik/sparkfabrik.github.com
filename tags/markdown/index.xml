@@ -22,7 +22,7 @@
 &lt;p&gt;Only the brave can be web developers today.
 I really think if you are a web developer, nothing can scare the crap out of you! Nothing but writing documentation for your code&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;rsquo;s face it, we &lt;strong&gt;hate&lt;/strong&gt; writing doc! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
+&lt;p&gt;Let&amp;rsquo;s face it, we &lt;strong&gt;hate&lt;/strong&gt; writing docs! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
 But there are cases where you have to jot down a guide to first build, or a reference page with best practices. Odds are good you end up using a project wiki, or if you are less fortunate you are juggling through a bunch of never-to-be-found Google Documents.&lt;/p&gt;
 
 &lt;p&gt;Well, look no further: here we have a recipe to soothe your pain!&lt;br /&gt;
@@ -41,7 +41,7 @@ It may not be a panacea but surely it will streamline the process of documentati
 &lt;p&gt;&lt;strong&gt;1. Manage documentation requires a context switch&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;When you live in a tmux-powered kickin-ass hyper-hipster hyphens-overloaded console environment the more annoying thing to do is switch to a browser, navigate to your tracker&amp;rsquo;s wiki, make your way to the right page and edit the stuff. It is discomfortable and a great excuse for procrastination.
-This is in my opition the first reason why documentation goes obsolete from day 1.&lt;/p&gt;
+This is in my opinion the first reason why documentation goes obsolete from day 1.&lt;/p&gt;
 
 &lt;p&gt;Add problems like write permissions on knowledge-base tools, another approval workflow to manage, possible policies-hell, etc. and you&amp;rsquo;ll flip your table at the sole idea!&lt;/p&gt;
 
@@ -52,7 +52,7 @@ This is in my opition the first reason why documentation goes obsolete from day 
 &lt;p&gt;When your team is involved on a medium-to-long term project, you really need to keep track of changes. But changes don&amp;rsquo;t always happen in line.
 Wild branching, forking and bisecting happens in your codebase as experimental feature get thrown in and out, or the codebase is updated to work on the next &lt;em&gt;&amp;lt;your technology of choice&amp;gt;&lt;/em&gt; release. This means documentation should ideally follow along with your codebase.&lt;/p&gt;
 
-&lt;p&gt;For example, a three-years long project of ours was recently moved from an &amp;ldquo;old fashioned&amp;rdquo; PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment work.
+&lt;p&gt;For example, a three-years long project of ours was recently moved from an &amp;ldquo;old fashioned&amp;rdquo; PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment works.
 Maintaining two pages on a wiki, with almost the same title, and drop a note somewhere to explain which page to read is ugly as a single-headed monkey. It introduces throw-away information, generates confusion and is hard to read for both experienced teammates and newcomers.&lt;/p&gt;
 
 &lt;p&gt;This leads to the next point.&lt;/p&gt;
@@ -85,10 +85,10 @@ This in turn makes some people the SPOF for important information, which is neve
 &lt;p&gt;And it happened.
 A customer asked our CTO to write guidelines on how to ensure maximum performance on the project before committing new contributions.&lt;/p&gt;
 
-&lt;p&gt;Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you are probably causing you permanent damage!
-Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called &amp;ldquo;Documentation&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you&amp;rsquo;ll end up causing yourself permanent damage!
+Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called &lt;code&gt;documentation&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;He didn&amp;rsquo;t event thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance.&lt;/p&gt;
+&lt;p&gt;He didn&amp;rsquo;t even thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Hey, not bad!&lt;/p&gt;
@@ -136,7 +136,7 @@ But no &lt;del&gt;hipst&lt;/del&gt; modern CTO would ever accept another depende
 &lt;p&gt;We miss a way to make Raneto available in a snap!
 The solution is obviously to dockerize the whole thing out. And manage the container with docker-compose for good measure, of course!&lt;/p&gt;
 
-&lt;p&gt;So &lt;a href=&#34;https://hub.docker.com/r/sparkfabrik/docker-node-raneto&#34;&gt;I prepared a container&lt;/a&gt; which mounts the local folder in a volume and expose the content via Raneto, on port 80 for easier access!
+&lt;p&gt;So &lt;a href=&#34;https://hub.docker.com/r/sparkfabrik/docker-node-raneto&#34;&gt;I prepared a container&lt;/a&gt; which mounts the local folder in a volume and exposes the content via Raneto, on port 80 for easier access!
 The documentation is pretty straightforward (eh! ^_^&amp;lsquo;) but if you want to play with it right now, follow these steps:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Create a folder structure like this:&lt;/strong&gt;&lt;/p&gt;
@@ -178,8 +178,8 @@ _And here is an even more silly meme_
 
 &lt;h3 id=&#34;hey-you-get-your-damn-hands-off-it:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Hey, you! Get your damn hands off it!&lt;/h3&gt;
 
-&lt;p&gt;But why, oh why would you want to launch a container by hand when you can do it with &lt;a href=&#34;https://docs.docker.com/compose&#34;&gt;docker-compose&lt;/a&gt;?
-Actually there are a lot of potential reason, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install &lt;a href=&#34;https://github.com/tonistiigi/dnsdock&#34;&gt;dnsdock&lt;/a&gt; (&lt;a href=&#34;http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/&#34;&gt;this guide&lt;/a&gt; may come in handy) and register a URL for your project documentation.&lt;/p&gt;
+&lt;p&gt;But why, oh why would you want to launch a container by hand when you can do it with &lt;a href=&#34;https://docs.docker.com/compose&#34;&gt;docker-compose&lt;/a&gt;?&lt;br /&gt;
+Actually there are a lot of potential reasons, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install &lt;a href=&#34;https://github.com/tonistiigi/dnsdock&#34;&gt;dnsdock&lt;/a&gt; (&lt;a href=&#34;http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/&#34;&gt;this guide&lt;/a&gt; may come in handy) and register a URL for your project documentation.&lt;/p&gt;
 
 &lt;p&gt;You can either create a new &lt;code&gt;docker-compose.yml&lt;/code&gt; file in your project root with the following content, or add these lines to the one you have in place.&lt;/p&gt;
 
