@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="http://www.sparkfabrik.com/favicon.png" />
+
+  <title>Wait a minute, Doc | SparkFabrik </title>
+
+  <meta name="author" content="Sparkfabrik" />
+
+  
+  <meta name="description" content="How we leveraged Raneto and Docker to tame projects documentation">
+  
+
+  <meta name="generator" content="Hugo 0.15" />
+
+  <link rel="alternate" href="http://sparkfabrik.github.io/index.xml" type="application/rss+xml" title="Tech @ SparkFabrik">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/spark.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/gruvbox-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <meta property="og:title" content="Wait a minute, Doc" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc" />
+  <meta property="og:image" content="http://sparkfabrik.github.io/img/full_logo.png" />
+
+  
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/rrssb/css/rrssb.css" />
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <i class="spark-icon icon-sparkfabrik">&#xe800;</i> <a class="navbar-brand navtitle" href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li>
+        <a title="Blog" href="http://sparkfabrik.github.io/">Blog </a>
+	      </li>
+	    
+        <li>
+        <a title="Team" href="http://sparkfabrik.github.io/page/team/">Team </a>
+	      </li>
+	    
+        <li>
+        <a title="About" href="http://sparkfabrik.github.io/page/about/">About </a>
+	      </li>
+	    
+        <li>
+        <a title="Archive" href="http://sparkfabrik.github.io/archive/">Archive </a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+
+      
+        <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Wait a minute, Doc</h1>
+        
+        <h2 class="post-subheading">How we leveraged Raneto and Docker to tame projects documentation</h2>
+        
+        <span class="post-meta">Posted on June 14, 2016</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  
+
+<p>Only the brave can be web developers today.
+I really think if you are a web developer, nothing can scare the crap out of you! Nothing but writing documentation for your code&hellip;</p>
+
+<p>Let&rsquo;s face it, we <strong>hate</strong> writing doc! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
+But there are cases where you have to jot down a guide to first build, or a reference page with best practices. Odds are good you end up using a project wiki, or if you are less fortunate you are juggling through a bunch of never-to-be-found Google Documents.</p>
+
+<p>Well, look no further: here we have a recipe to soothe your pain!<br />
+It may not be a panacea but surely it will streamline the process of documentation maintenance and availability.</p>
+
+<p>Say welcome to Raneto!</p>
+
+<!-- more -->
+
+<h3 id="hey-doc-this-is-heavy:cb7242210f870347cebbc9c2f1daff46">Hey doc, this is heavy!</h3>
+
+<p><img src="http://sparkfabrik.github.io/posts/wamd-thisisheavy-meme.jpg" alt="This is heavy" /></p>
+
+<p>So let&rsquo;s start listing our pains with project documentation:</p>
+
+<p><strong>1. Manage documentation requires a context switch</strong></p>
+
+<p>When you live in a tmux-powered kickin-ass hyper-hipster hyphens-overloaded console environment the more annoying thing to do is switch to a browser, navigate to your tracker&rsquo;s wiki, make your way to the right page and edit the stuff. It is discomfortable and a great excuse for procrastination.
+This is in my opition the first reason why documentation goes obsolete from day 1.</p>
+
+<p>Add problems like write permissions on knowledge-base tools, another approval workflow to manage, possible policies-hell, etc. and you&rsquo;ll flip your table at the sole idea!</p>
+
+<p>Surely, having a more straighforward path from your working environment to your documentation helps you keep it up to date.</p>
+
+<p><strong>2. Documentation is hard to evolve with your project</strong></p>
+
+<p>When your team is involved on a medium-to-long term project, you really need to keep track of changes. But changes don&rsquo;t always happen in line.
+Wild branching, forking and bisecting happens in your codebase as experimental feature get thrown in and out, or the codebase is updated to work on the next <em>&lt;your technology of choice&gt;</em> release. This means documentation should ideally follow along with your codebase.</p>
+
+<p>For example, a three-years long project of ours was recently moved from an &ldquo;old fashioned&rdquo; PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment work.
+Maintaining two pages on a wiki, with almost the same title, and drop a note somewhere to explain which page to read is ugly as a single-headed monkey. It introduces throw-away information, generates confusion and is hard to read for both experienced teammates and newcomers.</p>
+
+<p>This leads to the next point.</p>
+
+<p><strong>3. When documentation is hard to find or unreliable, people stop reaching for it</strong></p>
+
+<p>Natural tendency towards the path of least resistence makes people want to <del>stre</del> ping one another on Slack instead of searching for information in the docs, simply because it is perceived as quicker, easier and (this is bad) more reliable.
+This in turn makes some people the SPOF for important information, which is never persisted anywhere and when it does, it&rsquo;s left alone and quickly goes out of date.</p>
+
+<blockquote>
+<p>No good!</p>
+</blockquote>
+
+<p>So we had a bunch of problems to solve:</p>
+
+<ul>
+<li>Streamline the process of writing and maintaining documentation by devs point of view</li>
+<li>Make documentation accessible, reliable and relevant to the project state</li>
+<li>Allow anybody to contribute to documentation</li>
+<li>Avoid <em>moar policies</em> for contributions</li>
+<li>Be cool (it&rsquo;s always important to be cool if you want to write an article on what you are doing) (or if you want to play metal :D )</li>
+</ul>
+
+<p>Now what?</p>
+
+<h3 id="back-to-the-future:cb7242210f870347cebbc9c2f1daff46">Back to the future</h3>
+
+<p><img src="http://sparkfabrik.github.io/posts/wamd-gigawatts-meme.jpg" alt="I got gigawatts" /></p>
+
+<p>And it happened.
+A customer asked our CTO to write guidelines on how to ensure maximum performance on the project before committing new contributions.</p>
+
+<p>Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you are probably causing you permanent damage!
+Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called &ldquo;Documentation&rdquo;.</p>
+
+<p>He didn&rsquo;t event thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance.</p>
+
+<blockquote>
+<p>Hey, not bad!</p>
+</blockquote>
+
+<p>I was already in search for an easy to maintain knowledge-base platform and I thought in 2016, when static site generator are all-the-rage and everybody drools on going down-to-metal, maybe someone would have had addressed the problem, building a simple markdown-powered knowledge based generator.</p>
+
+<p>And guess what?! <a href="https://gilbert.pellegrom.me">Someone</a> <a href="https://github.com/gilbitron/Ranet">did</a>.</p>
+
+<p>A bit of research and I stumbled on <a href="http://raneto.com">Raneto</a>, a node-based, markdown-powered knowledge base site generator. Not static, but still. :)</p>
+
+<p>Raneto actually has a lot of selling points that made me fall in love:</p>
+
+<ul>
+<li>It&rsquo;s easy to install and use.</li>
+<li>It has no database, or if you prefer, your flat markdown files are it&rsquo;s database.</li>
+<li>It is fast and pretty lightweight, with the whole stack sucking around 65MB of RAM.</li>
+<li>It renders to a pleasant default template, which can be themed with <a href="https://mustache.github.io">Mustache</a>, highlights your code, support GitHub-flavored MarkDown and is also responsive.</li>
+<li>It allows you to perform full text search in the doc.</li>
+<li>Its index and documentation navigation are directory&amp;slug-driven: you don&rsquo;t have to build a menu, just arrange your files in folders <code>to/reflect/doc-sections</code> and name dirs and files <code>using-a-slug-to-make-them-readable</code> and you&rsquo;ll end up with human readable version of menu links and titles.</li>
+<li>The whole doc reads in 5 minutes. From a smartphone. On a crowded train. I did.</li>
+</ul>
+
+<p>Yay! Now our CTO documentation looks really cute, with unicorns, rainbows and all!</p>
+
+<blockquote>
+<p>Going down-to-metal leapfrogged us to the future! Yay!</p>
+</blockquote>
+
+<p>It&rsquo;s like flying-skates cool! Almost&hellip;</p>
+
+<h3 id="great-dock:cb7242210f870347cebbc9c2f1daff46">Great Dock!!!</h3>
+
+<p>OK, we got a great service to hadle our CTO-proof documentation.
+But no <del>hipst</del> modern CTO would ever accept another dependency in his stack.</p>
+
+<p>The idea here is to have a folder in your project repository to hold all the relevant documentation so that:</p>
+
+<ul>
+<li>Anybody can contribute with the same policies they use for code (do you review MRs? Use git-flow? Commit directly on master? No, seriously&hellip; don&rsquo;t do this, even at home!)</li>
+<li>Different branches or forks can have different version of the documentation</li>
+<li>Navigating the source code from Gitlab/GitHub/Bitbucket/Whatever allows you to read the documentation files anyway (a nice addition)</li>
+</ul>
+
+<p>We miss a way to make Raneto available in a snap!
+The solution is obviously to dockerize the whole thing out. And manage the container with docker-compose for good measure, of course!</p>
+
+<p>So <a href="https://hub.docker.com/r/sparkfabrik/docker-node-raneto">I prepared a container</a> which mounts the local folder in a volume and expose the content via Raneto, on port 80 for easier access!
+The documentation is pretty straightforward (eh! ^_^&lsquo;) but if you want to play with it right now, follow these steps:</p>
+
+<p><strong>Create a folder structure like this:</strong></p>
+
+<pre><code>mkdir -p documentation/docs
+mkdir -p documentation/files
+</code></pre>
+
+<p>The first directory will hold your markdown files. The second one will be mounted to the public asset folder, so you can have images or attachments in your documentation.</p>
+
+<p><strong>Write some example doc</strong></p>
+
+<p>You can drop the following in <code>documentation/docs/up-to-88.md</code>:</p>
+
+<pre><code>This is a silly example page with **markdown** syntax!
+
+_And here is an even more silly meme_
+![88mph](files/silly-meme.png)
+</code></pre>
+
+<p>then put one of the silly memes on this page in <code>files</code> directory (of course name it <code>silly-meme.png</code>)</p>
+
+<p>Done?</p>
+
+<p><strong>Launch Raneto in its container</strong></p>
+
+<p>Run</p>
+
+<pre><code>docker run -p 80:80 -v &lt;/full/path/to/your/content&gt;:/srv/raneto/content -d sparkfabrik/raneto
+</code></pre>
+
+<p>and enjoy your documentation at <a href="http://localhost:80">http://localhost:80</a></p>
+
+<blockquote>
+<p>Yes! It is THAT simple! :)</p>
+</blockquote>
+
+<p><img src="http://sparkfabrik.github.io/posts/wamd-wasfast-meme.jpg" alt="Whew... this was fast" /></p>
+
+<h3 id="hey-you-get-your-damn-hands-off-it:cb7242210f870347cebbc9c2f1daff46">Hey, you! Get your damn hands off it!</h3>
+
+<p>But why, oh why would you want to launch a container by hand when you can do it with <a href="https://docs.docker.com/compose">docker-compose</a>?
+Actually there are a lot of potential reason, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install <a href="https://github.com/tonistiigi/dnsdock">dnsdock</a> (<a href="http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/">this guide</a> may come in handy) and register a URL for your project documentation.</p>
+
+<p>You can either create a new <code>docker-compose.yml</code> file in your project root with the following content, or add these lines to the one you have in place.</p>
+
+<pre><code>documentation:
+  image: sparkfabrik/docker-node-raneto:0.9.0
+  environment:
+    - DNSDOCK_ALIAS=docs.whatever.localdomain.loc
+  volumes:
+    - ./documentation/docs:/srv/raneto/content
+    - ./documentation/files:/srv/raneto/themes/default/public/files
+</code></pre>
+
+<p>Once done, and given your file is in the same directory than your <code>documentation</code> folder, just run:</p>
+
+<pre><code>docker-compose up -d
+</code></pre>
+
+<p>to enjoy your documentation at <a href="http://docs.whatever.localdomain.loc">http://docs.whatever.localdomain.loc</a></p>
+
+<h3 id="what-what-the-hell-is-a-gigawatt:cb7242210f870347cebbc9c2f1daff46">What-what the hell is a gigawatt?</h3>
+
+<p>Want to go the easy way?
+You can test the all of the above cloning this repo: <a href="https://github.com/stickgrinder/spark-docker-raneto-demo">https://github.com/stickgrinder/spark-docker-raneto-demo</a></p>
+
+<p><img src="http://sparkfabrik.github.io/posts/wamd-calculations-meme.jpg" alt="You did almost nothing..." /></p>
+
+<p><strong>NOTE</strong>: Mind that you have to have dnsdock in place <em>OR</em> create an entry in the hostfile to resolve <code>docs.demo.sparkfabrik.loc</code> to the IP of the container started by docker-compose.</p>
+
+<h3 id="give-me-a-milk-chocolate:cb7242210f870347cebbc9c2f1daff46">Give me a milk&hellip; Chocolate!</h3>
+
+<p>If you now feel like a real documentation badass, pat yourself a shoulder: <strong>you are!</strong></p>
+
+<p>This simple container still has a long way to go: for example public assets would be better served in a folder outside the default theme. Even better, it can support custom theme in the project folder.
+But you surely have more clever ideas so please, find the container definition <a href="https://github.com/sparkfabrik/docker-node-raneto">here</a>, fork it and adapt it to your needs and workflow!</p>
+
+<p>And don&rsquo;t forget to send PRs in! :)</p>
+
+<p>Happy doc(k)ing everybody!</p>
+
+    </div>
+  </div>
+
+  <div class="social-share row">
+  <div class="col-sm-5 col-md-offset-2 col-lg-offset-2">
+  <ul class="rrssb-buttons clearfix">
+    <li class="rrssb-facebook">
+      
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f06%2f14%2fwait-a-minute-doc" class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"/></svg></span>
+        <span class="rrssb-text">facebook</span>
+      </a>
+    </li>
+    <li class="rrssb-twitter">
+      
+      <a href="https://twitter.com/intent/tweet?text=Read+more+on+@sparkfabrik+Teck+Blog: http%3a%2f%2fsparkfabrik.github.io%2f2016%2f06%2f14%2fwait-a-minute-doc"
+      class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62a15.093 15.093 0 0 1-8.86-2.32c2.702.18 5.375-.648 7.507-2.32a5.417 5.417 0 0 1-4.49-3.64c.802.13 1.62.077 2.4-.154a5.416 5.416 0 0 1-4.412-5.11 5.43 5.43 0 0 0 2.168.387A5.416 5.416 0 0 1 2.89 4.498a15.09 15.09 0 0 0 10.913 5.573 5.185 5.185 0 0 1 3.434-6.48 5.18 5.18 0 0 1 5.546 1.682 9.076 9.076 0 0 0 3.33-1.317 5.038 5.038 0 0 1-2.4 2.942 9.068 9.068 0 0 0 3.02-.85 5.05 5.05 0 0 1-2.48 2.71z"/></svg></span>
+        <span class="rrssb-text">twitter</span>
+      </a>
+    </li>
+    <li class="rrssb-linkedin">
+      
+      <a class="popup" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f06%2f14%2fwait-a-minute-doc">
+      <span class="rrssb-icon">
+      <span class="rrssb-text">linkedin</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
+
+
+  <div class="row">
+    
+<div class="author-block clearfix">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="http://www.sparkfabrik.com/images/team/pusto.png" alt="Paolo Pustorino" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Stick" >Paolo Pustorino </a> <small>[ CEO ]</small></h4>
+     <p class="bio">Drummer, tabletop role-player and developer. Incidentally CEO and striving servant leader from 2013.</p>
+  </div>
+</div>
+
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04" data-toggle="tooltip" data-placement="top" title="Brown bag happy-hour, May 4th 2016">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+
+      
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <li>
+            <a href="https://www.sparkfabrik.com" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="https://twitter.com/sparkfabrik" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="mailto:info@sparkfabrik.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+	    	  
+    		  <li>
+      			<a href="http://sparkfabrik.github.io/index.xml" title="RSS">
+      			  <span class="fa-stack fa-lg">
+        				<i class="fa fa-circle fa-stack-2x"></i>
+        				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      			  </span>
+      			</a>
+    		  </li>
+
+        </ul>
+        <p class="copyright text-muted">
+    		  
+    		  <a href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    		  
+  	    </p>
+  	        
+    		<p class="theme-by text-muted">
+    		  Theme by
+    		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+    		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="http://sparkfabrik.github.io/js/jquery-1.11.2.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/bootstrap.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/main.js"></script>
+
+<script src="http://sparkfabrik.github.io/rrssb/js/rrssb.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76342738-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>

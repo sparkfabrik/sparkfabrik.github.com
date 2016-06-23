@@ -8,8 +8,218 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Tue, 10 May 2016 08:51:09 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jun 2016 11:02:30 +0000</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Wait a minute, Doc</title>
+      <link>http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</link>
+      <pubDate>Tue, 14 Jun 2016 11:02:30 +0000</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</guid>
+      <description>
+
+&lt;p&gt;Only the brave can be web developers today.
+I really think if you are a web developer, nothing can scare the crap out of you! Nothing but writing documentation for your code&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s face it, we &lt;strong&gt;hate&lt;/strong&gt; writing doc! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
+But there are cases where you have to jot down a guide to first build, or a reference page with best practices. Odds are good you end up using a project wiki, or if you are less fortunate you are juggling through a bunch of never-to-be-found Google Documents.&lt;/p&gt;
+
+&lt;p&gt;Well, look no further: here we have a recipe to soothe your pain!&lt;br /&gt;
+It may not be a panacea but surely it will streamline the process of documentation maintenance and availability.&lt;/p&gt;
+
+&lt;p&gt;Say welcome to Raneto!&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h3 id=&#34;hey-doc-this-is-heavy:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Hey doc, this is heavy!&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-thisisheavy-meme.jpg&#34; alt=&#34;This is heavy&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s start listing our pains with project documentation:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Manage documentation requires a context switch&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When you live in a tmux-powered kickin-ass hyper-hipster hyphens-overloaded console environment the more annoying thing to do is switch to a browser, navigate to your tracker&amp;rsquo;s wiki, make your way to the right page and edit the stuff. It is discomfortable and a great excuse for procrastination.
+This is in my opition the first reason why documentation goes obsolete from day 1.&lt;/p&gt;
+
+&lt;p&gt;Add problems like write permissions on knowledge-base tools, another approval workflow to manage, possible policies-hell, etc. and you&amp;rsquo;ll flip your table at the sole idea!&lt;/p&gt;
+
+&lt;p&gt;Surely, having a more straighforward path from your working environment to your documentation helps you keep it up to date.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Documentation is hard to evolve with your project&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When your team is involved on a medium-to-long term project, you really need to keep track of changes. But changes don&amp;rsquo;t always happen in line.
+Wild branching, forking and bisecting happens in your codebase as experimental feature get thrown in and out, or the codebase is updated to work on the next &lt;em&gt;&amp;lt;your technology of choice&amp;gt;&lt;/em&gt; release. This means documentation should ideally follow along with your codebase.&lt;/p&gt;
+
+&lt;p&gt;For example, a three-years long project of ours was recently moved from an &amp;ldquo;old fashioned&amp;rdquo; PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment work.
+Maintaining two pages on a wiki, with almost the same title, and drop a note somewhere to explain which page to read is ugly as a single-headed monkey. It introduces throw-away information, generates confusion and is hard to read for both experienced teammates and newcomers.&lt;/p&gt;
+
+&lt;p&gt;This leads to the next point.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. When documentation is hard to find or unreliable, people stop reaching for it&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Natural tendency towards the path of least resistence makes people want to &lt;del&gt;stre&lt;/del&gt; ping one another on Slack instead of searching for information in the docs, simply because it is perceived as quicker, easier and (this is bad) more reliable.
+This in turn makes some people the SPOF for important information, which is never persisted anywhere and when it does, it&amp;rsquo;s left alone and quickly goes out of date.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;No good!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So we had a bunch of problems to solve:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Streamline the process of writing and maintaining documentation by devs point of view&lt;/li&gt;
+&lt;li&gt;Make documentation accessible, reliable and relevant to the project state&lt;/li&gt;
+&lt;li&gt;Allow anybody to contribute to documentation&lt;/li&gt;
+&lt;li&gt;Avoid &lt;em&gt;moar policies&lt;/em&gt; for contributions&lt;/li&gt;
+&lt;li&gt;Be cool (it&amp;rsquo;s always important to be cool if you want to write an article on what you are doing) (or if you want to play metal :D )&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now what?&lt;/p&gt;
+
+&lt;h3 id=&#34;back-to-the-future:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Back to the future&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-gigawatts-meme.jpg&#34; alt=&#34;I got gigawatts&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And it happened.
+A customer asked our CTO to write guidelines on how to ensure maximum performance on the project before committing new contributions.&lt;/p&gt;
+
+&lt;p&gt;Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you are probably causing you permanent damage!
+Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called &amp;ldquo;Documentation&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;He didn&amp;rsquo;t event thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Hey, not bad!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I was already in search for an easy to maintain knowledge-base platform and I thought in 2016, when static site generator are all-the-rage and everybody drools on going down-to-metal, maybe someone would have had addressed the problem, building a simple markdown-powered knowledge based generator.&lt;/p&gt;
+
+&lt;p&gt;And guess what?! &lt;a href=&#34;https://gilbert.pellegrom.me&#34;&gt;Someone&lt;/a&gt; &lt;a href=&#34;https://github.com/gilbitron/Ranet&#34;&gt;did&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A bit of research and I stumbled on &lt;a href=&#34;http://raneto.com&#34;&gt;Raneto&lt;/a&gt;, a node-based, markdown-powered knowledge base site generator. Not static, but still. :)&lt;/p&gt;
+
+&lt;p&gt;Raneto actually has a lot of selling points that made me fall in love:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It&amp;rsquo;s easy to install and use.&lt;/li&gt;
+&lt;li&gt;It has no database, or if you prefer, your flat markdown files are it&amp;rsquo;s database.&lt;/li&gt;
+&lt;li&gt;It is fast and pretty lightweight, with the whole stack sucking around 65MB of RAM.&lt;/li&gt;
+&lt;li&gt;It renders to a pleasant default template, which can be themed with &lt;a href=&#34;https://mustache.github.io&#34;&gt;Mustache&lt;/a&gt;, highlights your code, support GitHub-flavored MarkDown and is also responsive.&lt;/li&gt;
+&lt;li&gt;It allows you to perform full text search in the doc.&lt;/li&gt;
+&lt;li&gt;Its index and documentation navigation are directory&amp;amp;slug-driven: you don&amp;rsquo;t have to build a menu, just arrange your files in folders &lt;code&gt;to/reflect/doc-sections&lt;/code&gt; and name dirs and files &lt;code&gt;using-a-slug-to-make-them-readable&lt;/code&gt; and you&amp;rsquo;ll end up with human readable version of menu links and titles.&lt;/li&gt;
+&lt;li&gt;The whole doc reads in 5 minutes. From a smartphone. On a crowded train. I did.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Yay! Now our CTO documentation looks really cute, with unicorns, rainbows and all!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Going down-to-metal leapfrogged us to the future! Yay!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It&amp;rsquo;s like flying-skates cool! Almost&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;great-dock:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Great Dock!!!&lt;/h3&gt;
+
+&lt;p&gt;OK, we got a great service to hadle our CTO-proof documentation.
+But no &lt;del&gt;hipst&lt;/del&gt; modern CTO would ever accept another dependency in his stack.&lt;/p&gt;
+
+&lt;p&gt;The idea here is to have a folder in your project repository to hold all the relevant documentation so that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Anybody can contribute with the same policies they use for code (do you review MRs? Use git-flow? Commit directly on master? No, seriously&amp;hellip; don&amp;rsquo;t do this, even at home!)&lt;/li&gt;
+&lt;li&gt;Different branches or forks can have different version of the documentation&lt;/li&gt;
+&lt;li&gt;Navigating the source code from Gitlab/GitHub/Bitbucket/Whatever allows you to read the documentation files anyway (a nice addition)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We miss a way to make Raneto available in a snap!
+The solution is obviously to dockerize the whole thing out. And manage the container with docker-compose for good measure, of course!&lt;/p&gt;
+
+&lt;p&gt;So &lt;a href=&#34;https://hub.docker.com/r/sparkfabrik/docker-node-raneto&#34;&gt;I prepared a container&lt;/a&gt; which mounts the local folder in a volume and expose the content via Raneto, on port 80 for easier access!
+The documentation is pretty straightforward (eh! ^_^&amp;lsquo;) but if you want to play with it right now, follow these steps:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Create a folder structure like this:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p documentation/docs
+mkdir -p documentation/files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first directory will hold your markdown files. The second one will be mounted to the public asset folder, so you can have images or attachments in your documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Write some example doc&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can drop the following in &lt;code&gt;documentation/docs/up-to-88.md&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This is a silly example page with **markdown** syntax!
+
+_And here is an even more silly meme_
+![88mph](files/silly-meme.png)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then put one of the silly memes on this page in &lt;code&gt;files&lt;/code&gt; directory (of course name it &lt;code&gt;silly-meme.png&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;Done?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Launch Raneto in its container&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -p 80:80 -v &amp;lt;/full/path/to/your/content&amp;gt;:/srv/raneto/content -d sparkfabrik/raneto
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and enjoy your documentation at &lt;a href=&#34;http://localhost:80&#34;&gt;http://localhost:80&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Yes! It is THAT simple! :)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-wasfast-meme.jpg&#34; alt=&#34;Whew... this was fast&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;hey-you-get-your-damn-hands-off-it:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Hey, you! Get your damn hands off it!&lt;/h3&gt;
+
+&lt;p&gt;But why, oh why would you want to launch a container by hand when you can do it with &lt;a href=&#34;https://docs.docker.com/compose&#34;&gt;docker-compose&lt;/a&gt;?
+Actually there are a lot of potential reason, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install &lt;a href=&#34;https://github.com/tonistiigi/dnsdock&#34;&gt;dnsdock&lt;/a&gt; (&lt;a href=&#34;http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/&#34;&gt;this guide&lt;/a&gt; may come in handy) and register a URL for your project documentation.&lt;/p&gt;
+
+&lt;p&gt;You can either create a new &lt;code&gt;docker-compose.yml&lt;/code&gt; file in your project root with the following content, or add these lines to the one you have in place.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;documentation:
+  image: sparkfabrik/docker-node-raneto:0.9.0
+  environment:
+    - DNSDOCK_ALIAS=docs.whatever.localdomain.loc
+  volumes:
+    - ./documentation/docs:/srv/raneto/content
+    - ./documentation/files:/srv/raneto/themes/default/public/files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once done, and given your file is in the same directory than your &lt;code&gt;documentation&lt;/code&gt; folder, just run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to enjoy your documentation at &lt;a href=&#34;http://docs.whatever.localdomain.loc&#34;&gt;http://docs.whatever.localdomain.loc&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;what-what-the-hell-is-a-gigawatt:cb7242210f870347cebbc9c2f1daff46&#34;&gt;What-what the hell is a gigawatt?&lt;/h3&gt;
+
+&lt;p&gt;Want to go the easy way?
+You can test the all of the above cloning this repo: &lt;a href=&#34;https://github.com/stickgrinder/spark-docker-raneto-demo&#34;&gt;https://github.com/stickgrinder/spark-docker-raneto-demo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-calculations-meme.jpg&#34; alt=&#34;You did almost nothing...&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Mind that you have to have dnsdock in place &lt;em&gt;OR&lt;/em&gt; create an entry in the hostfile to resolve &lt;code&gt;docs.demo.sparkfabrik.loc&lt;/code&gt; to the IP of the container started by docker-compose.&lt;/p&gt;
+
+&lt;h3 id=&#34;give-me-a-milk-chocolate:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Give me a milk&amp;hellip; Chocolate!&lt;/h3&gt;
+
+&lt;p&gt;If you now feel like a real documentation badass, pat yourself a shoulder: &lt;strong&gt;you are!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This simple container still has a long way to go: for example public assets would be better served in a folder outside the default theme. Even better, it can support custom theme in the project folder.
+But you surely have more clever ideas so please, find the container definition &lt;a href=&#34;https://github.com/sparkfabrik/docker-node-raneto&#34;&gt;here&lt;/a&gt;, fork it and adapt it to your needs and workflow!&lt;/p&gt;
+
+&lt;p&gt;And don&amp;rsquo;t forget to send PRs in! :)&lt;/p&gt;
+
+&lt;p&gt;Happy doc(k)ing everybody!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Brown bag happy-hour, May 4th 2016</title>
