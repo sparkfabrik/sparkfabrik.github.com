@@ -11,7 +11,7 @@ author = "Stick"
 Only the brave can be web developers today.
 I really think if you are a web developer, nothing can scare the crap out of you! Nothing but writing documentation for your code...
 
-Let's face it, we **hate** writing doc! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
+Let's face it, we **hate** writing docs! In fact developers came up with a lot of clever tools to automatize code documentation, and they work well and reliably to date.
 But there are cases where you have to jot down a guide to first build, or a reference page with best practices. Odds are good you end up using a project wiki, or if you are less fortunate you are juggling through a bunch of never-to-be-found Google Documents.
 
 Well, look no further: here we have a recipe to soothe your pain!  
@@ -30,7 +30,7 @@ So let's start listing our pains with project documentation:
 **1. Manage documentation requires a context switch**
 
 When you live in a tmux-powered kickin-ass hyper-hipster hyphens-overloaded console environment the more annoying thing to do is switch to a browser, navigate to your tracker's wiki, make your way to the right page and edit the stuff. It is discomfortable and a great excuse for procrastination. 
-This is in my opition the first reason why documentation goes obsolete from day 1.
+This is in my opinion the first reason why documentation goes obsolete from day 1.
 
 Add problems like write permissions on knowledge-base tools, another approval workflow to manage, possible policies-hell, etc. and you'll flip your table at the sole idea!
 
@@ -41,7 +41,7 @@ Surely, having a more straighforward path from your working environment to your 
 When your team is involved on a medium-to-long term project, you really need to keep track of changes. But changes don't always happen in line. 
 Wild branching, forking and bisecting happens in your codebase as experimental feature get thrown in and out, or the codebase is updated to work on the next _\<your technology of choice\>_ release. This means documentation should ideally follow along with your codebase.
 
-For example, a three-years long project of ours was recently moved from an "old fashioned" PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment work.
+For example, a three-years long project of ours was recently moved from an "old fashioned" PHP5 based environment to a shiny new docker-based, PHP7 one. The process took weeks and almost totally changed the way we perform builds, not to mention how local development environment works.
 Maintaining two pages on a wiki, with almost the same title, and drop a note somewhere to explain which page to read is ugly as a single-headed monkey. It introduces throw-away information, generates confusion and is hard to read for both experienced teammates and newcomers.
 
 This leads to the next point.
@@ -71,10 +71,10 @@ Now what?
 And it happened. 
 A customer asked our CTO to write guidelines on how to ensure maximum performance on the project before committing new contributions. 
 
-Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you are probably causing you permanent damage! 
-Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called "Documentation".
+Now, if you ask a developer to write documentation you are making her a major disservice, but if you ask a CTO you'll end up causing yourself permanent damage! 
+Paolo decided to avoid physical confrontation and went the simple way: he dropped a markdown file with instructions in the project repository, in a folder called `documentation`.
 
-He didn't event thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance. 
+He didn't even thought about opening the wiki (which was covered in cobwebs anyway). He did what was natural and obvious to him. And we ended up with a file we could read, nicely formatted, on our Gitlab instance. 
 
 > Hey, not bad!
 
@@ -115,7 +115,7 @@ The idea here is to have a folder in your project repository to hold all the rel
 We miss a way to make Raneto available in a snap! 
 The solution is obviously to dockerize the whole thing out. And manage the container with docker-compose for good measure, of course!
 
-So [I prepared a container](https://hub.docker.com/r/sparkfabrik/docker-node-raneto) which mounts the local folder in a volume and expose the content via Raneto, on port 80 for easier access!
+So [I prepared a container](https://hub.docker.com/r/sparkfabrik/docker-node-raneto) which mounts the local folder in a volume and exposes the content via Raneto, on port 80 for easier access!
 The documentation is pretty straightforward (eh! ^\_^') but if you want to play with it right now, follow these steps:
 
 **Create a folder structure like this:**
@@ -160,8 +160,8 @@ and enjoy your documentation at http://localhost:80
 
 ### Hey, you! Get your damn hands off it! 
 
-But why, oh why would you want to launch a container by hand when you can do it with [docker-compose](https://docs.docker.com/compose)? 
-Actually there are a lot of potential reason, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install [dnsdock](https://github.com/tonistiigi/dnsdock) ([this guide](http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/) may come in handy) and register a URL for your project documentation.
+But why, oh why would you want to launch a container by hand when you can do it with [docker-compose](https://docs.docker.com/compose)?   
+Actually there are a lot of potential reasons, but leave me my drama and follow along: to make your documentation quickly accessible in your project the best thing to do is to install [dnsdock](https://github.com/tonistiigi/dnsdock) ([this guide](http://blog.brunopaz.net/easy-discover-your-docker-containers-with-dnsdock/) may come in handy) and register a URL for your project documentation.
 
 You can either create a new `docker-compose.yml` file in your project root with the following content, or add these lines to the one you have in place.
 
