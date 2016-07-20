@@ -206,7 +206,8 @@ Happy doc(k)ing everybody!
 
 ---
 
-*UPDATE - 20 July 2016*: My colleague Stefano pointed me out to [this great complementary article](https://thinkshout.com/blog/2016/07/the-hidden-power-of-documentation/?utm_source=The+Weekly+Drop&utm_medium=email&utm_campaign=The_Weekly_Drop_Issue_248_07_14_2016) by Joe Komenda, who provided valuable insight on how to organize your docs so that they actually make a difference. In the article Joe also provide a couple of great markdown templates to start with. 
-I found them a perfect match for our Raneto container and they really helps kickstart great project documentation. 
+**UPDATE - 20 July 2016**:   
+My colleague Stefano pointed me out to [this great complementary article](https://thinkshout.com/blog/2016/07/the-hidden-power-of-documentation/?utm_source=The+Weekly+Drop&utm_medium=email&utm_campaign=The_Weekly_Drop_Issue_248_07_14_2016) by Joe Komenda, who provided valuable insight on how to organize your docs so that they actually make a difference. In the article Joe also provide a couple of great markdown templates to start with.   
+I found them a perfect match for our Raneto container and they really helps kickstart great project documentation.   
 My advice is to have them in your project launch checklist right now! :)
 
