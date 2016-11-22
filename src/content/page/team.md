@@ -72,6 +72,19 @@ title: Team
     </div>
   </div>
 
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <h4> Vincenzo Di Biaggio </h4>
+      <img src="http://www.sparkfabrik.com/images/team/vinz.png" alt="Vincenzo Di Biaggio" class="img-rounded pull-left avatar">
+      <i> Software Developer </i>
+      <p class="small">Software Developer, heavy music listener, street photography lover.</p>
+      <ul class="list-inline">
+        <li> <i class="fa fa-github"></i> <a href="https://github.com/vincenzodibiaggio">Github</a></li>
+        <li> <i class="fa fa-twitter"></i> <a href="https://twitter.com/vincenzodb">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 
