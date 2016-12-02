@@ -40,7 +40,7 @@ A this point, you are asked to edit the previous commit message and the staged e
 
 ## The side effect
 
-This little trick can be very handy in many situations, but it can also be a very sharp double-edged blade because, as you probably have guessed, you can use the amend on *any* commit including, for example, a *merge commit*.
+This little trick can be very handy in many situations, but it can also be a very sharp double-edged sword because, as you probably have guessed, you can use the amend on *any* commit including, for example, a *merge commit*.
 
 So, here's a possible sequence of commands that could generate a bad situation.
 
@@ -85,7 +85,7 @@ That's bad.
 
 ## The git reflog solution
 
-Because you want to restore the situation, before the amend  you can decide to use the `git reflog` in combination with a `git reset`.
+Since you want to restore the situation before the amend, you can decide to use the `git reflog` in combination with a `git reset`.
 
 The `git reflog` command will prompt the history of the last commands you've entered.
 The output will look something like this.
