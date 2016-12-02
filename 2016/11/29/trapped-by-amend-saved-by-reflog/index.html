@@ -133,7 +133,7 @@ git commit --amend
 
 <h2 id="the-side-effect:3505e5c32acab82cdbe51550c3e49a44">The side effect</h2>
 
-<p>This little trick can be very handy in many situations, but it can also be a very sharp double-edged blade because, as you probably have guessed, you can use the amend on <em>any</em> commit including, for example, a <em>merge commit</em>.</p>
+<p>This little trick can be very handy in many situations, but it can also be a very sharp double-edged sword because, as you probably have guessed, you can use the amend on <em>any</em> commit including, for example, a <em>merge commit</em>.</p>
 
 <p>So, here&rsquo;s a possible sequence of commands that could generate a bad situation.</p>
 
@@ -174,7 +174,7 @@ a69fa15 Added new public method
 
 <h2 id="the-git-reflog-solution:3505e5c32acab82cdbe51550c3e49a44">The git reflog solution</h2>
 
-<p>Because you want to restore the situation, before the amend  you can decide to use the <code>git reflog</code> in combination with a <code>git reset</code>.</p>
+<p>Since you want to restore the situation before the amend, you can decide to use the <code>git reflog</code> in combination with a <code>git reset</code>.</p>
 
 <p>The <code>git reflog</code> command will prompt the history of the last commands you&rsquo;ve entered.
 The output will look something like this.</p>

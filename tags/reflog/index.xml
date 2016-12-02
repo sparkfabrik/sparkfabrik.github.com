@@ -47,7 +47,7 @@ git commit --amend
 
 &lt;h2 id=&#34;the-side-effect:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;The side effect&lt;/h2&gt;
 
-&lt;p&gt;This little trick can be very handy in many situations, but it can also be a very sharp double-edged blade because, as you probably have guessed, you can use the amend on &lt;em&gt;any&lt;/em&gt; commit including, for example, a &lt;em&gt;merge commit&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This little trick can be very handy in many situations, but it can also be a very sharp double-edged sword because, as you probably have guessed, you can use the amend on &lt;em&gt;any&lt;/em&gt; commit including, for example, a &lt;em&gt;merge commit&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;So, here&amp;rsquo;s a possible sequence of commands that could generate a bad situation.&lt;/p&gt;
 
@@ -88,7 +88,7 @@ a69fa15 Added new public method
 
 &lt;h2 id=&#34;the-git-reflog-solution:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;The git reflog solution&lt;/h2&gt;
 
-&lt;p&gt;Because you want to restore the situation, before the amend  you can decide to use the &lt;code&gt;git reflog&lt;/code&gt; in combination with a &lt;code&gt;git reset&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since you want to restore the situation before the amend, you can decide to use the &lt;code&gt;git reflog&lt;/code&gt; in combination with a &lt;code&gt;git reset&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;git reflog&lt;/code&gt; command will prompt the history of the last commands you&amp;rsquo;ve entered.
 The output will look something like this.&lt;/p&gt;
