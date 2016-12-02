@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amend on Tech @ SparkFabrik</title>
+    <link>http://sparkfabrik.github.io/tags/amend/</link>
+    <description>Recent content in Amend on Tech @ SparkFabrik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
+    <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
+    <lastBuildDate>Tue, 29 Nov 2016 08:51:09 +0200</lastBuildDate>
+    <atom:link href="http://sparkfabrik.github.io/tags/amend/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Trapped by an amend, saved by a reflog</title>
+      <link>http://sparkfabrik.github.io/2016/11/29/trapped-by-amend-saved-by-reflog</link>
+      <pubDate>Tue, 29 Nov 2016 08:51:09 +0200</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/11/29/trapped-by-amend-saved-by-reflog</guid>
+      <description>
+
+&lt;p&gt;We use Git on a daily basis, and most of the time we always enter the same commands.
+It can happen to found ourselves trapped by one of them, sometimes because we forgot a side-effect, other times because we confused the right option.
+No need to worry though, since Git is equally able to put you in trouble and save your day with the same ease. So, let me tell you how I was hit by an &lt;code&gt;--amend&lt;/code&gt; during a commit and how I easily got out.&lt;/p&gt;
+
+&lt;p&gt;Sometimes during the day, especially in the time right before lunch or leaving work, it&amp;rsquo;s possible to forget one the most important rules of the savvy developer: in the console, you can be quick with all the keys, but think twice before pressing &amp;ldquo;enter&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Sure, I managed to break that very rule some days ago. Luckily that was a chance to remind me how much powerful Git is and how sometimes the solutions to an apparently bad situation can be just a few commands away.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-amend-secret:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;The amend secret&lt;/h2&gt;
+
+&lt;p&gt;As many of you probably know, the &lt;code&gt;git commit --amend&lt;/code&gt; command can be used to edit the message of the last commit in the history. This is one of the most common uses because - as developers - we are prone to typos and bad phrasing.
+But the &lt;code&gt;--amend&lt;/code&gt; option can also be used to include &lt;em&gt;new code&lt;/em&gt; in the last commit.&lt;/p&gt;
+
+&lt;p&gt;For example:
+Let&amp;rsquo;s say you&amp;rsquo;ve just created a commit but you&amp;rsquo;ve also forgot to add a block comment to that very method you&amp;rsquo;ve written, and you don&amp;rsquo;t want to have another commit in the history, for various reasons. You have many choices at this point, including creating a new commit with the new lines and squash it with the previous one using the &lt;code&gt;git rebase&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;But you can also do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Add new line and prepare them for the commit.
+git add -p
+# Amend the previous commit and add to it the staged modifications.
+git commit --amend
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A this point, you are asked to edit the previous commit message and the staged edits will be included in it. Useful, isnt&amp;rsquo;it?&lt;/p&gt;
+
+&lt;h2 id=&#34;the-side-effect:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;The side effect&lt;/h2&gt;
+
+&lt;p&gt;This little trick can be very handy in many situations, but it can also be a very sharp double-edged blade because, as you probably have guessed, you can use the amend on &lt;em&gt;any&lt;/em&gt; commit including, for example, a &lt;em&gt;merge commit&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;So, here&amp;rsquo;s a possible sequence of commands that could generate a bad situation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# You add some modifications.
+git add -p
+# Then create a new commit
+git commit -m &#39;Added new public method&#39;
+# Then merge the last develop in your working branch
+git fetch --all
+git merge origin/develop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So far the history of your branch could be something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;~$ git log --oneline
+
+b1748d6 Merge remote-tracking branch &#39;origin/develop&#39; into feature/my_branch
+a69fa15 Added new public method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you accidendally amend the next modifications instead of creating a new commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Write a block comment for your new method and stage the new modifcations.
+git add -p
+# But instead of creating a new commit, you use the --amend option.
+git commit --amend
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, the history will be almost the same, but the hash of the &lt;em&gt;merge commit&lt;/em&gt; will be different and that commmit will include your new block comment too.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;~$ git log --oneline
+
+f5a5377 Merge remote-tracking branch &#39;origin/develop&#39; into feature/my_branch
+a69fa15 Added new public method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s bad.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-git-reflog-solution:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;The git reflog solution&lt;/h2&gt;
+
+&lt;p&gt;Because you want to restore the situation, before the amend  you can decide to use the &lt;code&gt;git reflog&lt;/code&gt; in combination with a &lt;code&gt;git reset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;git reflog&lt;/code&gt; command will prompt the history of the last commands you&amp;rsquo;ve entered.
+The output will look something like this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;~$ git reflog
+
+f5a5377 HEAD@{0}: commit (amend): Merge remote-tracking branch &#39;origin/develop&#39; into feature/my_branch
+b1748d6 HEAD@{1}: merge origin/develop: Merge made by the &#39;recursive&#39; strategy.
+a69fa15 HEAD@{2}: Added new public method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see you have a separate line for each commit action made, and it is pretty easy to solve the problem. Having the &lt;strong&gt;HEAD@{1}&lt;/strong&gt; hash now you can go back there, removing &lt;em&gt;de facto&lt;/em&gt; the last command from the history.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# We go back in the history up to the merge commit.
+git reset --soft b1748d6
+# At this point we&#39;ll have all the edits that we wrongly added to the merge commit already staged and ready to be added to a new commit.
+git commit -m &#39;Added new block comment&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion:3505e5c32acab82cdbe51550c3e49a44&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Here it is. One simple problem and one simple solution.
+What I learned when I&amp;rsquo;ve found myself in a situation like this one is that your understanding of Git can really make the difference sometimes. Knowing the commands main purpose is as important as having a basic undestanding of their possibile secondary uses and side effects, but it is also crucial to remember that Git itself provides the tools to investigate and solve critical situations.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

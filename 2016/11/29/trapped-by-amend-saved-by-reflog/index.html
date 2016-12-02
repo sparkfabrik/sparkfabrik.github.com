@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="http://www.sparkfabrik.com/favicon.png" />
+
+  <title>Trapped by an amend, saved by a reflog | SparkFabrik </title>
+
+  <meta name="author" content="Sparkfabrik" />
+
+  
+  <meta name="description" content="Personal experience on getting in trouble with a common git command and finding my way out.">
+  
+
+  <meta name="generator" content="Hugo 0.15" />
+
+  <link rel="alternate" href="http://sparkfabrik.github.io/index.xml" type="application/rss+xml" title="Tech @ SparkFabrik">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/spark.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/gruvbox-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <meta property="og:title" content="Trapped by an amend, saved by a reflog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://sparkfabrik.github.io/2016/11/29/trapped-by-amend-saved-by-reflog" />
+  <meta property="og:image" content="http://sparkfabrik.github.io/img/full_logo.png" />
+
+  
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/rrssb/css/rrssb.css" />
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <i class="spark-icon icon-sparkfabrik">&#xe800;</i> <a class="navbar-brand navtitle" href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li>
+        <a title="Blog" href="http://sparkfabrik.github.io/">Blog </a>
+	      </li>
+	    
+        <li>
+        <a title="Team" href="http://sparkfabrik.github.io/page/team/">Team </a>
+	      </li>
+	    
+        <li>
+        <a title="About" href="http://sparkfabrik.github.io/page/about/">About </a>
+	      </li>
+	    
+        <li>
+        <a title="Archive" href="http://sparkfabrik.github.io/archive/">Archive </a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+
+      
+        <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Trapped by an amend, saved by a reflog</h1>
+        
+        <h2 class="post-subheading">Personal experience on getting in trouble with a common git command and finding my way out.</h2>
+        
+        <span class="post-meta">Posted on November 29, 2016</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  
+
+<p>We use Git on a daily basis, and most of the time we always enter the same commands.
+It can happen to found ourselves trapped by one of them, sometimes because we forgot a side-effect, other times because we confused the right option.
+No need to worry though, since Git is equally able to put you in trouble and save your day with the same ease. So, let me tell you how I was hit by an <code>--amend</code> during a commit and how I easily got out.</p>
+
+<p>Sometimes during the day, especially in the time right before lunch or leaving work, it&rsquo;s possible to forget one the most important rules of the savvy developer: in the console, you can be quick with all the keys, but think twice before pressing &ldquo;enter&rdquo;.</p>
+
+<p>Sure, I managed to break that very rule some days ago. Luckily that was a chance to remind me how much powerful Git is and how sometimes the solutions to an apparently bad situation can be just a few commands away.</p>
+
+<h2 id="the-amend-secret:3505e5c32acab82cdbe51550c3e49a44">The amend secret</h2>
+
+<p>As many of you probably know, the <code>git commit --amend</code> command can be used to edit the message of the last commit in the history. This is one of the most common uses because - as developers - we are prone to typos and bad phrasing.
+But the <code>--amend</code> option can also be used to include <em>new code</em> in the last commit.</p>
+
+<p>For example:
+Let&rsquo;s say you&rsquo;ve just created a commit but you&rsquo;ve also forgot to add a block comment to that very method you&rsquo;ve written, and you don&rsquo;t want to have another commit in the history, for various reasons. You have many choices at this point, including creating a new commit with the new lines and squash it with the previous one using the <code>git rebase</code> command.</p>
+
+<p>But you can also do this:</p>
+
+<pre><code class="language-bash"># Add new line and prepare them for the commit.
+git add -p
+# Amend the previous commit and add to it the staged modifications.
+git commit --amend
+</code></pre>
+
+<p>A this point, you are asked to edit the previous commit message and the staged edits will be included in it. Useful, isnt&rsquo;it?</p>
+
+<h2 id="the-side-effect:3505e5c32acab82cdbe51550c3e49a44">The side effect</h2>
+
+<p>This little trick can be very handy in many situations, but it can also be a very sharp double-edged blade because, as you probably have guessed, you can use the amend on <em>any</em> commit including, for example, a <em>merge commit</em>.</p>
+
+<p>So, here&rsquo;s a possible sequence of commands that could generate a bad situation.</p>
+
+<pre><code class="language-bash"># You add some modifications.
+git add -p
+# Then create a new commit
+git commit -m 'Added new public method'
+# Then merge the last develop in your working branch
+git fetch --all
+git merge origin/develop
+</code></pre>
+
+<p>So far the history of your branch could be something like:</p>
+
+<pre><code class="language-bash">~$ git log --oneline
+
+b1748d6 Merge remote-tracking branch 'origin/develop' into feature/my_branch
+a69fa15 Added new public method
+</code></pre>
+
+<p>Now you accidendally amend the next modifications instead of creating a new commit.</p>
+
+<pre><code class="language-bash"># Write a block comment for your new method and stage the new modifcations.
+git add -p
+# But instead of creating a new commit, you use the --amend option.
+git commit --amend
+</code></pre>
+
+<p>At this point, the history will be almost the same, but the hash of the <em>merge commit</em> will be different and that commmit will include your new block comment too.</p>
+
+<pre><code class="language-bash">~$ git log --oneline
+
+f5a5377 Merge remote-tracking branch 'origin/develop' into feature/my_branch
+a69fa15 Added new public method
+</code></pre>
+
+<p>That&rsquo;s bad.</p>
+
+<h2 id="the-git-reflog-solution:3505e5c32acab82cdbe51550c3e49a44">The git reflog solution</h2>
+
+<p>Because you want to restore the situation, before the amend  you can decide to use the <code>git reflog</code> in combination with a <code>git reset</code>.</p>
+
+<p>The <code>git reflog</code> command will prompt the history of the last commands you&rsquo;ve entered.
+The output will look something like this.</p>
+
+<pre><code class="language-bash">~$ git reflog
+
+f5a5377 HEAD@{0}: commit (amend): Merge remote-tracking branch 'origin/develop' into feature/my_branch
+b1748d6 HEAD@{1}: merge origin/develop: Merge made by the 'recursive' strategy.
+a69fa15 HEAD@{2}: Added new public method
+</code></pre>
+
+<p>As you can see you have a separate line for each commit action made, and it is pretty easy to solve the problem. Having the <strong>HEAD@{1}</strong> hash now you can go back there, removing <em>de facto</em> the last command from the history.</p>
+
+<pre><code class="language-bash"># We go back in the history up to the merge commit.
+git reset --soft b1748d6
+# At this point we'll have all the edits that we wrongly added to the merge commit already staged and ready to be added to a new commit.
+git commit -m 'Added new block comment'
+</code></pre>
+
+<h2 id="conclusion:3505e5c32acab82cdbe51550c3e49a44">Conclusion</h2>
+
+<p>Here it is. One simple problem and one simple solution.
+What I learned when I&rsquo;ve found myself in a situation like this one is that your understanding of Git can really make the difference sometimes. Knowing the commands main purpose is as important as having a basic undestanding of their possibile secondary uses and side effects, but it is also crucial to remember that Git itself provides the tools to investigate and solve critical situations.</p>
+
+    </div>
+  </div>
+
+  <div class="social-share row">
+  <div class="col-sm-5 col-md-offset-2 col-lg-offset-2">
+  <ul class="rrssb-buttons clearfix">
+    <li class="rrssb-facebook">
+      
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f29%2ftrapped-by-amend-saved-by-reflog" class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"/></svg></span>
+        <span class="rrssb-text">facebook</span>
+      </a>
+    </li>
+    <li class="rrssb-twitter">
+      
+      <a href="https://twitter.com/intent/tweet?text=Read+more+on+@sparkfabrik+Teck+Blog: http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f29%2ftrapped-by-amend-saved-by-reflog"
+      class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62a15.093 15.093 0 0 1-8.86-2.32c2.702.18 5.375-.648 7.507-2.32a5.417 5.417 0 0 1-4.49-3.64c.802.13 1.62.077 2.4-.154a5.416 5.416 0 0 1-4.412-5.11 5.43 5.43 0 0 0 2.168.387A5.416 5.416 0 0 1 2.89 4.498a15.09 15.09 0 0 0 10.913 5.573 5.185 5.185 0 0 1 3.434-6.48 5.18 5.18 0 0 1 5.546 1.682 9.076 9.076 0 0 0 3.33-1.317 5.038 5.038 0 0 1-2.4 2.942 9.068 9.068 0 0 0 3.02-.85 5.05 5.05 0 0 1-2.48 2.71z"/></svg></span>
+        <span class="rrssb-text">twitter</span>
+      </a>
+    </li>
+    <li class="rrssb-linkedin">
+      
+      <a class="popup" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f29%2ftrapped-by-amend-saved-by-reflog">
+      <span class="rrssb-icon">
+      <span class="rrssb-text">linkedin</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
+
+
+  <div class="row">
+    
+<div class="author-block clearfix">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="http://www.sparkfabrik.com/images/team/mg.png" alt="Marcello Gorla" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Marcello" >Marcello Gorla </a> <small>[ Frontend Developer ]</small></h4>
+     <p class="bio">Designer, developer and games addicted. Sometimes all three of them apply.</p>
+  </div>
+</div>
+
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc" data-toggle="tooltip" data-placement="top" title="Wait a minute, Doc">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+
+      
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <li>
+            <a href="https://www.sparkfabrik.com" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="https://twitter.com/sparkfabrik" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="mailto:info@sparkfabrik.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+	    	  
+    		  <li>
+      			<a href="http://sparkfabrik.github.io/index.xml" title="RSS">
+      			  <span class="fa-stack fa-lg">
+        				<i class="fa fa-circle fa-stack-2x"></i>
+        				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      			  </span>
+      			</a>
+    		  </li>
+
+        </ul>
+        <p class="copyright text-muted">
+    		  
+    		  <a href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    		  
+  	    </p>
+  	        
+    		<p class="theme-by text-muted">
+    		  Theme by
+    		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+    		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="http://sparkfabrik.github.io/js/jquery-1.11.2.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/bootstrap.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/main.js"></script>
+
+<script src="http://sparkfabrik.github.io/rrssb/js/rrssb.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76342738-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
