@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Drupal on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/drupal/</link>
-    <description>Recent content in Drupal on Tech @ SparkFabrik</description>
+    <title>Performance on Tech @ SparkFabrik</title>
+    <link>http://sparkfabrik.github.io/tags/performance/</link>
+    <description>Recent content in Performance on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Tue, 22 Nov 2016 11:02:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/drupal/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://sparkfabrik.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Avoid bottlenecks on a Drupal web application and how identify it with profiling</title>
@@ -192,126 +192,6 @@ that are the same things.
 &lt;li&gt;Browser: Google Developer Tools / Firebug - tab Network&lt;/li&gt;
 &lt;li&gt;A good starting point on Views optimization: &lt;a href=&#34;https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/&#34;&gt;https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;High Performance Drupal: &lt;a href=&#34;http://shop.oreilly.com/product/0636920012269.do&#34;&gt;http://shop.oreilly.com/product/0636920012269.do&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Brown bag happy-hour, May 4th 2016</title>
-      <link>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</link>
-      <pubDate>Tue, 10 May 2016 08:51:09 +0200</pubDate>
-      <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</guid>
-      <description>
-
-&lt;p&gt;News about Drupal, Backtrac Casestudy, Drupal Developer Days and PHP for this new appointment of BBH!&lt;/p&gt;
-
-&lt;h1 id=&#34;weekly-news:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Weekly News&lt;/h1&gt;
-
-&lt;h3 id=&#34;a-new-design-system-for-drupal-org:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;A new design system for Drupal.org&lt;/h3&gt;
-
-&lt;p&gt;A new visual system for Drupal.org is expected for this year.
-The goal is &amp;ldquo;Update Drupal.org to reflect the flexibility, modernity, and community of Drupal itself&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;See all details at &lt;a href=&#34;https://www.drupal.org/drupalorg/blog/a-new-design-system&#34;&gt;drupal.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;drupal-developer-days-keynotes:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Drupal Developer Days keynotes&lt;/h3&gt;
-
-&lt;p&gt;Drupal Developer Days, the developer-oriented international event that offers opportunities for learning and actually using Drupal, comes to Italy for the very first time in 2016. It will be held in Milan, June 21-26.&lt;/p&gt;
-
-&lt;p&gt;Annunced keynotes:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bojan Živanović - Making a Drupal shaped dent in the universe&lt;/li&gt;
-&lt;li&gt;Alessia Rullo - Aesthetics of interaction: an update&lt;/li&gt;
-&lt;li&gt;Jessica Rose - Automating Access to Development&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See all details at &lt;a href=&#34;http://milan2016.drupaldays.org/program/keynotes&#34;&gt;drupaldays.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;backtrac-casestudy:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;Backtrac Casestudy&lt;/h3&gt;
-
-&lt;p&gt;BackTrac is visual regression testing tool, the case study explain a real life example, Drupal.org.&lt;/p&gt;
-
-&lt;p&gt;See all detail at &lt;a href=&#34;https://backtrac.io/blog/case-study-drupalorg&#34;&gt;backtrac.io&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;php-nette:15e3b647be7581d1cad694f8e8bd1c67&#34;&gt;PHP, Nette&lt;/h3&gt;
-
-&lt;p&gt;According to the survey result at &lt;a href=&#34;http;//http://www.sitepoint.com&#34;&gt;sitepoint&lt;/a&gt; SitePoint statistics , it ranked number 3 in both “at Work” and “in Personal Projects”, just tailing the two giants: Laravel and Symfony2.
-Nette Framework is an Open Source framework for creating web applications in PHP&lt;/p&gt;
-
-&lt;p&gt;Features:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Full PHP 7 compatibility&lt;/li&gt;
-&lt;li&gt;Revolutionary technology that eliminates security holes and their misuse, such as XSS, CSRF, session hijacking, session fixation, etc&lt;/li&gt;
-&lt;li&gt;Tracy debug tools, which will help you discover all bugs in timely fashion.&lt;/li&gt;
-&lt;li&gt;Thoughtful and pure object-oriented design using the new features in PHP 5, components and event driven modeling.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See all detail at &lt;a href=&#34;https://nette.org&#34;&gt;nette.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;The &lt;em&gt;BBH (Brown bag happy-hour)&lt;/em&gt; it&amp;rsquo;s a &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; regular activity where we share discoveries and techniques with each other and discuss the last two week tech and innovation world novelties.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Drush Make overwrites your custom .gitignore file</title>
-      <link>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</link>
-      <pubDate>Fri, 08 Apr 2016 01:00:00 -0400</pubDate>
-      <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</guid>
-      <description>
-
-&lt;h1 id=&#34;managing-a-customized-gitignore-file-across-drush-make-builds:a0167166354a1579d70789b020f359e4&#34;&gt;Managing a customized .gitignore file across drush make builds&lt;/h1&gt;
-
-&lt;h2 id=&#34;the-problem:a0167166354a1579d70789b020f359e4&#34;&gt;The problem&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/drush-ops/drush&#34;&gt;Drush&lt;/a&gt; 8&lt;/strong&gt; overwrites the .gitignore file after a successful makefile execution.&lt;/p&gt;
-
-&lt;p&gt;This affects complex projects where multiple dependency sources are present, and where other reasons might require a significant override of the &lt;strong&gt;.gitignore&lt;/strong&gt; file provided by Drupal, which ends up diffed, causing &lt;code&gt;git status&lt;/code&gt; to produce an ugly output, until the committed .gitignore is restored.&lt;/p&gt;
-
-&lt;h2 id=&#34;origin-of-the-problem:a0167166354a1579d70789b020f359e4&#34;&gt;Origin of the problem&lt;/h2&gt;
-
-&lt;p&gt;In recent upgrades, the &lt;code&gt;--overwrite&lt;/code&gt; option has been added to Drush in order to force the overwrite of existing folders (the command docs don&amp;rsquo;t  mention files, althought some file reference is present in the code comments), while the default behavior is to &lt;em&gt;merge&lt;/em&gt;, which means keeping existing folder content. This option has only an impact on &lt;strong&gt;directories&lt;/strong&gt; inside the project&amp;rsquo;s root and doesn&amp;rsquo;t affect the files in the root.&lt;/p&gt;
-
-&lt;h2 id=&#34;how-the-problem-was-investigated:a0167166354a1579d70789b020f359e4&#34;&gt;How the problem was investigated&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I created a couple of docker containers based on &lt;a href=&#34;https://hub.docker.com/r/sparkfabrik/docker-php-base-image/&#34;&gt;SparkFabrik base PHP image&lt;/a&gt; well suitable for PHP/Drupal development.&lt;/li&gt;
-&lt;li&gt;In both containers, I replaced the default Drush version (8.0.5 installed with phar) so that I could debug and alter the code on the fly&lt;/li&gt;
-&lt;li&gt;In a container I installed version 6.7.0 (downloading the &lt;a href=&#34;https://github.com/drush-ops/drush/releases/tag/6.7.0&#34;&gt;release tarball&lt;/a&gt;) in the other I installed the &amp;ldquo;source&amp;rdquo; version of Drush 8.0.5 (&lt;a href=&#34;http://docs.drush.org/en/master/install-alternative/&#34;&gt;via composer&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;I created a small repository containing a .gitignore slightly different than Drupal&amp;rsquo;s one, and a makefile with some dependencies&lt;/li&gt;
-&lt;li&gt;Then I executed &lt;code&gt;drush make&lt;/code&gt; in both containers, with the &lt;code&gt;--debug&lt;/code&gt; option that enhance output&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;execution-flow:a0167166354a1579d70789b020f359e4&#34;&gt;Execution flow&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;During makefile processing, files are downloaded in a temp directory and only at the end they are copied to the final destination by the function &lt;a href=&#34;https://github.com/drush-ops/drush/blob/8.0.5/commands/make/make.drush.inc#L739&#34;&gt;&lt;code&gt;make_move_build&lt;/code&gt;&lt;/a&gt;. The process is basically a recursive copy of the elements found in the root of the downloaded codebase.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make_move_build&lt;/code&gt; is also responsible for reading the &lt;code&gt;--overwrite&lt;/code&gt; option and pass a consequent value to the function in charge of copying both files and directories: &lt;a href=&#34;https://github.com/drush-ops/drush/blob/8.0.5/includes/filesystem.inc#L215&#34;&gt;&lt;code&gt;drush_copy_dir&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Before calling &lt;code&gt;drush_copy_dir&lt;/code&gt;, &lt;code&gt;make_move_build&lt;/code&gt; loops through root-level items and treats directories differently (see &lt;a href=&#34;https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316&#34;&gt;https://github.com/drush-ops/drush/commit/d10826132d72f8dabc10a396efe43319d4a5b316&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;drush_copy_dir&lt;/code&gt; the value passed when &lt;code&gt;--overwrite&lt;/code&gt; is set is only used to create a log entry (&lt;a href=&#34;https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224&#34;&gt;https://github.com/drush-ops/drush/blob/6.7.0/includes/filesystem.inc#L224&lt;/a&gt;), but not in order to avoid overwriting files.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;workaround-and-solutions:a0167166354a1579d70789b020f359e4&#34;&gt;Workaround and solutions&lt;/h2&gt;
-
-&lt;p&gt;As a workaround, we set the build system (we&amp;rsquo;re currently using &lt;a href=&#34;https://www.phing.info/&#34;&gt;Phing&lt;/a&gt;) to execute a &lt;code&gt;git checkout&lt;/code&gt; of the committed version of .gitignore.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;real&lt;/em&gt; solution might consist in applying the &lt;code&gt;--override&lt;/code&gt; option (or lack of) also for root-level files, but I doubt this was intended by drush contributors, until now. In the following links, you can read a handful of relevant issues, for reference.&lt;/p&gt;
-
-&lt;h2 id=&#34;links:a0167166354a1579d70789b020f359e4&#34;&gt;Links&lt;/h2&gt;
-
-&lt;p&gt;This was the issue that originated the change from the previous behavior: &lt;a href=&#34;https://github.com/drush-ops/drush/pull/1450&#34;&gt;https://github.com/drush-ops/drush/pull/1450&lt;/a&gt; (commit &lt;a href=&#34;https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316&#34;&gt;https://github.com/drush-ops/drush/pull/1450/commits/d10826132d72f8dabc10a396efe43319d4a5b316&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Other issues discussing the same subject:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/drush-ops/drush/issues/1468&#34;&gt;https://github.com/drush-ops/drush/issues/1468&lt;/a&gt; &amp;ldquo;drush make does not overwrite root core files&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/NuCivic/dkan/issues/824&#34;&gt;https://github.com/NuCivic/dkan/issues/824&lt;/a&gt; &amp;ldquo;Move dkan modules downloaded via drush make to their own folder&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/drush-ops/drush/issues/1269&#34;&gt;https://github.com/drush-ops/drush/issues/1269&lt;/a&gt; &amp;ldquo;drush make &lt;code&gt;--overwrite&lt;/code&gt; should respect &lt;code&gt;--projects=&lt;/code&gt;?&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

@@ -116,6 +116,191 @@ What I learned when I&amp;rsquo;ve found myself in a situation like this one is 
     </item>
     
     <item>
+      <title>Avoid bottlenecks on a Drupal web application and how identify it with profiling</title>
+      <link>http://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</link>
+      <pubDate>Tue, 22 Nov 2016 11:02:30 +0000</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</guid>
+      <description>
+
+&lt;h2 id=&#34;introdution:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Introdution&lt;/h2&gt;
+
+&lt;p&gt;This article is focused on the possible &lt;em&gt;bottlenecks of a web application&lt;/em&gt;, how you can identify it and improve the performance of your code.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll talk about using &lt;em&gt;Blackfire&lt;/em&gt; to get insights on a Drupal-based PHP application running on a LAMP stack.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;Application&amp;rsquo;s performance is one of the feature that tells a &lt;em&gt;done&lt;/em&gt; job from a &lt;em&gt;good&lt;/em&gt; job, and shows a focus on quality.&lt;/p&gt;
+
+&lt;p&gt;Scope of this post it to provide a quick-reference that can be used right before to deploying a Drupal (but not only) project to production.
+There are two kind of actions that can improve performances: application of best-pratices, that aren&amp;rsquo;t related to product&amp;rsquo;s functions and the logic profiling that depends on domain and the implementation (that can be considered cherry on top).&lt;/p&gt;
+
+&lt;p&gt;We will provide:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A list of checks, valid for every PHP application, with indication which Drupal components are involved, point by point.&lt;/li&gt;
+&lt;li&gt;Tools and methods useful to obtain information about how our application is performing and where bottlenecks are located.&lt;/li&gt;
+&lt;li&gt;A pratical example on how to find improvement points and apply necessary changes.&lt;/li&gt;
+&lt;li&gt;Some pro-tips dictated by experience on common pitfall and how bypass them.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;performance-best-practice-checklist:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Performance best-practice checklist&lt;/h3&gt;
+
+&lt;p&gt;At first level of the list we can see &amp;ldquo;general&amp;rdquo; checks that we can perform for a generic web application, at the second level a Drupal transliteration of the point.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Check that caches are active and working&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;In Drupal&lt;/em&gt;: Activate page cache, block cache and view cache as the miniumum set.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Aggregate and minify CSS and JS to improve bandwidth consumption.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;In Drupal&lt;/em&gt;: A good starting point are to use the tools provided by our favourite CMF in the &lt;code&gt;development - performance&lt;/code&gt; section.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Deactivate development component: all frameworks provide a set of useful tolls/function to help developers but all of these are really performances hogs!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;In Drupal&lt;/em&gt;: pay attention to deactivate modules like &lt;em&gt;devel&lt;/em&gt;, _update&lt;em&gt;status&lt;/em&gt;, &lt;em&gt;performance&lt;/em&gt; before to deploy in production.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Deactivate &lt;em&gt;cron&lt;/em&gt; automation managed by the application in automatic way (like Drupal&amp;rsquo;s cron or Wordpress&amp;rsquo;s wp-cron).&lt;br /&gt;
+Be sure you are running batches and asynchronous tasks during low-traffic hours, wherever possible. Remember to demand critical tasks or heavy tasks to external workers.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Deactivate any database logger, and switch logs to &lt;em&gt;syslog&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check images size: manage size of every image applying standard dimension for each specific case. Pay a lot of attention if you have
+numerous image dimension: often scripts that manages image resize/transforming consumes a lot of resources.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;In Drupal&lt;/em&gt;: Use opportune _image&lt;em&gt;styles&lt;/em&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Check retrieval process of external resources (feed, streams, etc.). I mean that we need to reply to questions like &lt;code&gt;How many time the application need to retrieve last Company&#39;s tweets?&lt;/code&gt;, &lt;code&gt;How many time was spent to collect weather info to populate this badge?&lt;/code&gt;, &lt;code&gt;It&#39;s normal that before to load the page we collect info related to the last match results?&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;detection-of-application-s-bottleneck:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Detection of application&amp;rsquo;s bottleneck&lt;/h3&gt;
+
+&lt;p&gt;Once we went through all the list above, your server will probably sigh in relief. This doesn&amp;rsquo;t mean our work is done: we need to use right tools (especially if we lack specific references to slow page) to find the cause of th high server load. Before doing anything else we need to collect data about what&amp;rsquo;s going under the hood, so we can improve in the right direction. Yes, I&amp;rsquo;m talking about &lt;a href=&#34;https://en.wikipedia.org/wiki/Profiling_(computer_programming&#34;&gt;profiling&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h4 id=&#34;getting-insights-by-environmental-monitoring:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Getting insights by environmental monitoring&lt;/h4&gt;
+
+&lt;p&gt;On Drupal 7, we can use the &lt;a href=&#34;https://www.drupal.org/project/performance&#34;&gt;Performance Logging&lt;/a&gt; module to profile time spent to generate pages, memory consumption, and how many queries fire during page load. We only need to navigate our site to populate the data table. On Drupal 8 the great &lt;em&gt;Web Profiler&lt;/em&gt; module, recently merged into &lt;a href=&#34;https://www.drupal.org/project/devel&#34;&gt;Devel&lt;/a&gt; project is the best option.&lt;/p&gt;
+
+&lt;h4 id=&#34;environment-side:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Environment side&lt;/h4&gt;
+
+&lt;p&gt;The environment (local but also production), with the right tools can become our better friend to help us to find reasons of application&amp;rsquo;s bottlenecks. There is a lot of profiler, but an excellent choice is &lt;a href=&#34;http://blackfire.io/&#34;&gt;Blackfire&lt;/a&gt;: free, flexible and very light (his agent can be installed on the production servers with a really really thin overhead). The feature which makes me love Blackfire are his profiler result: a simple and clear diagram of entire code execution flow from the request response to the final output: all function calls will be analyzed and counted to produce a detailed report that contain a lot of useful data like function&amp;rsquo;s time execution, memory consumption, etc. Finally all this data will be collected and the results will be showed to us related to the global status: a function that takes three seconds to produce an output, can be a lower problem related to another function that takes only 0.5 second but it&amp;rsquo;s called ninety time.
+Obviously, remember to puts on the mysql slow query log.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-practical-profiling-example:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;A practical profiling example&lt;/h4&gt;
+
+&lt;p&gt;We have a simple Drupal 7 application that display 200 node&amp;rsquo;s titles, but in the wrong way.&lt;/p&gt;
+
+&lt;p&gt;This is a Blackfire profiling output: &lt;a href=&#34;https://blackfire.io/profiles/f911c4ad-792b-4977-af51-d9e3b7649d24/graph&#34;&gt;https://blackfire.io/profiles/f911c4ad-792b-4977-af51-d9e3b7649d24/graph&lt;/a&gt;
+We can clearly see a &amp;lsquo;red branch&amp;rsquo; that indicates us where the most of time is spent to generate the page and we can see that the _node&lt;em&gt;load&lt;/em&gt; function was called 200 times after the call to _dsc_module_block&lt;em&gt;view&lt;/em&gt; , uhm IMHO it&amp;rsquo;s better take a look to this function:&lt;/p&gt;
+
+&lt;pre&gt;
+function dsc_module_block_view($delta = &#39;&#39;) {
+  $block = array();
+  switch ($delta) {
+    case &#39;page_block&#39;:
+
+    $node_titles = [];
+    for ($i = 1; $i &lt; 200; $i++) {
+      $node = node_load($i);
+      $node_titles[] = $node-&gt;title;
+    }
+    $content = &#39;&lt;ul&gt;&#39;;
+    foreach ($node_titles as $node_title) {
+      $content .= &#39;&lt;li&gt;;&#39; . $node_title . &#39;&lt;/li&gt;&#39;;
+    }
+    $content .= &#39;&lt;/ul&gt;&#39;;
+    $block[&#39;subject&#39;] = t(&#39;My block&#39;);
+    $block[&#39;content&#39;] = array(
+      &#39;#type&#39; =&gt; &#39;markup&#39;,
+      &#39;#markup&#39; =&gt; $content,
+      &#39;#title&#39; =&gt; t(&#39;Last 100 content&#39;),
+    );
+    break;
+  }
+  return $block;
+}
+&lt;/pre&gt;
+
+&lt;p&gt;With a simple refactoring we can improve the block generation:&lt;/p&gt;
+
+&lt;pre&gt;
+function dsc_module_block_view($delta = &#39;&#39;) {
+  $block = array();
+
+  switch ($delta) {
+    case &#39;page_block&#39;:
+
+      $n_ids = [];
+
+      for ($i = 1; $i &gt; 200; $i++) {
+        $n_ids[] = $i;
+      }
+
+      $results = db_select(&#39;node&#39;, &#39;n&#39;)
+        -&gt;fields(&#39;n&#39;, array(&#39;title&#39;))
+        -&gt;condition(&#39;nid&#39;, $n_ids, &#39;IN&#39;)
+        -&gt;execute()
+        -&gt;fetchAll();
+      $content = &#39;&lt;ul&gt;&#39;;
+      foreach ($results as $node_title) {
+        $content .= &#39;&lt;li&gt;&#39; . $node_title-&gt;title . &#39;&lt;/li&gt;&#39;;
+      }
+      $content .= &#39;&lt;/ul&gt;&#39;;
+      $block[&#39;subject&#39;] = t(&#39;My block&#39;);
+      $block[&#39;content&#39;] = array(
+        &#39;#type&#39; =&gt; &#39;markup&#39;,
+        &#39;#markup&#39; =&gt; $content,
+        &#39;#title&#39; =&gt; t(&#39;Last 100 content&#39;),
+      );
+      break;
+    }
+    return $block;
+  }
+}
+&lt;/pre&gt;
+
+&lt;p&gt;And the Blackfire&amp;rsquo;s verdict becomes &lt;a href=&#34;https://blackfire.io/profiles/b7243495-11d8-41fc-a374-e7bfe6e21ab7/graph&#34;&gt;https://blackfire.io/profiles/b7243495-11d8-41fc-a374-e7bfe6e21ab7/graph&lt;/a&gt;: &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt; of the time execution saved only with this refactoring.&lt;/p&gt;
+
+&lt;p&gt;Obviously this is a very basic example but it&amp;rsquo;s not a remote possibility that these things happens.&lt;/p&gt;
+
+&lt;h3 id=&#34;some-pro-tips-to-write-code-with-an-eye-on-performance:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Some pro-tips to write code with an eye on performance&lt;/h3&gt;
+
+&lt;p&gt;*While querying the database, ask only for the data you really need. Avoid &lt;code&gt;SELECT * FROM&lt;/code&gt;, or
+&lt;pre&gt;
+db_select(&amp;lsquo;table&amp;rsquo;, &amp;rsquo;t&amp;rsquo;)
+-&amp;gt;fields(&amp;rsquo;t&amp;rsquo;)
+&lt;/pre&gt;
+that are the same things.
+* Load entity in groups, not one by one: avoid &lt;code&gt;entity_load()&lt;/code&gt; like &lt;code&gt;node_load()&lt;/code&gt;, &lt;code&gt;taxonomy_term_load()&lt;/code&gt;, etc. Replace it with &lt;code&gt;node_load_multiple()&lt;/code&gt; or simple queries, if at all possible.
+* Use - the - cache
+  * Use views&amp;rsquo; caching and specially &lt;em&gt;views results&lt;/em&gt; and &lt;em&gt;rendered content&lt;/em&gt; caching
+  * Use _drupal&lt;em&gt;static()&lt;/em&gt; to make data persist throughout the same request and the &lt;em&gt;Cache API&lt;/em&gt; to persist data between different requests over time.
+* Demand heavy processes to external workers like &lt;a href=&#34;http://gearman.org/&#34;&gt;Gearman&lt;/a&gt; or use Drupal&amp;rsquo;s &lt;em&gt;Batch API&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;useful-resources:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Useful resources&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Repo of my DSC talk on Profiling examples: &lt;a href=&#34;https://gitlab.sparkfabrik.com/vincenzo.dibiaggio/dsc-profiling&#34;&gt;https://gitlab.sparkfabrik.com/vincenzo.dibiaggio/dsc-profiling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hints about query caching: &lt;a href=&#34;https://www.percona.com/blog/2006/07/27/mysql-query-cache/&#34;&gt;https://www.percona.com/blog/2006/07/27/mysql-query-cache/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Page rendering profiling: Yslow e Google Page Speed&lt;/li&gt;
+&lt;li&gt;Browser: Google Developer Tools / Firebug - tab Network&lt;/li&gt;
+&lt;li&gt;A good starting point on Views optimization: &lt;a href=&#34;https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/&#34;&gt;https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;High Performance Drupal: &lt;a href=&#34;http://shop.oreilly.com/product/0636920012269.do&#34;&gt;http://shop.oreilly.com/product/0636920012269.do&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Wait a minute, Doc</title>
       <link>http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</link>
       <pubDate>Tue, 14 Jun 2016 11:02:30 +0000</pubDate>

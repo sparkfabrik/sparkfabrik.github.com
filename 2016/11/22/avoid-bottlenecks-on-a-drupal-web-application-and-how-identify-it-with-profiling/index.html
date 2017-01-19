@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="http://www.sparkfabrik.com/favicon.png" />
+
+  <title>Avoid bottlenecks on a Drupal web application and how identify it with profiling | SparkFabrik </title>
+
+  <meta name="author" content="Sparkfabrik" />
+
+  
+  <meta name="description" content="How identify bottleneck of your web application and avoid that can appear in the future">
+  
+
+  <meta name="generator" content="Hugo 0.15" />
+
+  <link rel="alternate" href="http://sparkfabrik.github.io/index.xml" type="application/rss+xml" title="Tech @ SparkFabrik">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/spark.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/gruvbox-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <meta property="og:title" content="Avoid bottlenecks on a Drupal web application and how identify it with profiling" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling" />
+  <meta property="og:image" content="http://sparkfabrik.github.io/img/full_logo.png" />
+
+  
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/rrssb/css/rrssb.css" />
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <i class="spark-icon icon-sparkfabrik">&#xe800;</i> <a class="navbar-brand navtitle" href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li>
+        <a title="Blog" href="http://sparkfabrik.github.io/">Blog </a>
+	      </li>
+	    
+        <li>
+        <a title="Team" href="http://sparkfabrik.github.io/page/team/">Team </a>
+	      </li>
+	    
+        <li>
+        <a title="About" href="http://sparkfabrik.github.io/page/about/">About </a>
+	      </li>
+	    
+        <li>
+        <a title="Archive" href="http://sparkfabrik.github.io/archive/">Archive </a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+
+      
+        <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Avoid bottlenecks on a Drupal web application and how identify it with profiling</h1>
+        
+        <h2 class="post-subheading">How identify bottleneck of your web application and avoid that can appear in the future</h2>
+        
+        <span class="post-meta">Posted on November 22, 2016</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  
+
+<h2 id="introdution:85ecb63f3cadea5d1c4d918e23974e4c">Introdution</h2>
+
+<p>This article is focused on the possible <em>bottlenecks of a web application</em>, how you can identify it and improve the performance of your code.</p>
+
+<p>We&rsquo;ll talk about using <em>Blackfire</em> to get insights on a Drupal-based PHP application running on a LAMP stack.</p>
+
+<!-- more -->
+
+<p>Application&rsquo;s performance is one of the feature that tells a <em>done</em> job from a <em>good</em> job, and shows a focus on quality.</p>
+
+<p>Scope of this post it to provide a quick-reference that can be used right before to deploying a Drupal (but not only) project to production.
+There are two kind of actions that can improve performances: application of best-pratices, that aren&rsquo;t related to product&rsquo;s functions and the logic profiling that depends on domain and the implementation (that can be considered cherry on top).</p>
+
+<p>We will provide:</p>
+
+<ul>
+<li>A list of checks, valid for every PHP application, with indication which Drupal components are involved, point by point.</li>
+<li>Tools and methods useful to obtain information about how our application is performing and where bottlenecks are located.</li>
+<li>A pratical example on how to find improvement points and apply necessary changes.</li>
+<li>Some pro-tips dictated by experience on common pitfall and how bypass them.</li>
+</ul>
+
+<h3 id="performance-best-practice-checklist:85ecb63f3cadea5d1c4d918e23974e4c">Performance best-practice checklist</h3>
+
+<p>At first level of the list we can see &ldquo;general&rdquo; checks that we can perform for a generic web application, at the second level a Drupal transliteration of the point.</p>
+
+<ol>
+<li>Check that caches are active and working</li>
+</ol>
+
+<p><em>In Drupal</em>: Activate page cache, block cache and view cache as the miniumum set.</p>
+
+<ol>
+<li>Aggregate and minify CSS and JS to improve bandwidth consumption.</li>
+</ol>
+
+<p><em>In Drupal</em>: A good starting point are to use the tools provided by our favourite CMF in the <code>development - performance</code> section.</p>
+
+<ol>
+<li>Deactivate development component: all frameworks provide a set of useful tolls/function to help developers but all of these are really performances hogs!</li>
+</ol>
+
+<p><em>In Drupal</em>: pay attention to deactivate modules like <em>devel</em>, _update<em>status</em>, <em>performance</em> before to deploy in production.</p>
+
+<ol>
+<li><p>Deactivate <em>cron</em> automation managed by the application in automatic way (like Drupal&rsquo;s cron or Wordpress&rsquo;s wp-cron).<br />
+Be sure you are running batches and asynchronous tasks during low-traffic hours, wherever possible. Remember to demand critical tasks or heavy tasks to external workers.</p></li>
+
+<li><p>Deactivate any database logger, and switch logs to <em>syslog</em></p></li>
+
+<li><p>Check images size: manage size of every image applying standard dimension for each specific case. Pay a lot of attention if you have
+numerous image dimension: often scripts that manages image resize/transforming consumes a lot of resources.</p></li>
+</ol>
+
+<p><em>In Drupal</em>: Use opportune _image<em>styles</em></p>
+
+<ol>
+<li>Check retrieval process of external resources (feed, streams, etc.). I mean that we need to reply to questions like <code>How many time the application need to retrieve last Company's tweets?</code>, <code>How many time was spent to collect weather info to populate this badge?</code>, <code>It's normal that before to load the page we collect info related to the last match results?</code></li>
+</ol>
+
+<h3 id="detection-of-application-s-bottleneck:85ecb63f3cadea5d1c4d918e23974e4c">Detection of application&rsquo;s bottleneck</h3>
+
+<p>Once we went through all the list above, your server will probably sigh in relief. This doesn&rsquo;t mean our work is done: we need to use right tools (especially if we lack specific references to slow page) to find the cause of th high server load. Before doing anything else we need to collect data about what&rsquo;s going under the hood, so we can improve in the right direction. Yes, I&rsquo;m talking about <a href="https://en.wikipedia.org/wiki/Profiling_(computer_programming">profiling</a>).</p>
+
+<h4 id="getting-insights-by-environmental-monitoring:85ecb63f3cadea5d1c4d918e23974e4c">Getting insights by environmental monitoring</h4>
+
+<p>On Drupal 7, we can use the <a href="https://www.drupal.org/project/performance">Performance Logging</a> module to profile time spent to generate pages, memory consumption, and how many queries fire during page load. We only need to navigate our site to populate the data table. On Drupal 8 the great <em>Web Profiler</em> module, recently merged into <a href="https://www.drupal.org/project/devel">Devel</a> project is the best option.</p>
+
+<h4 id="environment-side:85ecb63f3cadea5d1c4d918e23974e4c">Environment side</h4>
+
+<p>The environment (local but also production), with the right tools can become our better friend to help us to find reasons of application&rsquo;s bottlenecks. There is a lot of profiler, but an excellent choice is <a href="http://blackfire.io/">Blackfire</a>: free, flexible and very light (his agent can be installed on the production servers with a really really thin overhead). The feature which makes me love Blackfire are his profiler result: a simple and clear diagram of entire code execution flow from the request response to the final output: all function calls will be analyzed and counted to produce a detailed report that contain a lot of useful data like function&rsquo;s time execution, memory consumption, etc. Finally all this data will be collected and the results will be showed to us related to the global status: a function that takes three seconds to produce an output, can be a lower problem related to another function that takes only 0.5 second but it&rsquo;s called ninety time.
+Obviously, remember to puts on the mysql slow query log.</p>
+
+<h4 id="a-practical-profiling-example:85ecb63f3cadea5d1c4d918e23974e4c">A practical profiling example</h4>
+
+<p>We have a simple Drupal 7 application that display 200 node&rsquo;s titles, but in the wrong way.</p>
+
+<p>This is a Blackfire profiling output: <a href="https://blackfire.io/profiles/f911c4ad-792b-4977-af51-d9e3b7649d24/graph">https://blackfire.io/profiles/f911c4ad-792b-4977-af51-d9e3b7649d24/graph</a>
+We can clearly see a &lsquo;red branch&rsquo; that indicates us where the most of time is spent to generate the page and we can see that the _node<em>load</em> function was called 200 times after the call to _dsc_module_block<em>view</em> , uhm IMHO it&rsquo;s better take a look to this function:</p>
+
+<pre>
+function dsc_module_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'page_block':
+
+    $node_titles = [];
+    for ($i = 1; $i < 200; $i++) {
+      $node = node_load($i);
+      $node_titles[] = $node->title;
+    }
+    $content = '<ul>';
+    foreach ($node_titles as $node_title) {
+      $content .= '<li>;' . $node_title . '</li>';
+    }
+    $content .= '</ul>';
+    $block['subject'] = t('My block');
+    $block['content'] = array(
+      '#type' => 'markup',
+      '#markup' => $content,
+      '#title' => t('Last 100 content'),
+    );
+    break;
+  }
+  return $block;
+}
+</pre>
+
+<p>With a simple refactoring we can improve the block generation:</p>
+
+<pre>
+function dsc_module_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'page_block':
+
+      $n_ids = [];
+
+      for ($i = 1; $i > 200; $i++) {
+        $n_ids[] = $i;
+      }
+
+      $results = db_select('node', 'n')
+        ->fields('n', array('title'))
+        ->condition('nid', $n_ids, 'IN')
+        ->execute()
+        ->fetchAll();
+      $content = '<ul>';
+      foreach ($results as $node_title) {
+        $content .= '<li>' . $node_title->title . '</li>';
+      }
+      $content .= '</ul>';
+      $block['subject'] = t('My block');
+      $block['content'] = array(
+        '#type' => 'markup',
+        '#markup' => $content,
+        '#title' => t('Last 100 content'),
+      );
+      break;
+    }
+    return $block;
+  }
+}
+</pre>
+
+<p>And the Blackfire&rsquo;s verdict becomes <a href="https://blackfire.io/profiles/b7243495-11d8-41fc-a374-e7bfe6e21ab7/graph">https://blackfire.io/profiles/b7243495-11d8-41fc-a374-e7bfe6e21ab7/graph</a>: <sup>1</sup>&frasl;<sub>3</sub> of the time execution saved only with this refactoring.</p>
+
+<p>Obviously this is a very basic example but it&rsquo;s not a remote possibility that these things happens.</p>
+
+<h3 id="some-pro-tips-to-write-code-with-an-eye-on-performance:85ecb63f3cadea5d1c4d918e23974e4c">Some pro-tips to write code with an eye on performance</h3>
+
+<p>*While querying the database, ask only for the data you really need. Avoid <code>SELECT * FROM</code>, or
+<pre>
+db_select(&lsquo;table&rsquo;, &rsquo;t&rsquo;)
+-&gt;fields(&rsquo;t&rsquo;)
+</pre>
+that are the same things.
+* Load entity in groups, not one by one: avoid <code>entity_load()</code> like <code>node_load()</code>, <code>taxonomy_term_load()</code>, etc. Replace it with <code>node_load_multiple()</code> or simple queries, if at all possible.
+* Use - the - cache
+  * Use views&rsquo; caching and specially <em>views results</em> and <em>rendered content</em> caching
+  * Use _drupal<em>static()</em> to make data persist throughout the same request and the <em>Cache API</em> to persist data between different requests over time.
+* Demand heavy processes to external workers like <a href="http://gearman.org/">Gearman</a> or use Drupal&rsquo;s <em>Batch API</em></p>
+
+<h3 id="useful-resources:85ecb63f3cadea5d1c4d918e23974e4c">Useful resources</h3>
+
+<ul>
+<li>Repo of my DSC talk on Profiling examples: <a href="https://gitlab.sparkfabrik.com/vincenzo.dibiaggio/dsc-profiling">https://gitlab.sparkfabrik.com/vincenzo.dibiaggio/dsc-profiling</a></li>
+<li>Hints about query caching: <a href="https://www.percona.com/blog/2006/07/27/mysql-query-cache/">https://www.percona.com/blog/2006/07/27/mysql-query-cache/</a></li>
+<li>Page rendering profiling: Yslow e Google Page Speed</li>
+<li>Browser: Google Developer Tools / Firebug - tab Network</li>
+<li>A good starting point on Views optimization: <a href="https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/">https://www.silviogutierrez.com/blog/optimizing-drupal-views-right-way/</a></li>
+<li>High Performance Drupal: <a href="http://shop.oreilly.com/product/0636920012269.do">http://shop.oreilly.com/product/0636920012269.do</a></li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="social-share row">
+  <div class="col-sm-5 col-md-offset-2 col-lg-offset-2">
+  <ul class="rrssb-buttons clearfix">
+    <li class="rrssb-facebook">
+      
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f22%2favoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling" class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"/></svg></span>
+        <span class="rrssb-text">facebook</span>
+      </a>
+    </li>
+    <li class="rrssb-twitter">
+      
+      <a href="https://twitter.com/intent/tweet?text=Read+more+on+@sparkfabrik+Teck+Blog: http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f22%2favoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling"
+      class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62a15.093 15.093 0 0 1-8.86-2.32c2.702.18 5.375-.648 7.507-2.32a5.417 5.417 0 0 1-4.49-3.64c.802.13 1.62.077 2.4-.154a5.416 5.416 0 0 1-4.412-5.11 5.43 5.43 0 0 0 2.168.387A5.416 5.416 0 0 1 2.89 4.498a15.09 15.09 0 0 0 10.913 5.573 5.185 5.185 0 0 1 3.434-6.48 5.18 5.18 0 0 1 5.546 1.682 9.076 9.076 0 0 0 3.33-1.317 5.038 5.038 0 0 1-2.4 2.942 9.068 9.068 0 0 0 3.02-.85 5.05 5.05 0 0 1-2.48 2.71z"/></svg></span>
+        <span class="rrssb-text">twitter</span>
+      </a>
+    </li>
+    <li class="rrssb-linkedin">
+      
+      <a class="popup" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fsparkfabrik.github.io%2f2016%2f11%2f22%2favoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling">
+      <span class="rrssb-icon">
+      <span class="rrssb-text">linkedin</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
+
+
+  <div class="row">
+    
+<div class="author-block clearfix">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="" alt="" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Vinz" > </a> <small>[  ]</small></h4>
+     <p class="bio"></p>
+  </div>
+</div>
+
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc" data-toggle="tooltip" data-placement="top" title="Wait a minute, Doc">&larr; Previous Post</a>
+      </li>
+      
+      
+      <li class="next">
+        <a href="http://sparkfabrik.github.io/2016/11/29/trapped-by-amend-saved-by-reflog" data-toggle="tooltip" data-placement="top" title="Trapped by an amend, saved by a reflog">Next Post &rarr;</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+
+      
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <li>
+            <a href="https://www.sparkfabrik.com" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="https://twitter.com/sparkfabrik" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="mailto:info@sparkfabrik.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+	    	  
+    		  <li>
+      			<a href="http://sparkfabrik.github.io/index.xml" title="RSS">
+      			  <span class="fa-stack fa-lg">
+        				<i class="fa fa-circle fa-stack-2x"></i>
+        				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      			  </span>
+      			</a>
+    		  </li>
+
+        </ul>
+        <p class="copyright text-muted">
+    		  
+    		  <a href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    		  
+  	    </p>
+  	        
+    		<p class="theme-by text-muted">
+    		  Theme by
+    		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+    		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="http://sparkfabrik.github.io/js/jquery-1.11.2.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/bootstrap.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/main.js"></script>
+
+<script src="http://sparkfabrik.github.io/rrssb/js/rrssb.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76342738-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
