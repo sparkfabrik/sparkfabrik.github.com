@@ -3,3 +3,4 @@ output/*
 src/public
 !output/.gitkeep
 .idea/
+*.swp
