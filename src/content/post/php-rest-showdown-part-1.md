@@ -43,6 +43,13 @@ With the next point, why this is important will become clear: naming resources b
 
 --- TABLE WITH EXAMPLES ---
 
+| Right | Wrong |
+|:-:|:-:|
+| `/cars` | `/getAllCars` |
+| `/users` | `/userRemove` |
+| `/books/{id}` | `/books/{id}/remove` |
+
+
 ### 2. GET requests must never alter system/resource state
 
 _Also known as_ **HTTP has verbs**.
@@ -55,7 +62,13 @@ But there's more: you don't expect that collecting something will change its pro
 
 Writing RESTful expressions boils down mostly on leveraging _by-design_ HTTP expressive power.
 
---- TABLE WITH EXAMPLES ---
+![GET ME OUT!](/posts/20170304-rest-series/02-invariantstate-cat.png)
+
+| Right | Wrong |
+|:-:|:-:|
+| `POST /cars` | `GET /addCar` |
+| `DELETE /users/{uid}` | `GET /userRemove` |
+| `PUT /books/{id}` | `GET /books/{id}/update` |
 
 ### 3. Don't mix plurals and singulars
 
@@ -71,7 +84,13 @@ Last but not least, it's way easier to setup a consistent routing to your action
 
 In the end, sticking with singular or plural is the best way to avoid complications that add little value. Choose one and go with it. My personal choice is for plural.
 
---- TABLE WITH EXAMPLES ---
+| Right | Wrong |
+|---|---|
+| `GET /users` | `GET /users` (_Right but inconsistent with the following_)
+| `DELETE /users/{uid}` | `DELETE /user/{uid}` |
+| `GET /users/{uid}/reviews` | `GET /user/{uid}/reviews` (_This really sucks..._)| 
+| `POST /users/{uid}/reviews` | `POST /user/{uid}/review` |
+| `PUT /users/{uid}/reviews/{rid}` | `POST /user/{uid}/review/{rid}` |
 
 ### 4. Map relations by sub-resources
 
@@ -87,7 +106,12 @@ Well, this really depends on your domain: if you know you need a list of reviews
 
 Just avoid proliferating your endpoint just for the sake of having them at hand. Design is the most important step in API development and declaring resources informs by  itself about the hierarchy, relations and logic the clients are expected to follow.
 
---- TABLE WITH EXAMPLES ---
+![Sub cat behaving hierarchically](/posts/20170304-rest-series/04-subres-cat.png)
+
+| Right | Wrong |
+|:-:|:-:|
+| `GET /users/{uid}/reviews` | `GET /reviews?byUserId={uid}` |
+| `PUT /users/{uid}/reviews/{rid}` | `PUT /userReviews/{rid}` |
 
 ### 5. Negotiate format in HTTP headers
 
@@ -115,7 +139,10 @@ to inform the server we are expecting a JSON payload... way more expressive and 
 
 Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!
 
---- TABLE WITH EXAMPLES ---
+| Right | Wrong |
+|---|---|
+| `Content-Type : application/json` | `PUT /reviews.json` |
+| `Accept : text/xml` | `GET /reviews?format=xml` |
 
 ### 6. Leverage powerful HTTP caching
 
@@ -133,9 +160,12 @@ Just remember these three things:
 
 Not bad of a transfer protocol, uh? :)
 
+![Copy cat :D](/posts/20170304-rest-series/06-cachecopy-cat.png)
+
+
 ### 7. Allow for collections filtering, sorting and paging
 
-This is query parameters time!
+**This is query parameters time!**
 
 After having disparaged query parameters in almost all former examples, here they come to save our day. Did you know humans can easily find an element in up to a dozen, with little to none [cognitive load](https://en.wikipedia.org/wiki/Cognitive_load)? That's why good interfaces allow for filtering result-sets (and why it is so important to rack high on search engines, just to say).
 
@@ -180,11 +210,18 @@ This is also true at some extent for collections of related items. Take this as 
 1. `/books?owner_id=1`
 
 This is trickier and it really depends on what you need in the domain of your application. Is the collection of books owned by a specific user` a resource by itself? Or in better words, are book collections resources for the users of your system? If so, being a resource, the user's book collection deserves a universal identifier. If not, go with a filtered collection.  
-Mind that nothing stops you to have both, but don't just throw them in for good measure... think about your domain, how entities are related and what kind of operations you wat to perform on a resource.
+Mind that nothing stops you to have both, but don't just throw them in for good measure... think about your domain, how entities are related and what kind of operations you want to perform on a resource.
+
+![Copy cat :D](/posts/20170304-rest-series/07-mindurfilters-cat.png)
 
 OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can enpower your clients:
 
---- TABLE WITH EXAMPLES ---
+| Right | Wrong |
+|---|---|
+| `GET /users?sort=-age,+name` | `GET /users?sortAsc=name&sortDesc=age` |
+| `GET /users/{uid}/reviews?rate>=3&published=1` | `GET /userReviews?uid={uid}&rate>=3` |
+| `GET /books?format=[epub,mobi]` | `GET /books?format=epub&format=mobi` |
+
 
 To close this paragraph with one more digression, I'm not a fan of field-selection, that is allowing the client to list the fields it wants to receive for a resource representations. It surely can come in handy, but mind that APIs are not a trendy way to allow a client to access a database. A service layer is, as the name implies, something that provide a service: it often holds business logic behind its endpoints.  
 There are cases where your API is simply a secure and decoupled persistence layer, while your client holds all of the business logic. Good examples of this are some dedicated iOS or Android apps, which doesn't even have a web counterpart. As long as clients performing the same functions over and over proliferate on different channels (web, SmartTVs, mobile OSes, etc), you service layer will become a RESTful representation of your application model.
@@ -206,7 +243,10 @@ Where to place your version? My preference is in the domain, like `https://v1.ap
 
 It goes without saying that the point here is not to keep each and every version of your API online indefinitely! You can (and will) surely deprecate old versions soon or late, but you can do this on a public schedule, communicating the variations and version EOL, and collecting information about the degree of adoption of new versions by the clients (hint: use logs to collect usage statistics of your endpoints!).
 
---- TABLE WITH EXAMPLES ---
+| Right | Wrong |
+|---|---|
+| `GET /v1/users?sort=-age,+name` | `GET /users?format=old` |
+| `POST api.v2.stick.says/users` | `POST /users?format=2017` |
 
 ### 9. Return meaningful status codes
 
@@ -233,32 +273,59 @@ I'll list here some HTTP status codes trivia which may or may not be common know
 
 * **HTTP status codes are numerals with an optional description**: The format of response status codes is alwas a 3-digits number like `201`, `302`, `404` or `401`. Mnemonic descriptions are added so that us meatbags can remember what they mean: `401 Unauthorized`, `302 Permanent redirect` or `200 OK`
 
-* **HTTP status codes are categorized by the most significant digit**: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in succh a situation you may double check your assumptions... it smells a bit), the _hundreds_ are used to represent status categories:
-
-|Range|Category|Usage|
-|---|---|---|
-| 1xx | Informational | Intended for when you have to respond with an information about the management of the request, like `100 Continue` (which I think I spotted only in proxies traffic) or `101 Switching protocols` (which informs the client that the server is OK in changing the application protocols). |
-| 2xx | Successfull | Inform the client that _Yay! Allrite bro!_ The infamous `200 OK` which is a laconic way to say _the request has been understood and here is the content you required_ is the most known specimen, but `201 Created` (after a succesfull `POST`) or `204 No content` (when you ask for a resource which *is there* but has no content, like an empty collection) are good examples to understand what those codes are there for.|
-| 3xx | Redirection | Handle all situations where the client is redirected to another source of information or URL. Local cache is a source if information, thus the `304 Not modified` makes perfect sense in this family. Renowned examples are `301 Moved permanently` and `302 Found`, but also `305 Use proxy` showcases how useful those code are. |
-| 4xx | Client Error | Used in every case where the request can't be processed but it seems the client is to blame. The most widely known is the `404 Not found` upon everybody in the world stumbled at least once. Note that this differs from `204 No content` in that querying a collection with no items in it (for example due to heavy filtering) doesn't mean the collection isn't there. Querying for a URI which does not represent any resouce (hence is not routed/handled by the system) is actually a client error! But learn more and use stuff like `401 Unauthorized`, that is the client didn't provide necessary credentials to access a protected resource, or `405 Method not allowed` for when the client tries to use an HTTP method/verb on a resource that does not support it (`PUT` or `PATCH` a collection for example?). |
-| 5xx | Server Error | Those are for when the request can't be processed but the server knows the problem lies in its request processing, not the request itself. The most spotted error in this category is the pretty uninfomative `500 Internal server error`, which map one-to-one with the `Uknown error` or `Unexpected error` some can remember from Windows 9x era. If the server has any clue on what happened it may be more helpful, returning stuff like `501 Not implemented` or `505 HTTP version not supported` (try to find one of those old farts, if you can!). Just mind that *it is really unlikely you will have to manage 5xx status codes at application level*, so use them only if you really know what you are doing! |
+* **HTTP status codes are categorized by the most significant digit**: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in succh a situation you may double check your assumptions... it smells a bit), the _hundreds_ are used to represent status categories. For a complete reference see the related part of [RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). For a shorter version and some notable insight, see [my table in the end notes](#httpstatuses).
 
 * **There is space for custom error code in each category**: And, as long as you document them for your client, you are encouraged to use them! You may not know this, but there is an actual [`418 I'm a teapot`](https://tools.ietf.org/html/rfc2324) implementation case registered in history. And [Symfony framework natively supports it](https://github.com/symfony/http-foundation/blob/master/Response.php#L61) :). So really, don't be shy and make good use of HTTP flexibility to inform your client about what the heck happened to their request.
 
+* **You can haz cats**: Yes, there are things like [HTTP Status Cats API](https://http.cat/) or, if you feel more like you want puppies, [HTTP Status Dogs](https://httpstatusdogs.com/). I can't state how important is you make use of this bleeding edge technologies! **World can be saved, after all...**
+
 ![Toy resource not found](/posts/20170304-rest-series/09-notfound-cat.jpg)
+
+
+#### Good
+
+```http
+401 UNAUTHORIZED
+
+{
+  "errors": [
+     {
+         "user_msg": "You shall nooot paaass!!!",
+         "internal_msg": "Balrogs are not welcome",
+         "code": 666,
+         “info": "http://stick.says/docs/v1/errors/666"
+     }
+   ]
+}
+
+```
+
+#### Bad
+
+```http
+200 OK
+
+{
+  “status” : “error”,
+  "user_msg": "You shall nooot paaass!!!",
+  "internal_msg": "Balrogs are not welcome",
+  "code": 666,
+  “info": "http://stick.says/docs/v1/errors/666"
+}
+```
 
 ### 10. Use modern authorization methods
 
 If you live in a well-off countryside area like me, you may have retained the old habit of putting your keys under the doormat.  
 Actually I am not! Times changes and I am not that akin to suffer thievery. Securing your resources is important, but most important yet, is to know who can access which one.
 
-Bear with the metaphor for a while, please. My friends may come visit, they just have to ring the bell and say their name. In this they are able to access my house while I am in.
+Bear with the analogy for a while, please. My friends may come visit, they just have to ring the bell and say their name. In this they are able to access my house while I am in.
 But this doesn't mean I give them free access to my wardrobe or family bank account. Those are resources that may be accessed only by high privileged people in my family.
 
 Now, what if my wife wants to access the home-banking and performs transitions? Sure she can, so I can let her use my token (it's actually the opposite, lol). Giving her my token, I allow her to act _on my behalf_ on the `bank account` resource. Most important, this can happen outside of my control, as long as the authorization is valid.
 
 So it is possible for a set of agents to access the house via **authentication** (identifying them at the door) and to access some resource under my direct or indirect supervision, for their staying.
-Other specific agents mayb instead manage private resources by gaining an **authorization** (asking me the token). The nuance that tells _authentication_ from _authorization_ is subtle but can be clearly stated in that:
+Other specific agents may instead manage private resources by gaining an **authorization** (asking me the token). The nuance that tells _authentication_ from _authorization_ is subtle but can be clearly stated in that:
 
 * *Authentication is a necessary condition to gain authorization*: I must know who you are before you can act on my behalf. It is not sufficient to gain control of my resources though.
 * *Authorization has one or more scopes*: Once you are authenticated (I know who you are), I can grant you access to a set of resources you can use on my behalf. This access can be temporary and conditioned to a specific logic. Let's call those set of resources `scopes`. It is clear that access to different scopes like _See bank account balance_, _Trigger money transfers_, _Use TV_, _Access wardrobe_, etc may be granted to different people over time.
@@ -284,20 +351,18 @@ Digging into the two would require a series of posts (or entire books) but in th
   Modern single page application written in frameworks like Angular.js or React holds part of the application logic in the client. You may be accustomed with the concept of server session, that is the server holding a state behing an HTTP request/response curtain. JTW allows for a real stateless connection: again, a token is exchanged with each request to match the client's authorizations as well as the user's authentication. JWT tokens generally have a short life and can hold actual information in a smart and secure way.  
   A modern API which goal is to serve client application should really rely on JWT to handle permissions!
 
---- TABLE WITH EXAMPLES ---
-
 ## Final thoughts
 
 Here you are my 10 golden rules for a perfectly REST API! **Hurray!**
 
 Or not? I can here some of you:
 
-> _But wait... where is HATEOAS?! And you old fart forgot to mention RDF also!!!1
+> _But wait... where is HATEOAS?! And you old fart forgot to mention RDF also!!?!1!1!!cos(0)_
 
-OK, let's make clear that despite I've kept an overconfident tone, which was hopefully just hilarious, the above doesn't want to be a universal source of truth about what makes a good REST API. It is just what I learned over the years for you to put to good use.
+OK, let's make clear that despite I've kept an overconfident tone, which was hopefully just hilarious, **the above doesn't want to be a universal source of truth about what makes a good REST API**. It is just what I learned over the years for you to put to good use.
 
 That said, I have mixed feelings about [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS) and [RDF](http://en.wikipedia.org/wiki/Resource_Description_Framework)-related stuff (JSON-LD etc, for the record).  
-My guts tell, and I would be happy to prove them wrong, that to date we have a lot of stuff that seem to perfectly match REST in describing resources semantics, but it's unclear how the client should actually behave with those data. Since yep, hypermedia navigation is all about behavior.
+My guts say - and I would be happy to prove them wrong - that to date we have a lot of stuff that seem to perfectly match REST in describing resources semantics, but it's unclear how the client should actually behave with those data. Since yep, hypermedia navigation is all about behavior.
 
 Take HATEOAS for example: nice to receive a list of available links (the catalogue of legit state transitions, to be a bit pedantic) in the payload, now what?  
 Without a clear behavioral framework to apply, client side, it is left to the developer to understand what to do with the information... at that point it is better not to do any server-side assumption and provide clear documentation so the client developer can forge URIs by himself, handling unavailable transitions at application level.
@@ -309,16 +374,27 @@ It's just that it's unhealthy to have native modality to perform content enrichm
 
 ## Conclusions
 
-To wrap it up, don't stop here! There are a lot of great books out there on how to design great REST APIs, go read them and better yet, get your hands dirty!  
+To wrap it up, **don't stop here!** There are a lot of great books out there on how to design great REST APIs, go read them and better yet, get your hands dirty!
+
 Reach for your [apiary](https://apiary.io/) account or start a [Swagger](http://swagger.io/) project and grind your teeth.
 
 Just remember a great service layer starts from its design, so don't rush installing the last new sensational tool: **your brainwork comes first**.
 
 See you soon with the next article of the series: **Drupal 8 REST features breakdown**.
 
-## Further readings
+## Additional resources
+
+### Further readings
 
 * [Build APIs you won't hate](https://apisyouwonthate.com/) - Book by [Phil Sturgen](https://philsturgeon.uk)
 * [REST API Design rulebook](http://shop.oreilly.com/product/0636920021575.do) - Book by [Mark Masse](http://www.oreilly.com/pub/au/4998)
 
+### <a name="httpstatuses"></a>Personal blurb on HTTP status codes
 
+|Range|Category|Usage|
+|---|---|---|
+| 1xx | Informational | Intended for when you have to respond with an information about the management of the request, like `100 Continue` (which I think I spotted only in proxies traffic) or `101 Switching protocols` (which informs the client that the server is OK in changing the application protocols). |
+| 2xx | Successfull | Inform the client that _Yay! Allrite bro!_ The infamous `200 OK` which is a laconic way to say _the request has been understood and here is the content you required_ is the most known specimen, but `201 Created` (after a succesfull `POST`) or `204 No content` (when you ask for a resource which *is there* but has no content, like an empty collection) are good examples to understand what those codes are there for.|
+| 3xx | Redirection | Handle all situations where the client is redirected to another source of information or URL. Local cache is a source if information, thus the `304 Not modified` makes perfect sense in this family. Renowned examples are `301 Moved permanently` and `302 Found`, but also `305 Use proxy` showcases how useful those code are. |
+| 4xx | Client Error | Used in every case where the request can't be processed but it seems the client is to blame. The most widely known is the `404 Not found` upon everybody in the world stumbled at least once. Note that this differs from `204 No content` in that querying a collection with no items in it (for example due to heavy filtering) doesn't mean the collection isn't there. Querying for a URI which does not represent any resouce (hence is not routed/handled by the system) is actually a client error! But learn more and use stuff like `401 Unauthorized`, that is the client didn't provide necessary credentials to access a protected resource, or `405 Method not allowed` for when the client tries to use an HTTP method/verb on a resource that does not support it (`PUT` or `PATCH` a collection for example?). |
+| 5xx | Server Error | Those are for when the request can't be processed but the server knows the problem lies in its request processing, not the request itself. The most spotted error in this category is the pretty uninfomative `500 Internal server error`, which map one-to-one with the `Uknown error` or `Unexpected error` some can remember from Windows 9x era. If the server has any clue on what happened it may be more helpful, returning stuff like `501 Not implemented` or `505 HTTP version not supported` (try to find one of those old farts, if you can!). Just mind that *it is really unlikely you will have to manage 5xx status codes at application level*, so use them only if you really know what you are doing! |
