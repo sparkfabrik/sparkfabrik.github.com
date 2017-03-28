@@ -12,12 +12,12 @@ author = "Stick"
 
 This is the first of five posts in a series that want to tell you the story of my discovery journey through modern PHP tools to build a REST service layer.  
 
-I have a sweet spot for REST and decoupled architectures, but working for a (mostly) Drupal company in the last (several) years, I had little occasion to put my head over the topic aside personal tinkering and small projects. Not to say that we didn't produced REST APIs for our customers, but a real decoupled project was hard to be found.
+I have a sweet spot for REST and decoupled architectures, but working for a (mostly) Drupal company in the last (several) years, I had little occasion to put my head over the topic aside personal tinkering and small projects. Not to say that we didn't produce REST APIs for our customers, but a real decoupled project was hard to be found.
 
 Then came Drupal 8, the first version of Drupal built from the ground-up to match enterprise use-cases: it brings many changes, embraces modern PHP to the core and is heavily oriented towards decoupled architectures. Actually, we can say **headless Drupal** is quite a buzzword these days. All good news, but hey... Drupal went finally PHP, which means that other modern PHP tools are finally within the reach of any *D8-savvy* developer.  
 I dare to state that moving towards *SOLID* PHP, Drupal made himself less of a *queen bee*, diluting its ecosystem and exposing itself to direct confrontation with other PHP options.
 
-This may seem counterintuitive, but I consider this a great strenght for Drupal in the first place: you don't have to decide between **making it "custom"** or **making it with Drupal**: it will be easy to carry your business logic in and out of Drupal if the need be. So with a healthy and open spirit of confrontation, let's dive into a journey among modern options to build REST APIs with PHP at the ides of March 2017.
+This may seem counterintuitive, but I consider this a great strength for Drupal in the first place: you don't have to decide between **making it "custom"** or **making it with Drupal**: it will be easy to carry your business logic in and out of Drupal if the need be. So with a healthy and open spirit of confrontation, let's dive into a journey among modern options to build REST APIs with PHP at the ides of March 2017.
 
 ## What makes an API really REST
 
@@ -99,7 +99,7 @@ We can say, for example that a user `has many` phone numbers, but `has one` prof
 
 The best RESTful representation of those kind of relationships is achieved by **sub-resources**: `/books/123/reviews` is the resource endpoint for reviews related to book with ID `123`. Along this line, `/books/123/reviews/456` is a specific review among those book `123` got.
 
-Redoundant? Yes, but also descriptive. And secure: since review `456` partains to book `123`, trying to `GET /books/098/reviews/456` should fail with a `404 Not found` error (see below for more status-codes and love).
+Redundant? Yes, but also descriptive. And secure: since review `456` partains to book `123`, trying to `GET /books/098/reviews/456` should fail with a `404 Not found` error (see below for more status-codes and love).
 
 Should we also redound the endpoints to provide different access routes? Like, following the example above, should we have a `reviews/456/books` resource so that I can go backward from reviews to books?  
 Well, this really depends on your domain: if you know you need a list of reviews, no matter the book they are related to, or (to add a dimension to this depiction) if you may need reviews by author, like `/users/987/reviews`, then why not? I would go further and say that you can go fancy with filters on a `/reviews` resource endpoint (see below for filters galore).
@@ -149,14 +149,14 @@ Try to pollute this in a fake extension, a parameter or (may God forgive) as par
 This paragraph would deserve a full book _per se_. The topic is really huge and I don't even have the experience to compete in clarity and completeness with other authors.  
 Still I feel that HTTP caching features are often overlooked by many, mostly when it comes to REST API design.
 
-To support my statement I often take as an example the fact that (in my experience) far too often the `etag` header goes totally unconsidered during API design, though it is a brillant solution to content-based cache invalidation.
+To support my statement I often take as an example the fact that (in my experience) far too often the `etag` header goes totally unconsidered during API design, though it is a brilliiant solution to content-based cache invalidation.
 
 Google has a great article on [HTTP caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching) on the Developer Network.
 Just remember these three things:
 
 * The problem with caching is its *invalidation strategy*; pretty obvious but it's often very tricky to come up with a good one
 * HTTP allows for *content-based* and *time-based* invalidation, which is a real boon since *you can trade off performances and data reliability*
-* Being based on response headers, HTTP caching allows *per-resource strategies*, which means you can carry out the aformentioned trade-offs depending on the nature of the data
+* Being based on response headers, HTTP caching allows *per-resource strategies*, which means you can carry out the aforementioned trade-offs depending on the nature of the data
 
 Not bad of a transfer protocol, uh? :)
 
@@ -214,7 +214,7 @@ Mind that nothing stops you to have both, but don't just throw them in for good 
 
 ![Copy cat :D](/posts/20170304-rest-series/07-mindurfilters-cat.png)
 
-OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can enpower your clients:
+OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can empower your clients:
 
 | Right | Wrong |
 |---|---|
@@ -271,9 +271,9 @@ Returning meaningful status codes means your client (the machine, not the human)
 
 I'll list here some HTTP status codes trivia which may or may not be common knowledge for you. If you learn something new, my advice is to dig deeper into HTML protocol and learn what it can already do for us.
 
-* **HTTP status codes are numerals with an optional description**: The format of response status codes is alwas a 3-digits number like `201`, `302`, `404` or `401`. Mnemonic descriptions are added so that us meatbags can remember what they mean: `401 Unauthorized`, `302 Permanent redirect` or `200 OK`
+* **HTTP status codes are numerals with an optional description**: The format of response status codes is always a 3-digits number like `201`, `302`, `404` or `401`. Mnemonic descriptions are added so that us meatbags can remember what they mean: `401 Unauthorized`, `302 Permanent redirect` or `200 OK`
 
-* **HTTP status codes are categorized by the most significant digit**: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in succh a situation you may double check your assumptions... it smells a bit), the _hundreds_ are used to represent status categories. For a complete reference see the related part of [RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). For a shorter version and some notable insight, see [my table in the end notes](#httpstatuses).
+* **HTTP status codes are categorized by the most significant digit**: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in such a situation you may double check your assumptions... it smells a bit), the _hundreds_ are used to represent status categories. For a complete reference see the related part of [RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). For a shorter version and some notable insight, see [my table in the end notes](#httpstatuses).
 
 * **There is space for custom error code in each category**: And, as long as you document them for your client, you are encouraged to use them! You may not know this, but there is an actual [`418 I'm a teapot`](https://tools.ietf.org/html/rfc2324) implementation case registered in history. And [Symfony framework natively supports it](https://github.com/symfony/http-foundation/blob/master/Response.php#L61) :). So really, don't be shy and make good use of HTTP flexibility to inform your client about what the heck happened to their request.
 
@@ -338,8 +338,8 @@ Uoookkey, enough metaphors; in the context of our service layer we can say the u
 Now, HTTP is a stateless protocol so if you want to have some RESTpect (sorry), you'd better **avoid relying on sessions** to authorize the client.  
 Use modern stateless authorization framework instead.
 
-The two most reknown example here are [Oauth2](https://oauth.net/2/) and [JSON Web Tokens](https://jwt.io/) (aka JWT).
-Both are standards (actually Oauth2 is not, it [failed to be standardized](https://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/) and is now considered a framework) to describe how a client may act on behalf of an authenticated user in a statless world.
+The two most renown example here are [Oauth2](https://oauth.net/2/) and [JSON Web Tokens](https://jwt.io/) (aka JWT).
+Both are standards (actually Oauth2 is not, it [failed to be standardized](https://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/) and is now considered a framework) to describe how a client may act on behalf of an authenticated user in a stateless world.
 
 Digging into the two would require a series of posts (or entire books) but in the scope of this article it suffice to say that:
 
