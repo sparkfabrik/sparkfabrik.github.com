@@ -57,6 +57,14 @@ title = "Tech @ SparkFabrik"
       github = "https://github.com/osvaldot"
       twitter = "https://twitter.com/osvaldotulini"
 
+    [Params.Authors.Bladedu]
+      name = "Marco Primitivo"
+      role = "backend Developer"
+      picture = "http://www.sparkfabrik.com/images/team/marco_primitivo.jpg"
+      bio = "Software Developer, curious about everything, love to make experiments."
+      github = "http://www.github.com/bladedu"
+      twitter = "http://www.twitter.com/BladeduMP"
+
 [Author]
   name = "Sparkfabrik"
   email = "info@sparkfabrik.com"

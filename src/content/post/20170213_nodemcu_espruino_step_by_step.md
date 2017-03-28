@@ -1,11 +1,11 @@
 +++
-date        = "2017-02-1329T08:51:09+02:00"
+date        = "2017-02-29T14:47:30Z"
 title       = "Espruino on NodeMCU (step-by-step guide)"
 tags        = ['iot', 'javascript', 'espruino', 'nodemcu']
 topics      = ['IoT']
 description = "How to flash NodeMCU with Espruino firmware and basic examples on how to use it."
 slug        = "espruino-nodemcu-step-by-step"
-author      = "Marco"
+author      = "Bladedu"
 +++
 [SparkFabrik]: http://www.sparkfabrik.com/  "SparkFabrik"
 
@@ -221,8 +221,8 @@ There is plenty of documentation and examples online. For now, the list of suppo
 but I'm pretty sure there are enough of them to get you started with it.
 
 ### Useful resources
-Espruino info on ESP8266 chip: http://www.espruino.com/EspruinoESP8266
-How to use espruino on ESP8266: http://crufti.com/getting-started-with-espruino-on-esp8266/
-ESP8266 flashing: http://www.espruino.com/ESP8266_Flashing
-Espruino JS reference: http://www.espruino.com/Reference
-Espruino sensors: https://www.espruino.com/Sensors
+- Espruino info on ESP8266 chip: http://www.espruino.com/EspruinoESP8266
+- How to use espruino on ESP8266: http://crufti.com/getting-started-with-espruino-on-esp8266/
+- ESP8266 flashing: http://www.espruino.com/ESP8266_Flashing
+- Espruino JS reference: http://www.espruino.com/Reference
+- Espruino sensors: https://www.espruino.com/Sensors
