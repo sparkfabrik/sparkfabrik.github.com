@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on Tech @ SparkFabrik</title>
+    <link>http://sparkfabrik.github.io/tags/javascript/</link>
+    <description>Recent content in Javascript on Tech @ SparkFabrik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
+    <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
+    <atom:link href="http://sparkfabrik.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Espruino on NodeMCU (step-by-step guide)</title>
+      <link>http://sparkfabrik.github.io/1/01/01/espruino-nodemcu-step-by-step</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/1/01/01/espruino-nodemcu-step-by-step</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction:181902d417846fa121f0e69f03cf2870&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This step-by-step guide is going to help you setting up and use &lt;a href=&#34;https://www.espruino.com/&#34; title=&#34;A firmware JavaScript Interpreter for Microcontrollers that runs on a variety of different chipsets&#34;&gt;Espruino&lt;/a&gt; on NodeMCU device.
+&lt;a href=&#34;http://www.nodemcu.com/index_en.html&#34;&gt;NodeMCU&lt;/a&gt; is:
+&amp;gt; An open-source firmware and development kit that helps you to prototype your IOT product within a few Lua script lines.&lt;/p&gt;
+
+&lt;p&gt;We chosen the NodeMCU because it uses the ESP8266 chip which is one of the most cheap wifi module.&lt;/p&gt;
+
+&lt;p&gt;We will first list all tools required to complete this tutorial, then we will flash the NodeMCU with the Espruino firmware (1v91) and at the end we will see how to connect to the wifi and push temp and humidity values over internet
+using &lt;a href=&#34;https://dweet.io/, &amp;quot;Ridiculously simple messaging (and alerts&#34;&gt;dweet.io&lt;/a&gt; for the Internet of Things.&amp;ldquo;)&lt;/p&gt;
+
+&lt;h2 id=&#34;buy-all-the-things:181902d417846fa121f0e69f03cf2870&#34;&gt;Buy all the things!&lt;/h2&gt;
+
+&lt;p&gt;Everything for this tutorial has been bought on Amazon (fast shipment reason :) )
+If you&amp;rsquo;re not in a hurry, you could have a look on Aliexpress.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.amazon.it/gp/product/B01GCK3J40/ref=oh_aui_detailpage_o01_s00?ie=UTF8&amp;amp;psc=1&#34;&gt;NodeMCU&lt;/a&gt;
+&lt;a href=&#34;https://www.amazon.it/gp/product/B0154JQRPI/ref=oh_aui_detailpage_o01_s00?ie=UTF8&amp;amp;psc=1&#34;&gt;DHT11 sensor&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;prepare-the-ground:181902d417846fa121f0e69f03cf2870&#34;&gt;Prepare the ground&lt;/h2&gt;
+
+&lt;p&gt;First of all we have to prepare everything that is needed to perform the installation and usage of the espruino.
+We would need a tool to copy the firmware into the device, we would need the firmware itself and a IDE that would facilitate us writing and uploading custom code.&lt;/p&gt;
+
+&lt;h4 id=&#34;utility:181902d417846fa121f0e69f03cf2870&#34;&gt;Utility&lt;/h4&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/themadinventor/esptool&#34;&gt;esptool.py&lt;/a&gt; is needed to flash the firmware into the device. Just follow the instruction on the github page.&lt;/p&gt;
+
+&lt;p&gt;Given that python is already installed on your system, just type&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install esptool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once installed, the executable is available on path (linux)&lt;code&gt;/usr/local/bin/esptool.py&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the Board described in this tutorial, CP2102 USB to UART driver is required. This driver is already part of the Linux core and maintained since version 3.x.
+The driver for Mac OSX is available &lt;a href=&#34;https://www.silabs.com/Support%20Documents/Software/Mac_OSX_VCP_Driver.zip&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;firmware:181902d417846fa121f0e69f03cf2870&#34;&gt;Firmware&lt;/h4&gt;
+
+&lt;p&gt;Espruino firmware for ESP8266 can either be built from source-code that can be found on &lt;a href=&#34;https://github.com/tve/Espruino&#34;&gt;github&lt;/a&gt;
+or simply install an already compiled one.
+Updates on this firmware are tracked in a forum thread &lt;a href=&#34;http://forum.espruino.com/conversations/279176/&#34;&gt;http://forum.espruino.com/conversations/279176/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For those not interested in discussions, just &lt;a href=&#34;https://www.espruino.com/Download&#34;&gt;download the latest firmware version&lt;/a&gt;
+Make sure to use the firmware compatible with ESP8266.&lt;/p&gt;
+
+&lt;h3 id=&#34;flash-the-espruino-firmware:181902d417846fa121f0e69f03cf2870&#34;&gt;Flash the espruino firmware&lt;/h3&gt;
+
+&lt;p&gt;To set NodeMCU to flash mode, keep pressed the &amp;ldquo;Flash&amp;rdquo; button while plugging in the device into the USB.&lt;/p&gt;
+
+&lt;p&gt;Before we actually upload the new firmware, we have to make sure everything is clean. For that, we first erase the flash on the device by executing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;esptool.py --port /dev/ttyUSB0 erase_flash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that we can upload the Espruino firmware with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;esptool.py --port /dev/ttyUSB0 --baud 115200 write_flash --flash_freq 80m --flash_mode qio --flash_size 32m 0x0000 &amp;quot;boot_v1.6.bin&amp;quot; 0x1000 espruino_esp8266_user1.bin 0x3FC000 esp_init_data_default.bin 0x37E000 blank.bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this command is explained within the README_flash.txt file contained into the downloaded firmware.
+The command above might be different according to the ESP board you&amp;rsquo;re using. In my case I&amp;rsquo;m using an &lt;code&gt;esp-12&lt;/code&gt; board, so I can use up to 4MB of space.
+For more info about flash and phisical addresses, please refer to &lt;a href=&#34;https://www.espruino.com/EspruinoESP8266&#34;&gt;https://www.espruino.com/EspruinoESP8266&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Please note that bauds sets are different from those listed on the device.
+You should find the same instruction in a README file within the downloaded firmware.&lt;/p&gt;
+
+&lt;h3 id=&#34;espruino-ide:181902d417846fa121f0e69f03cf2870&#34;&gt;Espruino IDE&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/espruino-web-ide/bleoifhkdalbjfbobjackfdifdneehpo?hl=en&#34;&gt;Espruino Web-IDE plugin for Chrome&lt;/a&gt; is the easiest tool to use to upload custom code into the NodeMCU.
+Once installed, go to settings &amp;gt; communications and update Baud rate to 115200.&lt;/p&gt;
+
+&lt;p&gt;Now if you click on the connect button, you should be able to get access to the device.&lt;/p&gt;
+
+&lt;h3 id=&#34;connect-to-wifi:181902d417846fa121f0e69f03cf2870&#34;&gt;Connect to wifi&lt;/h3&gt;
+
+&lt;p&gt;To gain access to internet from your device, you should first setup the code for the connectivity. An example is the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var wifi = require(&amp;quot;Wifi&amp;quot;);
+wifi.connect(&amp;quot;&amp;lt;YOUR-SSID-HERE&amp;gt;&amp;quot;, {password:&amp;quot;&amp;lt;YOUR-PASSWORD-HERE&amp;gt;&amp;quot;}, function(err){
+ console.log(&amp;quot;connected? err=&amp;quot;, err, &amp;quot;info=&amp;quot;, wifi.getIP());
+});
+wifi.stopAP();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You could, optionally, setup a hostname &lt;code&gt;wifi.setHostname(&amp;quot;Sparkfabrik-espruino&amp;quot;);&lt;/code&gt; to identify your device on your router.
+Paste the code into the espruino IDE and click (while connected to nodeMCU) on &amp;ldquo;Send to Espruino&amp;rdquo;.
+Once the wifi works as expected, add &lt;code&gt;wifi.save()&lt;/code&gt; to store the connection logic into the device. This operation will persist during device reset.&lt;/p&gt;
+
+&lt;p&gt;Final code would be this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var wifi = require(&amp;quot;Wifi&amp;quot;);
+wifi.setHostname(&amp;quot;Sparkfabrik-espruino&amp;quot;);
+wifi.connect(&amp;quot;&amp;lt;YOUR-SSID-HERE&amp;gt;&amp;quot;, {password:&amp;quot;&amp;lt;YOUR-PASSWORD-HERE&amp;gt;&amp;quot;}, function(err){
+ console.log(&amp;quot;connected? err=&amp;quot;, err, &amp;quot;info=&amp;quot;, wifi.getIP());
+});
+wifi.stopAP();
+wifi.save()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once stored, you can wipe it out of the IDE and start building some useful code.&lt;/p&gt;
+
+&lt;h3 id=&#34;examples:181902d417846fa121f0e69f03cf2870&#34;&gt;Examples&lt;/h3&gt;
+
+&lt;h4 id=&#34;temp-and-rh-data-over-internet:181902d417846fa121f0e69f03cf2870&#34;&gt;Temp and RH data over internet&lt;/h4&gt;
+
+&lt;p&gt;NodeMCU GPIO label don&amp;rsquo;t match the actual GPIO pin. With Espruino, there is a NodeMCU class that allows an easy mapping between Espruino and NodeMCU pins.
+Please refer to the &lt;a href=&#34;http://www.espruino.com/Reference#NodeMCU&#34;&gt;espruino reference&lt;/a&gt; for it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/espruino-dht11-min.jpg&#34; alt=&#34;NodeMCU DHT11 connection&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On &lt;a href=&#34;https://www.espruino.com/IoT+Services&#34;&gt;&lt;em&gt;IoT Services&lt;/em&gt;&lt;/a&gt; section on Espruino.com there are few examples of how to use external services to push data.&lt;/p&gt;
+
+&lt;p&gt;The following code is in charge of pushing data via POST method to dweet.io.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function putDweet(dweet_name, a, callback) {
+  var data = &amp;quot;&amp;quot;;
+  for (var n in a) {
+    if (data.length) data+=&amp;quot;&amp;amp;&amp;quot;;
+    data += encodeURIComponent(n)+&amp;quot;=&amp;quot;+encodeURIComponent(a[n]); 
+  }
+  var options = {
+    host: &#39;dweet.io&#39;,
+    port: &#39;80&#39;,
+    path:&#39;/dweet/for/&#39;+dweet_name+&amp;quot;?&amp;quot;+data,
+    method:&#39;POST&#39;
+  };
+  require(&amp;quot;http&amp;quot;).request(options, function(res)  {
+    var d = &amp;quot;&amp;quot;;
+    res.on(&#39;data&#39;, function(data) { d+=data; });
+    res.on(&#39;close&#39;, function(data) {
+      if (callback) callback(d);
+    });
+ }).end();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that we know how to send data over internet, we simply have to read data from the sensor and push it on a service online.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;pin=NodeMCU.D2;
+var dht11 = require(&amp;quot;DHT11&amp;quot;).connect(pin);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the data wire of the DHT11 sensor (yellow cable, usually) is connected to the pin 2 on the NodeMCU.
+Required the DHT11 lib and connected it to the pin.&lt;/p&gt;
+
+&lt;p&gt;Next we have to pull data at some interval (in my case, every minute) and to push them mover internet.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var dht11_read_test = function() {
+  dht11.read(
+    function(a){
+      console.log(&amp;quot;Temp is &amp;quot;+a.temp.toString()+ &amp;quot; and RH is &amp;quot;+a.rh.toString());
+      var data = {
+        temp: a.temp.toString(),
+        rh:a.rh.toString()
+      };
+      putDweet(&amp;quot;sparkfabrik-espruino&amp;quot;, data, function(response) {
+        console.log(response);
+      });
+     });
+};
+setInterval(dht11_read_test,60000);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Full script is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;pin=NodeMCU.D2;
+var dht11 = require(&amp;quot;DHT11&amp;quot;).connect(pin);
+var dht11_read_test = function() {
+  dht11.read(
+    function(a){
+      console.log(&amp;quot;Temp is &amp;quot;+a.temp.toString()+ &amp;quot; and RH is &amp;quot;+a.rh.toString());
+      var data = {
+        temp: a.temp.toString(),
+        rh:a.rh.toString()
+      };
+      putDweet(&amp;quot;sparkfabrik-espruino&amp;quot;, data, function(response) {
+        console.log(response);
+      });
+     });
+};
+setInterval(dht11_read_test,60000);
+
+function putDweet(dweet_name, a, callback) {
+  var data = &amp;quot;&amp;quot;;
+  for (var n in a) {
+    if (data.length) data+=&amp;quot;&amp;amp;&amp;quot;;
+    data += encodeURIComponent(n)+&amp;quot;=&amp;quot;+encodeURIComponent(a[n]); 
+  }
+  var options = {
+    host: &#39;dweet.io&#39;,
+    port: &#39;80&#39;,
+    path:&#39;/dweet/for/&#39;+dweet_name+&amp;quot;?&amp;quot;+data,
+    method:&#39;POST&#39;
+  };
+  require(&amp;quot;http&amp;quot;).request(options, function(res)  {
+    var d = &amp;quot;&amp;quot;;
+    res.on(&#39;data&#39;, function(data) { d+=data; });
+    res.on(&#39;close&#39;, function(data) {
+      if (callback) callback(d);
+    });
+ }).end();
+}
+
+save();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion:181902d417846fa121f0e69f03cf2870&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s very easy to build an IoT device nowadays as hardware for prototyping is becoming very cheap.
+NodeMCU is one of those &amp;ldquo;essential&amp;rdquo; play-board that is affordable and it is great for fast prototyping.
+At the end, for IoT device, what would you expect? A bunch of GPIO and a internet connection.&lt;/p&gt;
+
+&lt;p&gt;And what&amp;rsquo;s more cool for a web-developer to code not just software, but hardware as well with Javascript? :)
+I wanted to give it a try and it was easy and funny to build this very basic example.
+There is plenty of documentation and examples online. For now, the list of supported &lt;a href=&#34;https://www.espruino.com/Sensors&#34;&gt;sensors&lt;/a&gt; is limited,
+but I&amp;rsquo;m pretty sure there are enough of them to get you started with it.&lt;/p&gt;
+
+&lt;h3 id=&#34;useful-resources:181902d417846fa121f0e69f03cf2870&#34;&gt;Useful resources&lt;/h3&gt;
+
+&lt;p&gt;Espruino info on ESP8266 chip: &lt;a href=&#34;http://www.espruino.com/EspruinoESP8266&#34;&gt;http://www.espruino.com/EspruinoESP8266&lt;/a&gt;
+How to use espruino on ESP8266: &lt;a href=&#34;http://crufti.com/getting-started-with-espruino-on-esp8266/&#34;&gt;http://crufti.com/getting-started-with-espruino-on-esp8266/&lt;/a&gt;
+ESP8266 flashing: &lt;a href=&#34;http://www.espruino.com/ESP8266_Flashing&#34;&gt;http://www.espruino.com/ESP8266_Flashing&lt;/a&gt;
+Espruino JS reference: &lt;a href=&#34;http://www.espruino.com/Reference&#34;&gt;http://www.espruino.com/Reference&lt;/a&gt;
+Espruino sensors: &lt;a href=&#34;https://www.espruino.com/Sensors&#34;&gt;https://www.espruino.com/Sensors&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

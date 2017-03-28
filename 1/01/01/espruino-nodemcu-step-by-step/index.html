@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="http://www.sparkfabrik.com/favicon.png" />
+
+  <title>Espruino on NodeMCU (step-by-step guide) | SparkFabrik </title>
+
+  <meta name="author" content="Sparkfabrik" />
+
+  
+  <meta name="description" content="How to flash NodeMCU with Espruino firmware and basic examples on how to use it.">
+  
+
+  <meta name="generator" content="Hugo 0.15" />
+
+  <link rel="alternate" href="http://sparkfabrik.github.io/index.xml" type="application/rss+xml" title="Tech @ SparkFabrik">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/main.css" />
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/css/spark.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.2.0/styles/gruvbox-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/languages/dockerfile.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <meta property="og:title" content="Espruino on NodeMCU (step-by-step guide)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://sparkfabrik.github.io/1/01/01/espruino-nodemcu-step-by-step" />
+  <meta property="og:image" content="http://sparkfabrik.github.io/img/full_logo.png" />
+
+  
+  <link rel="stylesheet" href="http://sparkfabrik.github.io/rrssb/css/rrssb.css" />
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <i class="spark-icon icon-sparkfabrik">&#xe800;</i> <a class="navbar-brand navtitle" href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li>
+        <a title="Blog" href="http://sparkfabrik.github.io/">Blog </a>
+	      </li>
+	    
+        <li>
+        <a title="Team" href="http://sparkfabrik.github.io/page/team/">Team </a>
+	      </li>
+	    
+        <li>
+        <a title="About" href="http://sparkfabrik.github.io/page/about/">About </a>
+	      </li>
+	    
+        <li>
+        <a title="Archive" href="http://sparkfabrik.github.io/archive/">Archive </a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+
+      
+        <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Espruino on NodeMCU (step-by-step guide)</h1>
+        
+        <h2 class="post-subheading">How to flash NodeMCU with Espruino firmware and basic examples on how to use it.</h2>
+        
+        <span class="post-meta">Posted on January 1, 0001</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  
+
+<h2 id="introduction:181902d417846fa121f0e69f03cf2870">Introduction</h2>
+
+<p>This step-by-step guide is going to help you setting up and use <a href="https://www.espruino.com/" title="A firmware JavaScript Interpreter for Microcontrollers that runs on a variety of different chipsets">Espruino</a> on NodeMCU device.
+<a href="http://www.nodemcu.com/index_en.html">NodeMCU</a> is:
+&gt; An open-source firmware and development kit that helps you to prototype your IOT product within a few Lua script lines.</p>
+
+<p>We chosen the NodeMCU because it uses the ESP8266 chip which is one of the most cheap wifi module.</p>
+
+<p>We will first list all tools required to complete this tutorial, then we will flash the NodeMCU with the Espruino firmware (1v91) and at the end we will see how to connect to the wifi and push temp and humidity values over internet
+using <a href="https://dweet.io/, &quot;Ridiculously simple messaging (and alerts">dweet.io</a> for the Internet of Things.&ldquo;)</p>
+
+<h2 id="buy-all-the-things:181902d417846fa121f0e69f03cf2870">Buy all the things!</h2>
+
+<p>Everything for this tutorial has been bought on Amazon (fast shipment reason :) )
+If you&rsquo;re not in a hurry, you could have a look on Aliexpress.</p>
+
+<p><a href="https://www.amazon.it/gp/product/B01GCK3J40/ref=oh_aui_detailpage_o01_s00?ie=UTF8&amp;psc=1">NodeMCU</a>
+<a href="https://www.amazon.it/gp/product/B0154JQRPI/ref=oh_aui_detailpage_o01_s00?ie=UTF8&amp;psc=1">DHT11 sensor</a></p>
+
+<h2 id="prepare-the-ground:181902d417846fa121f0e69f03cf2870">Prepare the ground</h2>
+
+<p>First of all we have to prepare everything that is needed to perform the installation and usage of the espruino.
+We would need a tool to copy the firmware into the device, we would need the firmware itself and a IDE that would facilitate us writing and uploading custom code.</p>
+
+<h4 id="utility:181902d417846fa121f0e69f03cf2870">Utility</h4>
+
+<p>The <a href="https://github.com/themadinventor/esptool">esptool.py</a> is needed to flash the firmware into the device. Just follow the instruction on the github page.</p>
+
+<p>Given that python is already installed on your system, just type</p>
+
+<pre><code>pip install esptool
+</code></pre>
+
+<p>Once installed, the executable is available on path (linux)<code>/usr/local/bin/esptool.py</code></p>
+
+<p>For the Board described in this tutorial, CP2102 USB to UART driver is required. This driver is already part of the Linux core and maintained since version 3.x.
+The driver for Mac OSX is available <a href="https://www.silabs.com/Support%20Documents/Software/Mac_OSX_VCP_Driver.zip">here</a>.</p>
+
+<h4 id="firmware:181902d417846fa121f0e69f03cf2870">Firmware</h4>
+
+<p>Espruino firmware for ESP8266 can either be built from source-code that can be found on <a href="https://github.com/tve/Espruino">github</a>
+or simply install an already compiled one.
+Updates on this firmware are tracked in a forum thread <a href="http://forum.espruino.com/conversations/279176/">http://forum.espruino.com/conversations/279176/</a></p>
+
+<p>For those not interested in discussions, just <a href="https://www.espruino.com/Download">download the latest firmware version</a>
+Make sure to use the firmware compatible with ESP8266.</p>
+
+<h3 id="flash-the-espruino-firmware:181902d417846fa121f0e69f03cf2870">Flash the espruino firmware</h3>
+
+<p>To set NodeMCU to flash mode, keep pressed the &ldquo;Flash&rdquo; button while plugging in the device into the USB.</p>
+
+<p>Before we actually upload the new firmware, we have to make sure everything is clean. For that, we first erase the flash on the device by executing:</p>
+
+<pre><code>esptool.py --port /dev/ttyUSB0 erase_flash
+</code></pre>
+
+<p>After that we can upload the Espruino firmware with the following command:</p>
+
+<pre><code>esptool.py --port /dev/ttyUSB0 --baud 115200 write_flash --flash_freq 80m --flash_mode qio --flash_size 32m 0x0000 &quot;boot_v1.6.bin&quot; 0x1000 espruino_esp8266_user1.bin 0x3FC000 esp_init_data_default.bin 0x37E000 blank.bin
+</code></pre>
+
+<p>Note that this command is explained within the README_flash.txt file contained into the downloaded firmware.
+The command above might be different according to the ESP board you&rsquo;re using. In my case I&rsquo;m using an <code>esp-12</code> board, so I can use up to 4MB of space.
+For more info about flash and phisical addresses, please refer to <a href="https://www.espruino.com/EspruinoESP8266">https://www.espruino.com/EspruinoESP8266</a></p>
+
+<p>Please note that bauds sets are different from those listed on the device.
+You should find the same instruction in a README file within the downloaded firmware.</p>
+
+<h3 id="espruino-ide:181902d417846fa121f0e69f03cf2870">Espruino IDE</h3>
+
+<p><a href="https://chrome.google.com/webstore/detail/espruino-web-ide/bleoifhkdalbjfbobjackfdifdneehpo?hl=en">Espruino Web-IDE plugin for Chrome</a> is the easiest tool to use to upload custom code into the NodeMCU.
+Once installed, go to settings &gt; communications and update Baud rate to 115200.</p>
+
+<p>Now if you click on the connect button, you should be able to get access to the device.</p>
+
+<h3 id="connect-to-wifi:181902d417846fa121f0e69f03cf2870">Connect to wifi</h3>
+
+<p>To gain access to internet from your device, you should first setup the code for the connectivity. An example is the following code:</p>
+
+<pre><code class="language-javascript">var wifi = require(&quot;Wifi&quot;);
+wifi.connect(&quot;&lt;YOUR-SSID-HERE&gt;&quot;, {password:&quot;&lt;YOUR-PASSWORD-HERE&gt;&quot;}, function(err){
+ console.log(&quot;connected? err=&quot;, err, &quot;info=&quot;, wifi.getIP());
+});
+wifi.stopAP();
+</code></pre>
+
+<p>You could, optionally, setup a hostname <code>wifi.setHostname(&quot;Sparkfabrik-espruino&quot;);</code> to identify your device on your router.
+Paste the code into the espruino IDE and click (while connected to nodeMCU) on &ldquo;Send to Espruino&rdquo;.
+Once the wifi works as expected, add <code>wifi.save()</code> to store the connection logic into the device. This operation will persist during device reset.</p>
+
+<p>Final code would be this:</p>
+
+<pre><code class="language-javascript">var wifi = require(&quot;Wifi&quot;);
+wifi.setHostname(&quot;Sparkfabrik-espruino&quot;);
+wifi.connect(&quot;&lt;YOUR-SSID-HERE&gt;&quot;, {password:&quot;&lt;YOUR-PASSWORD-HERE&gt;&quot;}, function(err){
+ console.log(&quot;connected? err=&quot;, err, &quot;info=&quot;, wifi.getIP());
+});
+wifi.stopAP();
+wifi.save()
+</code></pre>
+
+<p>Once stored, you can wipe it out of the IDE and start building some useful code.</p>
+
+<h3 id="examples:181902d417846fa121f0e69f03cf2870">Examples</h3>
+
+<h4 id="temp-and-rh-data-over-internet:181902d417846fa121f0e69f03cf2870">Temp and RH data over internet</h4>
+
+<p>NodeMCU GPIO label don&rsquo;t match the actual GPIO pin. With Espruino, there is a NodeMCU class that allows an easy mapping between Espruino and NodeMCU pins.
+Please refer to the <a href="http://www.espruino.com/Reference#NodeMCU">espruino reference</a> for it.</p>
+
+<p><img src="http://sparkfabrik.github.io/posts/espruino-dht11-min.jpg" alt="NodeMCU DHT11 connection" /></p>
+
+<p>On <a href="https://www.espruino.com/IoT+Services"><em>IoT Services</em></a> section on Espruino.com there are few examples of how to use external services to push data.</p>
+
+<p>The following code is in charge of pushing data via POST method to dweet.io.</p>
+
+<pre><code class="language-javascript">function putDweet(dweet_name, a, callback) {
+  var data = &quot;&quot;;
+  for (var n in a) {
+    if (data.length) data+=&quot;&amp;&quot;;
+    data += encodeURIComponent(n)+&quot;=&quot;+encodeURIComponent(a[n]); 
+  }
+  var options = {
+    host: 'dweet.io',
+    port: '80',
+    path:'/dweet/for/'+dweet_name+&quot;?&quot;+data,
+    method:'POST'
+  };
+  require(&quot;http&quot;).request(options, function(res)  {
+    var d = &quot;&quot;;
+    res.on('data', function(data) { d+=data; });
+    res.on('close', function(data) {
+      if (callback) callback(d);
+    });
+ }).end();
+}
+</code></pre>
+
+<p>Now that we know how to send data over internet, we simply have to read data from the sensor and push it on a service online.</p>
+
+<pre><code class="language-javascript">pin=NodeMCU.D2;
+var dht11 = require(&quot;DHT11&quot;).connect(pin);
+</code></pre>
+
+<p>Note that the data wire of the DHT11 sensor (yellow cable, usually) is connected to the pin 2 on the NodeMCU.
+Required the DHT11 lib and connected it to the pin.</p>
+
+<p>Next we have to pull data at some interval (in my case, every minute) and to push them mover internet.</p>
+
+<pre><code class="language-javascript">var dht11_read_test = function() {
+  dht11.read(
+    function(a){
+      console.log(&quot;Temp is &quot;+a.temp.toString()+ &quot; and RH is &quot;+a.rh.toString());
+      var data = {
+        temp: a.temp.toString(),
+        rh:a.rh.toString()
+      };
+      putDweet(&quot;sparkfabrik-espruino&quot;, data, function(response) {
+        console.log(response);
+      });
+     });
+};
+setInterval(dht11_read_test,60000);
+</code></pre>
+
+<p>Full script is:</p>
+
+<pre><code class="language-javascript">pin=NodeMCU.D2;
+var dht11 = require(&quot;DHT11&quot;).connect(pin);
+var dht11_read_test = function() {
+  dht11.read(
+    function(a){
+      console.log(&quot;Temp is &quot;+a.temp.toString()+ &quot; and RH is &quot;+a.rh.toString());
+      var data = {
+        temp: a.temp.toString(),
+        rh:a.rh.toString()
+      };
+      putDweet(&quot;sparkfabrik-espruino&quot;, data, function(response) {
+        console.log(response);
+      });
+     });
+};
+setInterval(dht11_read_test,60000);
+
+function putDweet(dweet_name, a, callback) {
+  var data = &quot;&quot;;
+  for (var n in a) {
+    if (data.length) data+=&quot;&amp;&quot;;
+    data += encodeURIComponent(n)+&quot;=&quot;+encodeURIComponent(a[n]); 
+  }
+  var options = {
+    host: 'dweet.io',
+    port: '80',
+    path:'/dweet/for/'+dweet_name+&quot;?&quot;+data,
+    method:'POST'
+  };
+  require(&quot;http&quot;).request(options, function(res)  {
+    var d = &quot;&quot;;
+    res.on('data', function(data) { d+=data; });
+    res.on('close', function(data) {
+      if (callback) callback(d);
+    });
+ }).end();
+}
+
+save();
+</code></pre>
+
+<h2 id="conclusion:181902d417846fa121f0e69f03cf2870">Conclusion</h2>
+
+<p>It&rsquo;s very easy to build an IoT device nowadays as hardware for prototyping is becoming very cheap.
+NodeMCU is one of those &ldquo;essential&rdquo; play-board that is affordable and it is great for fast prototyping.
+At the end, for IoT device, what would you expect? A bunch of GPIO and a internet connection.</p>
+
+<p>And what&rsquo;s more cool for a web-developer to code not just software, but hardware as well with Javascript? :)
+I wanted to give it a try and it was easy and funny to build this very basic example.
+There is plenty of documentation and examples online. For now, the list of supported <a href="https://www.espruino.com/Sensors">sensors</a> is limited,
+but I&rsquo;m pretty sure there are enough of them to get you started with it.</p>
+
+<h3 id="useful-resources:181902d417846fa121f0e69f03cf2870">Useful resources</h3>
+
+<p>Espruino info on ESP8266 chip: <a href="http://www.espruino.com/EspruinoESP8266">http://www.espruino.com/EspruinoESP8266</a>
+How to use espruino on ESP8266: <a href="http://crufti.com/getting-started-with-espruino-on-esp8266/">http://crufti.com/getting-started-with-espruino-on-esp8266/</a>
+ESP8266 flashing: <a href="http://www.espruino.com/ESP8266_Flashing">http://www.espruino.com/ESP8266_Flashing</a>
+Espruino JS reference: <a href="http://www.espruino.com/Reference">http://www.espruino.com/Reference</a>
+Espruino sensors: <a href="https://www.espruino.com/Sensors">https://www.espruino.com/Sensors</a></p>
+
+    </div>
+  </div>
+
+  <div class="social-share row">
+  <div class="col-sm-5 col-md-offset-2 col-lg-offset-2">
+  <ul class="rrssb-buttons clearfix">
+    <li class="rrssb-facebook">
+      
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fsparkfabrik.github.io%2f1%2f01%2f01%2fespruino-nodemcu-step-by-step" class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"/></svg></span>
+        <span class="rrssb-text">facebook</span>
+      </a>
+    </li>
+    <li class="rrssb-twitter">
+      
+      <a href="https://twitter.com/intent/tweet?text=Read+more+on+@sparkfabrik+Teck+Blog: http%3a%2f%2fsparkfabrik.github.io%2f1%2f01%2f01%2fespruino-nodemcu-step-by-step"
+      class="popup">
+        <span class="rrssb-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62a15.093 15.093 0 0 1-8.86-2.32c2.702.18 5.375-.648 7.507-2.32a5.417 5.417 0 0 1-4.49-3.64c.802.13 1.62.077 2.4-.154a5.416 5.416 0 0 1-4.412-5.11 5.43 5.43 0 0 0 2.168.387A5.416 5.416 0 0 1 2.89 4.498a15.09 15.09 0 0 0 10.913 5.573 5.185 5.185 0 0 1 3.434-6.48 5.18 5.18 0 0 1 5.546 1.682 9.076 9.076 0 0 0 3.33-1.317 5.038 5.038 0 0 1-2.4 2.942 9.068 9.068 0 0 0 3.02-.85 5.05 5.05 0 0 1-2.48 2.71z"/></svg></span>
+        <span class="rrssb-text">twitter</span>
+      </a>
+    </li>
+    <li class="rrssb-linkedin">
+      
+      <a class="popup" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fsparkfabrik.github.io%2f1%2f01%2f01%2fespruino-nodemcu-step-by-step">
+      <span class="rrssb-icon">
+      <span class="rrssb-text">linkedin</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
+
+
+  <div class="row">
+    
+<div class="author-block clearfix">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 ">
+    <p class="about">About the author</p>
+  </div>
+  <div class="col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-1">
+    <img src="" alt="" class="img-rounded pull-left avatar">
+  </div>
+  <div class="col-lg-7 col-md-7">
+     <h4> <a href="http://sparkfabrik.github.io/page/team#Marco" > </a> <small>[  ]</small></h4>
+     <p class="bio"></p>
+  </div>
+</div>
+
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      
+      <li class="next">
+        <a href="http://sparkfabrik.github.io/2016/04/05/a-nerdy-editorial-experiment" data-toggle="tooltip" data-placement="top" title="A nerdy editorial experiment">Next Post &rarr;</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+
+      
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <li>
+            <a href="https://www.sparkfabrik.com" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/sparkfabrik" title="home">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="https://twitter.com/sparkfabrik" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+          <li>
+            <a href="mailto:info@sparkfabrik.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		      
+	    	  
+    		  <li>
+      			<a href="http://sparkfabrik.github.io/index.xml" title="RSS">
+      			  <span class="fa-stack fa-lg">
+        				<i class="fa fa-circle fa-stack-2x"></i>
+        				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      			  </span>
+      			</a>
+    		  </li>
+
+        </ul>
+        <p class="copyright text-muted">
+    		  
+    		  <a href="http://sparkfabrik.github.io/">Tech @ SparkFabrik</a>
+    		  
+  	    </p>
+  	        
+    		<p class="theme-by text-muted">
+    		  Theme by
+    		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+    		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="http://sparkfabrik.github.io/js/jquery-1.11.2.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/bootstrap.min.js"></script>
+<script src="http://sparkfabrik.github.io/js/main.js"></script>
+
+<script src="http://sparkfabrik.github.io/rrssb/js/rrssb.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76342738-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+  </body>
+</html>
