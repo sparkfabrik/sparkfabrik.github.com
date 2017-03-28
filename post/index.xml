@@ -8,8 +8,597 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
-    <lastBuildDate>Tue, 29 Nov 2016 08:51:09 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 04 Mar 2017 14:47:30 +0000</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PHP REST tools showdown Series - Part 1: really RESTful APIs</title>
+      <link>http://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</link>
+      <pubDate>Sat, 04 Mar 2017 14:47:30 +0000</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction:7c8715bb330e5cc21c99494376b84830&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This is the first of five posts in a series that want to tell you the story of my discovery journey through modern PHP tools to build a REST service layer.&lt;/p&gt;
+
+&lt;p&gt;I have a sweet spot for REST and decoupled architectures, but working for a (mostly) Drupal company in the last (several) years, I had little occasion to put my head over the topic aside personal tinkering and small projects. Not to say that we didn&amp;rsquo;t produced REST APIs for our customers, but a real decoupled project was hard to be found.&lt;/p&gt;
+
+&lt;p&gt;Then came Drupal 8, the first version of Drupal built from the ground-up to match enterprise use-cases: it brings many changes, embraces modern PHP to the core and is heavily oriented towards decoupled architectures. Actually, we can say &lt;strong&gt;headless Drupal&lt;/strong&gt; is quite a buzzword these days. All good news, but hey&amp;hellip; Drupal went finally PHP, which means that other modern PHP tools are finally within the reach of any &lt;em&gt;D8-savvy&lt;/em&gt; developer.&lt;br /&gt;
+I dare to state that moving towards &lt;em&gt;SOLID&lt;/em&gt; PHP, Drupal made himself less of a &lt;em&gt;queen bee&lt;/em&gt;, diluting its ecosystem and exposing itself to direct confrontation with other PHP options.&lt;/p&gt;
+
+&lt;p&gt;This may seem counterintuitive, but I consider this a great strenght for Drupal in the first place: you don&amp;rsquo;t have to decide between &lt;strong&gt;making it &amp;ldquo;custom&amp;rdquo;&lt;/strong&gt; or &lt;strong&gt;making it with Drupal&lt;/strong&gt;: it will be easy to carry your business logic in and out of Drupal if the need be. So with a healthy and open spirit of confrontation, let&amp;rsquo;s dive into a journey among modern options to build REST APIs with PHP at the ides of March 2017.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-makes-an-api-really-rest:7c8715bb330e5cc21c99494376b84830&#34;&gt;What makes an API really REST&lt;/h2&gt;
+
+&lt;p&gt;The interweb is flooded with articles about what a good API is or is not. Just try to google for &amp;ldquo;rest api best practice&amp;rdquo;.&lt;br /&gt;
+Is one more opinion on the topic worth a blog-post? I don&amp;rsquo;t think so.&lt;/p&gt;
+
+&lt;p&gt;Nonetheless my indiscriminately inflated and voluminous ego forces me to barf my opinion hereunder for good measure; here is &lt;strong&gt;my personal&lt;/strong&gt; take on what a good REST API is, in extreme synthesis. I&amp;rsquo;ll add some information on what we have to take carefully, pitfalls etc.&lt;/p&gt;
+
+&lt;p&gt;I actually tackled into this topic yesterday, with a speech at Drupal Day 2017 in Rome - Italy, titled &lt;em&gt;REST in pieces&lt;/em&gt; (an atrocious and ruinous pun). This series aims to dig deeper into the topic so I&amp;rsquo;ll add a bit of information and (most important) a ton of lolcatz, sadly missing from my slides because time and blah blah.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/01-unacceptable-cat.png&#34; alt=&#34;This is unacceptable!&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;stick-s-10-laws-for-a-perfectly-rest-api:7c8715bb330e5cc21c99494376b84830&#34;&gt;Stick&amp;rsquo;s 10 laws for a perfectly REST API&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-uri-must-be-nouns-not-verbs:7c8715bb330e5cc21c99494376b84830&#34;&gt;1. URI must be nouns, not verbs&lt;/h3&gt;
+
+&lt;p&gt;Verbs are &lt;strong&gt;already wired in HTTP&lt;/strong&gt; (&lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;, etc) so it makes perfect sense, semantically speaking, to name your resources for what they are: resources.&lt;/p&gt;
+
+&lt;p&gt;Apples are resources (to feed a population), money are resources (to make charity or business), time is a resource (to invest in learning REST, lol).&lt;br /&gt;
+Navigate, press or play the guitar are not resources (whereas navigational skills, pressure and a guitar player can be - hey nouns!).&lt;/p&gt;
+
+&lt;p&gt;With the next point, why this is important will become clear: naming resources by nouns will grant you APIs &lt;strong&gt;sensible semantics&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;mdash; TABLE WITH EXAMPLES &amp;mdash;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Right&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/cars&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/getAllCars&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/users&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/userRemove&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/books/{id}&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;/books/{id}/remove&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;2-get-requests-must-never-alter-system-resource-state:7c8715bb330e5cc21c99494376b84830&#34;&gt;2. GET requests must never alter system/resource state&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Also known as&lt;/em&gt; &lt;strong&gt;HTTP has verbs&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is where rule 1 above begins to click. HTTP has verbs &amp;ldquo;hard-wired&amp;rdquo; in the protocol. You can &lt;code&gt;GET&lt;/code&gt; a resource, &lt;code&gt;POST&lt;/code&gt; it, &lt;code&gt;DELETE&lt;/code&gt; it and so on. This basically means you can use HTTP syntax to write perfectly sensible expressions like &lt;code&gt;DELETE /books/123&lt;/code&gt;, which even my granny can understand (this is good, leave useless complexity to bollywood screenwriters so they can make their mildly Asperger heros hack an alien spaceship via consumer wifi).&lt;/p&gt;
+
+&lt;p&gt;What if I ask you &amp;ldquo;Can you please get me a remove that stain from my shirt&amp;rdquo;? It would make little sense, specially compared to &amp;ldquo;Can you please remove that stain from my shirt?&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;But there&amp;rsquo;s more: you don&amp;rsquo;t expect that collecting something will change its properties. Imagine a world where raising a cup of tea to your mouth change the content in olive oil. Or if buying a bulb means to automatically light it. Weird, huh?&lt;/p&gt;
+
+&lt;p&gt;Writing RESTful expressions boils down mostly on leveraging &lt;em&gt;by-design&lt;/em&gt; HTTP expressive power.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/02-invariantstate-cat.png&#34; alt=&#34;GET ME OUT!&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Right&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;POST /cars&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;GET /addCar&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;DELETE /users/{uid}&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;GET /userRemove&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;PUT /books/{id}&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;GET /books/{id}/update&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;3-don-t-mix-plurals-and-singulars:7c8715bb330e5cc21c99494376b84830&#34;&gt;3. Don&amp;rsquo;t mix plurals and singulars&lt;/h3&gt;
+
+&lt;p&gt;This is less of a rule and more of an advice. There is nothing inherently bad in pushing expressiveness towards natural language. Right? Meh&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I warn you against going too frenzy with expressiveness. It is important but can&amp;rsquo;t come at the cost of consistency. In other words, while it makes perfect sense, in fluent English to &lt;code&gt;GET /books&lt;/code&gt; (all of them) and &lt;code&gt;GET /book/123&lt;/code&gt; (only that one), the &lt;code&gt;/books&lt;/code&gt; &amp;rarr; &lt;code&gt;/book&lt;/code&gt; mapping creates an inconsistency among endpoints URIs.&lt;/p&gt;
+
+&lt;p&gt;I hear you mumbling &amp;ldquo;why this hurts, anyway?&amp;rdquo;. First of all pluralization is not always straightforward, even in a language as consistent as English (if you don&amp;rsquo;t think it is, try with Italian), so for example you can incur in the &lt;code&gt;person&lt;/code&gt; &amp;rarr; &lt;code&gt;people&lt;/code&gt; case, which is a natural and fluent but hard to map inconsistency, compared to the books example.&lt;/p&gt;
+
+&lt;p&gt;In addition, despite good inflectors are available for all popular languages, automating URI composition on the client side is more painful if you have to deal with the singular/plural/collective-nouns logic.&lt;/p&gt;
+
+&lt;p&gt;Last but not least, it&amp;rsquo;s way easier to setup a consistent routing to your actions (think about your future you).&lt;/p&gt;
+
+&lt;p&gt;In the end, sticking with singular or plural is the best way to avoid complications that add little value. Choose one and go with it. My personal choice is for plural.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Right&lt;/th&gt;
+&lt;th&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /users&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /users&lt;/code&gt; (&lt;em&gt;Right but inconsistent with the following&lt;/em&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DELETE /users/{uid}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DELETE /user/{uid}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /users/{uid}/reviews&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /user/{uid}/reviews&lt;/code&gt; (&lt;em&gt;This really sucks&amp;hellip;&lt;/em&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;POST /users/{uid}/reviews&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;POST /user/{uid}/review&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PUT /users/{uid}/reviews/{rid}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;POST /user/{uid}/review/{rid}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;4-map-relations-by-sub-resources:7c8715bb330e5cc21c99494376b84830&#34;&gt;4. Map relations by sub-resources&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Database_normalization&#34;&gt;Normal&lt;/a&gt; relationships intuitively boils down to a schematic form of &lt;strong&gt;ownership&lt;/strong&gt;.&lt;br /&gt;
+We can say, for example that a user &lt;code&gt;has many&lt;/code&gt; phone numbers, but &lt;code&gt;has one&lt;/code&gt; profile. Invoices &lt;code&gt;has many&lt;/code&gt; customer, while in turn customers &lt;code&gt;has many&lt;/code&gt; invoices. And so on.&lt;/p&gt;
+
+&lt;p&gt;The best RESTful representation of those kind of relationships is achieved by &lt;strong&gt;sub-resources&lt;/strong&gt;: &lt;code&gt;/books/123/reviews&lt;/code&gt; is the resource endpoint for reviews related to book with ID &lt;code&gt;123&lt;/code&gt;. Along this line, &lt;code&gt;/books/123/reviews/456&lt;/code&gt; is a specific review among those book &lt;code&gt;123&lt;/code&gt; got.&lt;/p&gt;
+
+&lt;p&gt;Redoundant? Yes, but also descriptive. And secure: since review &lt;code&gt;456&lt;/code&gt; partains to book &lt;code&gt;123&lt;/code&gt;, trying to &lt;code&gt;GET /books/098/reviews/456&lt;/code&gt; should fail with a &lt;code&gt;404 Not found&lt;/code&gt; error (see below for more status-codes and love).&lt;/p&gt;
+
+&lt;p&gt;Should we also redound the endpoints to provide different access routes? Like, following the example above, should we have a &lt;code&gt;reviews/456/books&lt;/code&gt; resource so that I can go backward from reviews to books?&lt;br /&gt;
+Well, this really depends on your domain: if you know you need a list of reviews, no matter the book they are related to, or (to add a dimension to this depiction) if you may need reviews by author, like &lt;code&gt;/users/987/reviews&lt;/code&gt;, then why not? I would go further and say that you can go fancy with filters on a &lt;code&gt;/reviews&lt;/code&gt; resource endpoint (see below for filters galore).&lt;/p&gt;
+
+&lt;p&gt;Just avoid proliferating your endpoint just for the sake of having them at hand. Design is the most important step in API development and declaring resources informs by  itself about the hierarchy, relations and logic the clients are expected to follow.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/04-subres-cat.png&#34; alt=&#34;Sub cat behaving hierarchically&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Right&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;GET /users/{uid}/reviews&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;GET /reviews?byUserId={uid}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;PUT /users/{uid}/reviews/{rid}&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;PUT /userReviews/{rid}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;5-negotiate-format-in-http-headers:7c8715bb330e5cc21c99494376b84830&#34;&gt;5. Negotiate format in HTTP headers&lt;/h3&gt;
+
+&lt;p&gt;This is a rule many frameworks allows to break easily, but trust me: there are headers for content negotiation and they work well and consistently.&lt;br /&gt;
+Request headers allow the server and the client to specify which kind of data you are passing and expecting in the request body. Are the client sending XML with its &lt;code&gt;POST&lt;/code&gt;? Is the server supposed to respond with a JSON payload to that &lt;code&gt;GET&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;Two nice headers are available for this and here they are in all their splendour:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Content-type&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Specifies what&amp;rsquo;s inside the request body.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Accept&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Specifies which format the server is supposed to pack the response so that it doesn&amp;rsquo;t stink.&lt;/p&gt;
+
+&lt;p&gt;Those headers accept mime-types, like &lt;code&gt;Content-type: application/json&lt;/code&gt; or &lt;code&gt;Accept: text/xml&lt;/code&gt;. Compare this to other means like slapping a fake file extension at the end of the resource URI:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;GET /books/123.json&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;to inform the server we are expecting a JSON payload&amp;hellip; way more expressive and powerful if you want, for example, a &lt;code&gt;JSON-LD&lt;/code&gt; HATEOAS payload, or other forms of RDF structure:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Accept: application/json+ld&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;Accept: application/rdf+json&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Right&lt;/th&gt;
+&lt;th&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Content-Type : application/json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;PUT /reviews.json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Accept : text/xml&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /reviews?format=xml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;6-leverage-powerful-http-caching:7c8715bb330e5cc21c99494376b84830&#34;&gt;6. Leverage powerful HTTP caching&lt;/h3&gt;
+
+&lt;p&gt;This paragraph would deserve a full book &lt;em&gt;per se&lt;/em&gt;. The topic is really huge and I don&amp;rsquo;t even have the experience to compete in clarity and completeness with other authors.&lt;br /&gt;
+Still I feel that HTTP caching features are often overlooked by many, mostly when it comes to REST API design.&lt;/p&gt;
+
+&lt;p&gt;To support my statement I often take as an example the fact that (in my experience) far too often the &lt;code&gt;etag&lt;/code&gt; header goes totally unconsidered during API design, though it is a brillant solution to content-based cache invalidation.&lt;/p&gt;
+
+&lt;p&gt;Google has a great article on &lt;a href=&#34;https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching&#34;&gt;HTTP caching&lt;/a&gt; on the Developer Network.
+Just remember these three things:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The problem with caching is its &lt;em&gt;invalidation strategy&lt;/em&gt;; pretty obvious but it&amp;rsquo;s often very tricky to come up with a good one&lt;/li&gt;
+&lt;li&gt;HTTP allows for &lt;em&gt;content-based&lt;/em&gt; and &lt;em&gt;time-based&lt;/em&gt; invalidation, which is a real boon since &lt;em&gt;you can trade off performances and data reliability&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Being based on response headers, HTTP caching allows &lt;em&gt;per-resource strategies&lt;/em&gt;, which means you can carry out the aformentioned trade-offs depending on the nature of the data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not bad of a transfer protocol, uh? :)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/06-cachecopy-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;7-allow-for-collections-filtering-sorting-and-paging:7c8715bb330e5cc21c99494376b84830&#34;&gt;7. Allow for collections filtering, sorting and paging&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;This is query parameters time!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;After having disparaged query parameters in almost all former examples, here they come to save our day. Did you know humans can easily find an element in up to a dozen, with little to none &lt;a href=&#34;https://en.wikipedia.org/wiki/Cognitive_load&#34;&gt;cognitive load&lt;/a&gt;? That&amp;rsquo;s why good interfaces allow for filtering result-sets (and why it is so important to rack high on search engines, just to say).&lt;/p&gt;
+
+&lt;p&gt;Narrowing and ordering sets is so pervasive in computing and information technology that we tend to take it for granted. Client applications (even on a server-to-server basis) will often require a narrow set of results, specific to some criteria. This is important to avoid sending heavy payloads that the client, and leave all the storage technology behind the service layer do the job it is probably most qualified.&lt;/p&gt;
+
+&lt;p&gt;Query parameters can express sorting and filtering criteria, as well as paging long result sets.&lt;br /&gt;
+It is important, in my opinion, to point out a subtle difference between &lt;em&gt;filtering results&lt;/em&gt; and &lt;em&gt;identifying a resource&lt;/em&gt;. Take those two different URIs:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;/users/1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users?uid=1&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;both seems legit ways to get - say - the profile of the user whose id is &lt;code&gt;1&lt;/code&gt;. But they is a difference: the first is a URI (&lt;em&gt;universal resource identifier&lt;/em&gt;, remarkably) for a user profile, the other is not. Actually the second URI identifies a collection of user profiles which incidentally (given the restricting filter applied) is composed by a single item.&lt;/p&gt;
+
+&lt;p&gt;I even expect the payload to differ substantially. In case 1 it should be something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
+   &#39;uid&#39; : 1,
+   &#39;name&#39; : &#39;John Doe&#39;,
+   ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;while in the second case I expect it to be&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;[
+   {
+      &#39;uid&#39; : 1,
+      &#39;name&#39; : &#39;John Doe&#39;,
+      ...
+   }
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;that is in fact an array with a single item.&lt;br /&gt;
+This &lt;em&gt;matters&lt;/em&gt;! If you need to identify a specific resource to perform state-changing operations on it, you should really have a URI for it.&lt;/p&gt;
+
+&lt;p&gt;This is also true at some extent for collections of related items. Take this as an example:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;/users/1/books&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/books?owner_id=1&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is trickier and it really depends on what you need in the domain of your application. Is the collection of books owned by a specific user` a resource by itself? Or in better words, are book collections resources for the users of your system? If so, being a resource, the user&amp;rsquo;s book collection deserves a universal identifier. If not, go with a filtered collection.&lt;br /&gt;
+Mind that nothing stops you to have both, but don&amp;rsquo;t just throw them in for good measure&amp;hellip; think about your domain, how entities are related and what kind of operations you want to perform on a resource.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/07-mindurfilters-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can enpower your clients:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Right&lt;/th&gt;
+&lt;th&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /users?sort=-age,+name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /users?sortAsc=name&amp;amp;sortDesc=age&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /users/{uid}/reviews?rate&amp;gt;=3&amp;amp;published=1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /userReviews?uid={uid}&amp;amp;rate&amp;gt;=3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /books?format=[epub,mobi]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /books?format=epub&amp;amp;format=mobi&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;To close this paragraph with one more digression, I&amp;rsquo;m not a fan of field-selection, that is allowing the client to list the fields it wants to receive for a resource representations. It surely can come in handy, but mind that APIs are not a trendy way to allow a client to access a database. A service layer is, as the name implies, something that provide a service: it often holds business logic behind its endpoints.&lt;br /&gt;
+There are cases where your API is simply a secure and decoupled persistence layer, while your client holds all of the business logic. Good examples of this are some dedicated iOS or Android apps, which doesn&amp;rsquo;t even have a web counterpart. As long as clients performing the same functions over and over proliferate on different channels (web, SmartTVs, mobile OSes, etc), you service layer will become a RESTful representation of your application model.&lt;/p&gt;
+
+&lt;p&gt;Field selection in filters, not bad &lt;em&gt;per se&lt;/em&gt;, smells a bit: think twice if you are not envisioning your API as a mere data-access layer.&lt;/p&gt;
+
+&lt;h3 id=&#34;8-version-your-api:7c8715bb330e5cc21c99494376b84830&#34;&gt;8. Version your API&lt;/h3&gt;
+
+&lt;p&gt;This is really as simple as it seems, but it&amp;rsquo;s a &lt;strong&gt;golden rule&lt;/strong&gt;. Your clients should &lt;strong&gt;always&lt;/strong&gt; have the possibility to reach a specific production version of your API, on a specific URL.&lt;/p&gt;
+
+&lt;p&gt;If you work mainly with web applications you can wonder why this matters. After all if you introduce breaking changes in your API but deploy a matching client that supports those changes, there is not problem, right? Tackling into mobile apps should make you change your mind: you can&amp;rsquo;t just push updates to customers&amp;rsquo; phones (er, &lt;a href=&#34;http://microsoft.github.io/code-push/&#34;&gt;almost&lt;/a&gt;). If your clients are outside of your control then, the game is almost over.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s why it is so important to deploy your API to a URL which specify your API version. But pay attention, we are not talking about exposing your codebase versioning: you can deploy the &lt;code&gt;1.14.05&lt;/code&gt; codebase version, which is exposing the version &lt;code&gt;v1&lt;/code&gt; of your API. As long as the API does not introduce breaking changes (that is to say, if you can query each endpoint, receiving the same response format from them), you must consider it the same version.&lt;/p&gt;
+
+&lt;p&gt;In fact there are cases when a specific version of your codebase delivers fixes or changes to more than a version of your API. API versioning refers to format, not development iterations.&lt;br /&gt;
+Of course, the major version of your codebase can be the same as the format version of your API. This makes perfect sense and help keeping things under control, so &lt;code&gt;codebase 1.x&lt;/code&gt; &amp;rarr; &lt;code&gt;API v1&lt;/code&gt;, and &lt;code&gt;codebase 2.x&lt;/code&gt; &amp;rarr; &lt;code&gt;API v2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Where to place your version? My preference is in the domain, like &lt;code&gt;https://v1.api.stick.says&lt;/code&gt;, but even a subtree like &lt;code&gt;https://api.stick.says/v1&lt;/code&gt; (which is supported out of the box by most frameworks) does the job.&lt;/p&gt;
+
+&lt;p&gt;It goes without saying that the point here is not to keep each and every version of your API online indefinitely! You can (and will) surely deprecate old versions soon or late, but you can do this on a public schedule, communicating the variations and version EOL, and collecting information about the degree of adoption of new versions by the clients (hint: use logs to collect usage statistics of your endpoints!).&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Right&lt;/th&gt;
+&lt;th&gt;Wrong&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GET /v1/users?sort=-age,+name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GET /users?format=old&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;POST api.v2.stick.says/users&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;POST /users?format=2017&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;9-return-meaningful-status-codes:7c8715bb330e5cc21c99494376b84830&#34;&gt;9. Return meaningful status codes&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;HTTP has response status codes!&lt;/em&gt; This is not a breaking news, it has since its inception and we are all well aware of the (in)famous &lt;code&gt;404 Not found&lt;/code&gt; that pops here and there in our browsers.&lt;br /&gt;
+Still, 20+ years from the devision of HTTP, I still happen to see established professionals going with &lt;code&gt;200 OK&lt;/code&gt; as the unique response code.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/09-senseevil-cat.png&#34; alt=&#34;I sense evil&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are about to say one of those&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;I&amp;rsquo;m placing my error status in the payload, so no need to use HTTP codes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;It is really not important, just return 200 OK so that client lib won&amp;rsquo;t complain&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Status WAT?&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Please, go back enveloping SOAP and leave me alone wondering what went wrong with the world! :D&lt;/p&gt;
+
+&lt;p&gt;Jokes apart, you&amp;rsquo;ll probably think by now that my sweet spot for HTTP may be a little too &lt;em&gt;sweeeet&lt;/em&gt; (creepy indeed), but hey: Sir Tim Berners Lee created one of the most complete and expressive transfer protocols in the late 80s. I&amp;rsquo;m pretty sure most of my readers were shaking their rattles at the time. So really, don&amp;rsquo;t ignore the fact that the fundamental protocol that ended up killin all former nerd/net technologies and cultures were designed to do &lt;strong&gt;one thing well&lt;/strong&gt;. And heck, it does! :)&lt;/p&gt;
+
+&lt;p&gt;Returning meaningful status codes means your client (the machine, not the human) can understand what happened to the request without analyzing the response payload, which in turn helps your client (the human, not the machine) to get additional information, useful to a sentient being.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll list here some HTTP status codes trivia which may or may not be common knowledge for you. If you learn something new, my advice is to dig deeper into HTML protocol and learn what it can already do for us.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTP status codes are numerals with an optional description&lt;/strong&gt;: The format of response status codes is alwas a 3-digits number like &lt;code&gt;201&lt;/code&gt;, &lt;code&gt;302&lt;/code&gt;, &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;401&lt;/code&gt;. Mnemonic descriptions are added so that us meatbags can remember what they mean: &lt;code&gt;401 Unauthorized&lt;/code&gt;, &lt;code&gt;302 Permanent redirect&lt;/code&gt; or &lt;code&gt;200 OK&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTP status codes are categorized by the most significant digit&lt;/strong&gt;: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in succh a situation you may double check your assumptions&amp;hellip; it smells a bit), the &lt;em&gt;hundreds&lt;/em&gt; are used to represent status categories. For a complete reference see the related part of &lt;a href=&#34;https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html&#34;&gt;RFC 2616&lt;/a&gt;. For a shorter version and some notable insight, see &lt;a href=&#34;#httpstatuses&#34;&gt;my table in the end notes&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;There is space for custom error code in each category&lt;/strong&gt;: And, as long as you document them for your client, you are encouraged to use them! You may not know this, but there is an actual &lt;a href=&#34;https://tools.ietf.org/html/rfc2324&#34;&gt;&lt;code&gt;418 I&#39;m a teapot&lt;/code&gt;&lt;/a&gt; implementation case registered in history. And &lt;a href=&#34;https://github.com/symfony/http-foundation/blob/master/Response.php#L61&#34;&gt;Symfony framework natively supports it&lt;/a&gt; :). So really, don&amp;rsquo;t be shy and make good use of HTTP flexibility to inform your client about what the heck happened to their request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;You can haz cats&lt;/strong&gt;: Yes, there are things like &lt;a href=&#34;https://http.cat/&#34;&gt;HTTP Status Cats API&lt;/a&gt; or, if you feel more like you want puppies, &lt;a href=&#34;https://httpstatusdogs.com/&#34;&gt;HTTP Status Dogs&lt;/a&gt;. I can&amp;rsquo;t state how important is you make use of this bleeding edge technologies! &lt;strong&gt;World can be saved, after all&amp;hellip;&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/09-notfound-cat.jpg&#34; alt=&#34;Toy resource not found&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;good:7c8715bb330e5cc21c99494376b84830&#34;&gt;Good&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-http&#34;&gt;401 UNAUTHORIZED
+
+{
+  &amp;quot;errors&amp;quot;: [
+     {
+         &amp;quot;user_msg&amp;quot;: &amp;quot;You shall nooot paaass!!!&amp;quot;,
+         &amp;quot;internal_msg&amp;quot;: &amp;quot;Balrogs are not welcome&amp;quot;,
+         &amp;quot;code&amp;quot;: 666,
+         “info&amp;quot;: &amp;quot;http://stick.says/docs/v1/errors/666&amp;quot;
+     }
+   ]
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;bad:7c8715bb330e5cc21c99494376b84830&#34;&gt;Bad&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-http&#34;&gt;200 OK
+
+{
+  “status” : “error”,
+  &amp;quot;user_msg&amp;quot;: &amp;quot;You shall nooot paaass!!!&amp;quot;,
+  &amp;quot;internal_msg&amp;quot;: &amp;quot;Balrogs are not welcome&amp;quot;,
+  &amp;quot;code&amp;quot;: 666,
+  “info&amp;quot;: &amp;quot;http://stick.says/docs/v1/errors/666&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;10-use-modern-authorization-methods:7c8715bb330e5cc21c99494376b84830&#34;&gt;10. Use modern authorization methods&lt;/h3&gt;
+
+&lt;p&gt;If you live in a well-off countryside area like me, you may have retained the old habit of putting your keys under the doormat.&lt;br /&gt;
+Actually I am not! Times changes and I am not that akin to suffer thievery. Securing your resources is important, but most important yet, is to know who can access which one.&lt;/p&gt;
+
+&lt;p&gt;Bear with the analogy for a while, please. My friends may come visit, they just have to ring the bell and say their name. In this they are able to access my house while I am in.
+But this doesn&amp;rsquo;t mean I give them free access to my wardrobe or family bank account. Those are resources that may be accessed only by high privileged people in my family.&lt;/p&gt;
+
+&lt;p&gt;Now, what if my wife wants to access the home-banking and performs transitions? Sure she can, so I can let her use my token (it&amp;rsquo;s actually the opposite, lol). Giving her my token, I allow her to act &lt;em&gt;on my behalf&lt;/em&gt; on the &lt;code&gt;bank account&lt;/code&gt; resource. Most important, this can happen outside of my control, as long as the authorization is valid.&lt;/p&gt;
+
+&lt;p&gt;So it is possible for a set of agents to access the house via &lt;strong&gt;authentication&lt;/strong&gt; (identifying them at the door) and to access some resource under my direct or indirect supervision, for their staying.
+Other specific agents may instead manage private resources by gaining an &lt;strong&gt;authorization&lt;/strong&gt; (asking me the token). The nuance that tells &lt;em&gt;authentication&lt;/em&gt; from &lt;em&gt;authorization&lt;/em&gt; is subtle but can be clearly stated in that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Authentication is a necessary condition to gain authorization&lt;/em&gt;: I must know who you are before you can act on my behalf. It is not sufficient to gain control of my resources though.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Authorization has one or more scopes&lt;/em&gt;: Once you are authenticated (I know who you are), I can grant you access to a set of resources you can use on my behalf. This access can be temporary and conditioned to a specific logic. Let&amp;rsquo;s call those set of resources &lt;code&gt;scopes&lt;/code&gt;. It is clear that access to different scopes like &lt;em&gt;See bank account balance&lt;/em&gt;, &lt;em&gt;Trigger money transfers&lt;/em&gt;, &lt;em&gt;Use TV&lt;/em&gt;, &lt;em&gt;Access wardrobe&lt;/em&gt;, etc may be granted to different people over time.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Authorization can be revoked&lt;/em&gt;: Revoking authentication means losing memory of the identity of someone, since authentication boils down to identifying someone. Denying access to a resource instead means you are revoking an authorization to someone you can identify.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/10-nomoremetaphors-cat.png&#34; alt=&#34;Please, move on...&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Uoookkey, enough metaphors; in the context of our service layer we can say the user can authenticate by providing credentials and be authorized to access resources by a permissions framework.&lt;/p&gt;
+
+&lt;p&gt;Now, HTTP is a stateless protocol so if you want to have some RESTpect (sorry), you&amp;rsquo;d better &lt;strong&gt;avoid relying on sessions&lt;/strong&gt; to authorize the client.&lt;br /&gt;
+Use modern stateless authorization framework instead.&lt;/p&gt;
+
+&lt;p&gt;The two most reknown example here are &lt;a href=&#34;https://oauth.net/2/&#34;&gt;Oauth2&lt;/a&gt; and &lt;a href=&#34;https://jwt.io/&#34;&gt;JSON Web Tokens&lt;/a&gt; (aka JWT).
+Both are standards (actually Oauth2 is not, it &lt;a href=&#34;https://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/&#34;&gt;failed to be standardized&lt;/a&gt; and is now considered a framework) to describe how a client may act on behalf of an authenticated user in a statless world.&lt;/p&gt;
+
+&lt;p&gt;Digging into the two would require a series of posts (or entire books) but in the scope of this article it suffice to say that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Oauth2 is a great way to allow other server applications to access your resources on behalf of a user&lt;/strong&gt;&lt;br /&gt;
+Social are the most common example of this: when you take one of those silly tests like &amp;ldquo;What mutant animal from the world of Sglorbz am I?&amp;rdquo; on Facebook, you are asked to grant access to your profile data (and God knows what else!) to (say) &amp;ldquo;Silly online quizzes Inc.&amp;rdquo;, which is a third party application that knows nothing about you but wants to create a profile and post things on your wall regarding your assumed Sglorbziness.&lt;br /&gt;
+To achieve this the app asks you (the resources owner) to unlock more or less permanent access to your profile and the ability to post on your wall (yes, these are &lt;em&gt;scopes&lt;/em&gt;). The silly tests app gains a token on authorization, which can be used to act on that scopes, even when your browser is closed and you are asleep. Actually the server&amp;rsquo;s app may impersonate you within the boundaries of the granted scopes.&lt;br /&gt;
+You can do this too: I mean you can both allow other apps to act on behalf of your users (that is you expose an Oauth2 Server) or you may hook into another REST API gaining access to its resources (you are acting like an Oauth2 client). Often you end up doing both, and that&amp;rsquo;s the web, and it&amp;rsquo;s great!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JWT is the right way to allow a rich client web application or a native application to act as a user interface&lt;/strong&gt;&lt;br /&gt;
+Modern single page application written in frameworks like Angular.js or React holds part of the application logic in the client. You may be accustomed with the concept of server session, that is the server holding a state behing an HTTP request/response curtain. JTW allows for a real stateless connection: again, a token is exchanged with each request to match the client&amp;rsquo;s authorizations as well as the user&amp;rsquo;s authentication. JWT tokens generally have a short life and can hold actual information in a smart and secure way.&lt;br /&gt;
+A modern API which goal is to serve client application should really rely on JWT to handle permissions!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;final-thoughts:7c8715bb330e5cc21c99494376b84830&#34;&gt;Final thoughts&lt;/h2&gt;
+
+&lt;p&gt;Here you are my 10 golden rules for a perfectly REST API! &lt;strong&gt;Hurray!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Or not? I can here some of you:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;But wait&amp;hellip; where is HATEOAS?! And you old fart forgot to mention RDF also!!?!1!1!!cos(0)&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;OK, let&amp;rsquo;s make clear that despite I&amp;rsquo;ve kept an overconfident tone, which was hopefully just hilarious, &lt;strong&gt;the above doesn&amp;rsquo;t want to be a universal source of truth about what makes a good REST API&lt;/strong&gt;. It is just what I learned over the years for you to put to good use.&lt;/p&gt;
+
+&lt;p&gt;That said, I have mixed feelings about &lt;a href=&#34;http://en.wikipedia.org/wiki/HATEOAS&#34;&gt;HATEOAS&lt;/a&gt; and &lt;a href=&#34;http://en.wikipedia.org/wiki/Resource_Description_Framework&#34;&gt;RDF&lt;/a&gt;-related stuff (JSON-LD etc, for the record).&lt;br /&gt;
+My guts say - and I would be happy to prove them wrong - that to date we have a lot of stuff that seem to perfectly match REST in describing resources semantics, but it&amp;rsquo;s unclear how the client should actually behave with those data. Since yep, hypermedia navigation is all about behavior.&lt;/p&gt;
+
+&lt;p&gt;Take HATEOAS for example: nice to receive a list of available links (the catalogue of legit state transitions, to be a bit pedantic) in the payload, now what?&lt;br /&gt;
+Without a clear behavioral framework to apply, client side, it is left to the developer to understand what to do with the information&amp;hellip; at that point it is better not to do any server-side assumption and provide clear documentation so the client developer can forge URIs by himself, handling unavailable transitions at application level.&lt;/p&gt;
+
+&lt;p&gt;Almost the same with RDF. Great meaningful semantic but then when it comes to hypermedia-ize it all, we need stuff like &lt;a href=&#34;http://restdesc.org/&#34;&gt;RESTdesc&lt;/a&gt; or &lt;a href=&#34;http://www.markus-lanthaler.com/hydra/&#34;&gt;Hydra&lt;/a&gt; (which is in turn an RDF application by itself, to make things worse :D) to describe how the client is supposed to behave to get along. So what is the client logic actually supposed to do in the first place?&lt;/p&gt;
+
+&lt;p&gt;To finish, a mention about content enrichment: I&amp;rsquo;d leave it to business middleware. It&amp;rsquo;s not just a matter of hype like &lt;em&gt;woohoo, microservices are all the rage, so never create a monolith anymore (but do middleware or clients will knock your door down by night)&lt;/em&gt;.&lt;br /&gt;
+It&amp;rsquo;s just that it&amp;rsquo;s unhealthy to have native modality to perform content enrichment in the hope that your data-level service layer will hit all possible clients use cases. That&amp;rsquo;s what specialized middlewares are for, put them to good use!&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusions:7c8715bb330e5cc21c99494376b84830&#34;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;To wrap it up, &lt;strong&gt;don&amp;rsquo;t stop here!&lt;/strong&gt; There are a lot of great books out there on how to design great REST APIs, go read them and better yet, get your hands dirty!&lt;/p&gt;
+
+&lt;p&gt;Reach for your &lt;a href=&#34;https://apiary.io/&#34;&gt;apiary&lt;/a&gt; account or start a &lt;a href=&#34;http://swagger.io/&#34;&gt;Swagger&lt;/a&gt; project and grind your teeth.&lt;/p&gt;
+
+&lt;p&gt;Just remember a great service layer starts from its design, so don&amp;rsquo;t rush installing the last new sensational tool: &lt;strong&gt;your brainwork comes first&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;See you soon with the next article of the series: &lt;strong&gt;Drupal 8 REST features breakdown&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;additional-resources:7c8715bb330e5cc21c99494376b84830&#34;&gt;Additional resources&lt;/h2&gt;
+
+&lt;h3 id=&#34;further-readings:7c8715bb330e5cc21c99494376b84830&#34;&gt;Further readings&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://apisyouwonthate.com/&#34;&gt;Build APIs you won&amp;rsquo;t hate&lt;/a&gt; - Book by &lt;a href=&#34;https://philsturgeon.uk&#34;&gt;Phil Sturgen&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://shop.oreilly.com/product/0636920021575.do&#34;&gt;REST API Design rulebook&lt;/a&gt; - Book by &lt;a href=&#34;http://www.oreilly.com/pub/au/4998&#34;&gt;Mark Masse&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;a-name-httpstatuses-a-personal-blurb-on-http-status-codes:7c8715bb330e5cc21c99494376b84830&#34;&gt;&lt;a name=&#34;httpstatuses&#34;&gt;&lt;/a&gt;Personal blurb on HTTP status codes&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Range&lt;/th&gt;
+&lt;th&gt;Category&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1xx&lt;/td&gt;
+&lt;td&gt;Informational&lt;/td&gt;
+&lt;td&gt;Intended for when you have to respond with an information about the management of the request, like &lt;code&gt;100 Continue&lt;/code&gt; (which I think I spotted only in proxies traffic) or &lt;code&gt;101 Switching protocols&lt;/code&gt; (which informs the client that the server is OK in changing the application protocols).&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2xx&lt;/td&gt;
+&lt;td&gt;Successfull&lt;/td&gt;
+&lt;td&gt;Inform the client that &lt;em&gt;Yay! Allrite bro!&lt;/em&gt; The infamous &lt;code&gt;200 OK&lt;/code&gt; which is a laconic way to say &lt;em&gt;the request has been understood and here is the content you required&lt;/em&gt; is the most known specimen, but &lt;code&gt;201 Created&lt;/code&gt; (after a succesfull &lt;code&gt;POST&lt;/code&gt;) or &lt;code&gt;204 No content&lt;/code&gt; (when you ask for a resource which &lt;em&gt;is there&lt;/em&gt; but has no content, like an empty collection) are good examples to understand what those codes are there for.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;3xx&lt;/td&gt;
+&lt;td&gt;Redirection&lt;/td&gt;
+&lt;td&gt;Handle all situations where the client is redirected to another source of information or URL. Local cache is a source if information, thus the &lt;code&gt;304 Not modified&lt;/code&gt; makes perfect sense in this family. Renowned examples are &lt;code&gt;301 Moved permanently&lt;/code&gt; and &lt;code&gt;302 Found&lt;/code&gt;, but also &lt;code&gt;305 Use proxy&lt;/code&gt; showcases how useful those code are.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;4xx&lt;/td&gt;
+&lt;td&gt;Client Error&lt;/td&gt;
+&lt;td&gt;Used in every case where the request can&amp;rsquo;t be processed but it seems the client is to blame. The most widely known is the &lt;code&gt;404 Not found&lt;/code&gt; upon everybody in the world stumbled at least once. Note that this differs from &lt;code&gt;204 No content&lt;/code&gt; in that querying a collection with no items in it (for example due to heavy filtering) doesn&amp;rsquo;t mean the collection isn&amp;rsquo;t there. Querying for a URI which does not represent any resouce (hence is not routed/handled by the system) is actually a client error! But learn more and use stuff like &lt;code&gt;401 Unauthorized&lt;/code&gt;, that is the client didn&amp;rsquo;t provide necessary credentials to access a protected resource, or &lt;code&gt;405 Method not allowed&lt;/code&gt; for when the client tries to use an HTTP method/verb on a resource that does not support it (&lt;code&gt;PUT&lt;/code&gt; or &lt;code&gt;PATCH&lt;/code&gt; a collection for example?).&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5xx&lt;/td&gt;
+&lt;td&gt;Server Error&lt;/td&gt;
+&lt;td&gt;Those are for when the request can&amp;rsquo;t be processed but the server knows the problem lies in its request processing, not the request itself. The most spotted error in this category is the pretty uninfomative &lt;code&gt;500 Internal server error&lt;/code&gt;, which map one-to-one with the &lt;code&gt;Uknown error&lt;/code&gt; or &lt;code&gt;Unexpected error&lt;/code&gt; some can remember from Windows 9x era. If the server has any clue on what happened it may be more helpful, returning stuff like &lt;code&gt;501 Not implemented&lt;/code&gt; or &lt;code&gt;505 HTTP version not supported&lt;/code&gt; (try to find one of those old farts, if you can!). Just mind that &lt;em&gt;it is really unlikely you will have to manage 5xx status codes at application level&lt;/em&gt;, so use them only if you really know what you are doing!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
     
     <item>
       <title>Trapped by an amend, saved by a reflog</title>
