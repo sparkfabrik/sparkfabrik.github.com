@@ -109,12 +109,12 @@
 
 <p>This is the first of five posts in a series that want to tell you the story of my discovery journey through modern PHP tools to build a REST service layer.</p>
 
-<p>I have a sweet spot for REST and decoupled architectures, but working for a (mostly) Drupal company in the last (several) years, I had little occasion to put my head over the topic aside personal tinkering and small projects. Not to say that we didn&rsquo;t produced REST APIs for our customers, but a real decoupled project was hard to be found.</p>
+<p>I have a sweet spot for REST and decoupled architectures, but working for a (mostly) Drupal company in the last (several) years, I had little occasion to put my head over the topic aside personal tinkering and small projects. Not to say that we didn&rsquo;t produce REST APIs for our customers, but a real decoupled project was hard to be found.</p>
 
 <p>Then came Drupal 8, the first version of Drupal built from the ground-up to match enterprise use-cases: it brings many changes, embraces modern PHP to the core and is heavily oriented towards decoupled architectures. Actually, we can say <strong>headless Drupal</strong> is quite a buzzword these days. All good news, but hey&hellip; Drupal went finally PHP, which means that other modern PHP tools are finally within the reach of any <em>D8-savvy</em> developer.<br />
 I dare to state that moving towards <em>SOLID</em> PHP, Drupal made himself less of a <em>queen bee</em>, diluting its ecosystem and exposing itself to direct confrontation with other PHP options.</p>
 
-<p>This may seem counterintuitive, but I consider this a great strenght for Drupal in the first place: you don&rsquo;t have to decide between <strong>making it &ldquo;custom&rdquo;</strong> or <strong>making it with Drupal</strong>: it will be easy to carry your business logic in and out of Drupal if the need be. So with a healthy and open spirit of confrontation, let&rsquo;s dive into a journey among modern options to build REST APIs with PHP at the ides of March 2017.</p>
+<p>This may seem counterintuitive, but I consider this a great strength for Drupal in the first place: you don&rsquo;t have to decide between <strong>making it &ldquo;custom&rdquo;</strong> or <strong>making it with Drupal</strong>: it will be easy to carry your business logic in and out of Drupal if the need be. So with a healthy and open spirit of confrontation, let&rsquo;s dive into a journey among modern options to build REST APIs with PHP at the ides of March 2017.</p>
 
 <h2 id="what-makes-an-api-really-rest:7c8715bb330e5cc21c99494376b84830">What makes an API really REST</h2>
 
@@ -263,7 +263,7 @@ We can say, for example that a user <code>has many</code> phone numbers, but <co
 
 <p>The best RESTful representation of those kind of relationships is achieved by <strong>sub-resources</strong>: <code>/books/123/reviews</code> is the resource endpoint for reviews related to book with ID <code>123</code>. Along this line, <code>/books/123/reviews/456</code> is a specific review among those book <code>123</code> got.</p>
 
-<p>Redoundant? Yes, but also descriptive. And secure: since review <code>456</code> partains to book <code>123</code>, trying to <code>GET /books/098/reviews/456</code> should fail with a <code>404 Not found</code> error (see below for more status-codes and love).</p>
+<p>Redundant? Yes, but also descriptive. And secure: since review <code>456</code> partains to book <code>123</code>, trying to <code>GET /books/098/reviews/456</code> should fail with a <code>404 Not found</code> error (see below for more status-codes and love).</p>
 
 <p>Should we also redound the endpoints to provide different access routes? Like, following the example above, should we have a <code>reviews/456/books</code> resource so that I can go backward from reviews to books?<br />
 Well, this really depends on your domain: if you know you need a list of reviews, no matter the book they are related to, or (to add a dimension to this depiction) if you may need reviews by author, like <code>/users/987/reviews</code>, then why not? I would go further and say that you can go fancy with filters on a <code>/reviews</code> resource endpoint (see below for filters galore).</p>
@@ -353,7 +353,7 @@ Request headers allow the server and the client to specify which kind of data yo
 <p>This paragraph would deserve a full book <em>per se</em>. The topic is really huge and I don&rsquo;t even have the experience to compete in clarity and completeness with other authors.<br />
 Still I feel that HTTP caching features are often overlooked by many, mostly when it comes to REST API design.</p>
 
-<p>To support my statement I often take as an example the fact that (in my experience) far too often the <code>etag</code> header goes totally unconsidered during API design, though it is a brillant solution to content-based cache invalidation.</p>
+<p>To support my statement I often take as an example the fact that (in my experience) far too often the <code>etag</code> header goes totally unconsidered during API design, though it is a brilliiant solution to content-based cache invalidation.</p>
 
 <p>Google has a great article on <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching">HTTP caching</a> on the Developer Network.
 Just remember these three things:</p>
@@ -361,7 +361,7 @@ Just remember these three things:</p>
 <ul>
 <li>The problem with caching is its <em>invalidation strategy</em>; pretty obvious but it&rsquo;s often very tricky to come up with a good one</li>
 <li>HTTP allows for <em>content-based</em> and <em>time-based</em> invalidation, which is a real boon since <em>you can trade off performances and data reliability</em></li>
-<li>Being based on response headers, HTTP caching allows <em>per-resource strategies</em>, which means you can carry out the aformentioned trade-offs depending on the nature of the data</li>
+<li>Being based on response headers, HTTP caching allows <em>per-resource strategies</em>, which means you can carry out the aforementioned trade-offs depending on the nature of the data</li>
 </ul>
 
 <p>Not bad of a transfer protocol, uh? :)</p>
@@ -421,7 +421,7 @@ Mind that nothing stops you to have both, but don&rsquo;t just throw them in for
 
 <p><img src="http://sparkfabrik.github.io/posts/20170304-rest-series/07-mindurfilters-cat.png" alt="Copy cat :D" /></p>
 
-<p>OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can enpower your clients:</p>
+<p>OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can empower your clients:</p>
 
 <table>
 <thead>
@@ -516,9 +516,9 @@ Still, 20+ years from the devision of HTTP, I still happen to see established pr
 <p>I&rsquo;ll list here some HTTP status codes trivia which may or may not be common knowledge for you. If you learn something new, my advice is to dig deeper into HTML protocol and learn what it can already do for us.</p>
 
 <ul>
-<li><p><strong>HTTP status codes are numerals with an optional description</strong>: The format of response status codes is alwas a 3-digits number like <code>201</code>, <code>302</code>, <code>404</code> or <code>401</code>. Mnemonic descriptions are added so that us meatbags can remember what they mean: <code>401 Unauthorized</code>, <code>302 Permanent redirect</code> or <code>200 OK</code></p></li>
+<li><p><strong>HTTP status codes are numerals with an optional description</strong>: The format of response status codes is always a 3-digits number like <code>201</code>, <code>302</code>, <code>404</code> or <code>401</code>. Mnemonic descriptions are added so that us meatbags can remember what they mean: <code>401 Unauthorized</code>, <code>302 Permanent redirect</code> or <code>200 OK</code></p></li>
 
-<li><p><strong>HTTP status codes are categorized by the most significant digit</strong>: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in succh a situation you may double check your assumptions&hellip; it smells a bit), the <em>hundreds</em> are used to represent status categories. For a complete reference see the related part of <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">RFC 2616</a>. For a shorter version and some notable insight, see <a href="#httpstatuses">my table in the end notes</a>.</p></li>
+<li><p><strong>HTTP status codes are categorized by the most significant digit</strong>: Being very unlikely for an application to have hundreds of different statuses of the same category (if you are in such a situation you may double check your assumptions&hellip; it smells a bit), the <em>hundreds</em> are used to represent status categories. For a complete reference see the related part of <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">RFC 2616</a>. For a shorter version and some notable insight, see <a href="#httpstatuses">my table in the end notes</a>.</p></li>
 
 <li><p><strong>There is space for custom error code in each category</strong>: And, as long as you document them for your client, you are encouraged to use them! You may not know this, but there is an actual <a href="https://tools.ietf.org/html/rfc2324"><code>418 I'm a teapot</code></a> implementation case registered in history. And <a href="https://github.com/symfony/http-foundation/blob/master/Response.php#L61">Symfony framework natively supports it</a> :). So really, don&rsquo;t be shy and make good use of HTTP flexibility to inform your client about what the heck happened to their request.</p></li>
 
@@ -583,8 +583,8 @@ Other specific agents may instead manage private resources by gaining an <strong
 <p>Now, HTTP is a stateless protocol so if you want to have some RESTpect (sorry), you&rsquo;d better <strong>avoid relying on sessions</strong> to authorize the client.<br />
 Use modern stateless authorization framework instead.</p>
 
-<p>The two most reknown example here are <a href="https://oauth.net/2/">Oauth2</a> and <a href="https://jwt.io/">JSON Web Tokens</a> (aka JWT).
-Both are standards (actually Oauth2 is not, it <a href="https://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/">failed to be standardized</a> and is now considered a framework) to describe how a client may act on behalf of an authenticated user in a statless world.</p>
+<p>The two most renown example here are <a href="https://oauth.net/2/">Oauth2</a> and <a href="https://jwt.io/">JSON Web Tokens</a> (aka JWT).
+Both are standards (actually Oauth2 is not, it <a href="https://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/">failed to be standardized</a> and is now considered a framework) to describe how a client may act on behalf of an authenticated user in a stateless world.</p>
 
 <p>Digging into the two would require a series of posts (or entire books) but in the scope of this article it suffice to say that:</p>
 
