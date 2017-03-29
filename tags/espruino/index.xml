@@ -8,14 +8,15 @@
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
+    <lastBuildDate>Wed, 01 Mar 2017 14:47:30 +0000</lastBuildDate>
     <atom:link href="http://sparkfabrik.github.io/tags/espruino/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Espruino on NodeMCU (step-by-step guide)</title>
-      <link>http://sparkfabrik.github.io/1/01/01/espruino-nodemcu-step-by-step</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <link>http://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</link>
+      <pubDate>Wed, 01 Mar 2017 14:47:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/1/01/01/espruino-nodemcu-step-by-step</guid>
+      <guid>http://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</guid>
       <description>
 
 &lt;h2 id=&#34;introduction:181902d417846fa121f0e69f03cf2870&#34;&gt;Introduction&lt;/h2&gt;
@@ -239,11 +240,13 @@ but I&amp;rsquo;m pretty sure there are enough of them to get you started with i
 
 &lt;h3 id=&#34;useful-resources:181902d417846fa121f0e69f03cf2870&#34;&gt;Useful resources&lt;/h3&gt;
 
-&lt;p&gt;Espruino info on ESP8266 chip: &lt;a href=&#34;http://www.espruino.com/EspruinoESP8266&#34;&gt;http://www.espruino.com/EspruinoESP8266&lt;/a&gt;
-How to use espruino on ESP8266: &lt;a href=&#34;http://crufti.com/getting-started-with-espruino-on-esp8266/&#34;&gt;http://crufti.com/getting-started-with-espruino-on-esp8266/&lt;/a&gt;
-ESP8266 flashing: &lt;a href=&#34;http://www.espruino.com/ESP8266_Flashing&#34;&gt;http://www.espruino.com/ESP8266_Flashing&lt;/a&gt;
-Espruino JS reference: &lt;a href=&#34;http://www.espruino.com/Reference&#34;&gt;http://www.espruino.com/Reference&lt;/a&gt;
-Espruino sensors: &lt;a href=&#34;https://www.espruino.com/Sensors&#34;&gt;https://www.espruino.com/Sensors&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Espruino info on ESP8266 chip: &lt;a href=&#34;http://www.espruino.com/EspruinoESP8266&#34;&gt;http://www.espruino.com/EspruinoESP8266&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;How to use espruino on ESP8266: &lt;a href=&#34;http://crufti.com/getting-started-with-espruino-on-esp8266/&#34;&gt;http://crufti.com/getting-started-with-espruino-on-esp8266/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ESP8266 flashing: &lt;a href=&#34;http://www.espruino.com/ESP8266_Flashing&#34;&gt;http://www.espruino.com/ESP8266_Flashing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Espruino JS reference: &lt;a href=&#34;http://www.espruino.com/Reference&#34;&gt;http://www.espruino.com/Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Espruino sensors: &lt;a href=&#34;https://www.espruino.com/Sensors&#34;&gt;https://www.espruino.com/Sensors&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
