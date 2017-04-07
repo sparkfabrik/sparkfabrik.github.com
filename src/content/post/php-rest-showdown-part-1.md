@@ -41,8 +41,6 @@ Navigate, press or play the guitar are not resources (whereas navigational skill
 
 With the next point, why this is important will become clear: naming resources by nouns will grant you APIs **sensible semantics**.
 
---- TABLE WITH EXAMPLES ---
-
 | Right | Wrong |
 |:-:|:-:|
 | `/cars` | `/getAllCars` |
@@ -138,6 +136,9 @@ to inform the server we are expecting a JSON payload... way more expressive and 
 > `Accept: application/rdf+json`
 
 Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!
+
+**7 apr 2017 - EDIT**: I've been pointed out on [rob_schluter](https://www.reddit.com/user/rob_schluter) on [this reddit thread](https://www.reddit.com/r/PHP/comments/61ypvo/php_rest_tools_showdown_series_part_1_really/) that I didn't stress enough that (by [RFC 1341](https://tools.ietf.org/html/rfc1341) the `Content-Type` and `Accept` headers should be populated with a valid [MIME Type](http://www.freeformatter.com/mime-types-list.html#mime-types-list). If I didn't miss the point in Rob's comment the main concern here is that content-negotiation is not a nice-to-have feature when it comes to server **declaring** the resource format: providing a `Content-type` header should **always** be done to ensure the client knows how to manage the payload. Remember you can also proxy an image or other form of binary data.  
+To add another bit, I never asked myself if a REST client library I used did content-type sniffing... if your does, avoid relying on it and always provide your payload's mime-type!
 
 | Right | Wrong |
 |---|---|
@@ -388,6 +389,8 @@ See you soon with the next article of the series: **Drupal 8 REST features break
 
 * [Build APIs you won't hate](https://apisyouwonthate.com/) - Book by [Phil Sturgen](https://philsturgeon.uk)
 * [REST API Design rulebook](http://shop.oreilly.com/product/0636920021575.do) - Book by [Mark Masse](http://www.oreilly.com/pub/au/4998)
+* [Microsoft's API Guidelines](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md) - Freely available on GitHub (thanks to [SurgioClemente](https://www.reddit.com/user/SurgioClemente) for this addition)
+* [APIs Design Guide](https://cloud.google.com/apis/design/) by Goole - Google Cloud Platform online documentation (thanks to [SurgioClemente](https://www.reddit.com/user/SurgioClemente) for this addition)
 
 ### <a name="httpstatuses"></a>Personal blurb on HTTP status codes
 
