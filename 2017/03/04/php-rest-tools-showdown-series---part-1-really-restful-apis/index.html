@@ -138,8 +138,6 @@ Navigate, press or play the guitar are not resources (whereas navigational skill
 
 <p>With the next point, why this is important will become clear: naming resources by nouns will grant you APIs <strong>sensible semantics</strong>.</p>
 
-<p>&mdash; TABLE WITH EXAMPLES &mdash;</p>
-
 <table>
 <thead>
 <tr>
@@ -326,6 +324,10 @@ Request headers allow the server and the client to specify which kind of data yo
 </blockquote>
 
 <p>Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!</p>
+
+<p><strong>7 apr 2017 - EDIT</strong>: I&rsquo;ve been pointed out by <a href="https://www.reddit.com/user/rob_schluter">rob_schluter</a> on <a href="https://www.reddit.com/r/PHP/comments/61ypvo/php_rest_tools_showdown_series_part_1_really/">this reddit thread</a> that I didn&rsquo;t stress enough the fact that (by <a href="https://tools.ietf.org/html/rfc1341">RFC 1341</a>) the <code>Content-Type</code> and <code>Accept</code> headers should be populated with a valid <a href="http://www.freeformatter.com/mime-types-list.html#mime-types-list">MIME Type</a>. If I didn&rsquo;t miss Rob&rsquo;s point, his concern was about content-negotiation not being just a nice-to-have feature.<br />
+When it comes to server <strong>declaring</strong> the resource format, providing a <code>Content-type</code> header should <strong>always</strong> be done to ensure the client knows how to manage the payload. For example you can proxy an image or other form of binary data by an endpoint of your application.<br />
+To add another bit, I never asked myself if a REST client library I used was trying to perform content-type sniffing&hellip; if your does, avoid relying on it and always provide your payload&rsquo;s mime-type!</p>
 
 <table>
 <thead>
@@ -638,6 +640,8 @@ It&rsquo;s just that it&rsquo;s unhealthy to have native modality to perform con
 <ul>
 <li><a href="https://apisyouwonthate.com/">Build APIs you won&rsquo;t hate</a> - Book by <a href="https://philsturgeon.uk">Phil Sturgen</a></li>
 <li><a href="http://shop.oreilly.com/product/0636920021575.do">REST API Design rulebook</a> - Book by <a href="http://www.oreilly.com/pub/au/4998">Mark Masse</a></li>
+<li><a href="https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md">Microsoft&rsquo;s API Guidelines</a> - Freely available on GitHub (thanks to <a href="https://www.reddit.com/user/SurgioClemente">SurgioClemente</a> for this addition)</li>
+<li><a href="https://cloud.google.com/apis/design/">APIs Design Guide</a> by Goole - Google Cloud Platform online documentation (thanks to <a href="https://www.reddit.com/user/SurgioClemente">SurgioClemente</a> for this addition)</li>
 </ul>
 
 <h3 id="a-name-httpstatuses-a-personal-blurb-on-http-status-codes:7c8715bb330e5cc21c99494376b84830"><a name="httpstatuses"></a>Personal blurb on HTTP status codes</h3>

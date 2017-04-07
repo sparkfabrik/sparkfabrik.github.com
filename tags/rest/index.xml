@@ -52,8 +52,6 @@ Navigate, press or play the guitar are not resources (whereas navigational skill
 
 &lt;p&gt;With the next point, why this is important will become clear: naming resources by nouns will grant you APIs &lt;strong&gt;sensible semantics&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&amp;mdash; TABLE WITH EXAMPLES &amp;mdash;&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -240,6 +238,10 @@ Request headers allow the server and the client to specify which kind of data yo
 &lt;/blockquote&gt;
 
 &lt;p&gt;Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;7 apr 2017 - EDIT&lt;/strong&gt;: I&amp;rsquo;ve been pointed out by &lt;a href=&#34;https://www.reddit.com/user/rob_schluter&#34;&gt;rob_schluter&lt;/a&gt; on &lt;a href=&#34;https://www.reddit.com/r/PHP/comments/61ypvo/php_rest_tools_showdown_series_part_1_really/&#34;&gt;this reddit thread&lt;/a&gt; that I didn&amp;rsquo;t stress enough the fact that (by &lt;a href=&#34;https://tools.ietf.org/html/rfc1341&#34;&gt;RFC 1341&lt;/a&gt;) the &lt;code&gt;Content-Type&lt;/code&gt; and &lt;code&gt;Accept&lt;/code&gt; headers should be populated with a valid &lt;a href=&#34;http://www.freeformatter.com/mime-types-list.html#mime-types-list&#34;&gt;MIME Type&lt;/a&gt;. If I didn&amp;rsquo;t miss Rob&amp;rsquo;s point, his concern was about content-negotiation not being just a nice-to-have feature.&lt;br /&gt;
+When it comes to server &lt;strong&gt;declaring&lt;/strong&gt; the resource format, providing a &lt;code&gt;Content-type&lt;/code&gt; header should &lt;strong&gt;always&lt;/strong&gt; be done to ensure the client knows how to manage the payload. For example you can proxy an image or other form of binary data by an endpoint of your application.&lt;br /&gt;
+To add another bit, I never asked myself if a REST client library I used was trying to perform content-type sniffing&amp;hellip; if your does, avoid relying on it and always provide your payload&amp;rsquo;s mime-type!&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -552,6 +554,8 @@ It&amp;rsquo;s just that it&amp;rsquo;s unhealthy to have native modality to per
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://apisyouwonthate.com/&#34;&gt;Build APIs you won&amp;rsquo;t hate&lt;/a&gt; - Book by &lt;a href=&#34;https://philsturgeon.uk&#34;&gt;Phil Sturgen&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://shop.oreilly.com/product/0636920021575.do&#34;&gt;REST API Design rulebook&lt;/a&gt; - Book by &lt;a href=&#34;http://www.oreilly.com/pub/au/4998&#34;&gt;Mark Masse&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md&#34;&gt;Microsoft&amp;rsquo;s API Guidelines&lt;/a&gt; - Freely available on GitHub (thanks to &lt;a href=&#34;https://www.reddit.com/user/SurgioClemente&#34;&gt;SurgioClemente&lt;/a&gt; for this addition)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cloud.google.com/apis/design/&#34;&gt;APIs Design Guide&lt;/a&gt; by Goole - Google Cloud Platform online documentation (thanks to &lt;a href=&#34;https://www.reddit.com/user/SurgioClemente&#34;&gt;SurgioClemente&lt;/a&gt; for this addition)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;a-name-httpstatuses-a-personal-blurb-on-http-status-codes:7c8715bb330e5cc21c99494376b84830&#34;&gt;&lt;a name=&#34;httpstatuses&#34;&gt;&lt;/a&gt;Personal blurb on HTTP status codes&lt;/h3&gt;
