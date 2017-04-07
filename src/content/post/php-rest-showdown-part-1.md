@@ -137,8 +137,9 @@ to inform the server we are expecting a JSON payload... way more expressive and 
 
 Try to pollute this in a fake extension, a parameter or (may God forgive) as part of the request body. The mere effort is simply nonsense!
 
-**7 apr 2017 - EDIT**: I've been pointed out on [rob_schluter](https://www.reddit.com/user/rob_schluter) on [this reddit thread](https://www.reddit.com/r/PHP/comments/61ypvo/php_rest_tools_showdown_series_part_1_really/) that I didn't stress enough that (by [RFC 1341](https://tools.ietf.org/html/rfc1341) the `Content-Type` and `Accept` headers should be populated with a valid [MIME Type](http://www.freeformatter.com/mime-types-list.html#mime-types-list). If I didn't miss the point in Rob's comment the main concern here is that content-negotiation is not a nice-to-have feature when it comes to server **declaring** the resource format: providing a `Content-type` header should **always** be done to ensure the client knows how to manage the payload. Remember you can also proxy an image or other form of binary data.  
-To add another bit, I never asked myself if a REST client library I used did content-type sniffing... if your does, avoid relying on it and always provide your payload's mime-type!
+**7 apr 2017 - EDIT**: I've been pointed out by [rob_schluter](https://www.reddit.com/user/rob_schluter) on [this reddit thread](https://www.reddit.com/r/PHP/comments/61ypvo/php_rest_tools_showdown_series_part_1_really/) that I didn't stress enough the fact that (by [RFC 1341](https://tools.ietf.org/html/rfc1341)) the `Content-Type` and `Accept` headers should be populated with a valid [MIME Type](http://www.freeformatter.com/mime-types-list.html#mime-types-list). If I didn't miss Rob's point, his concern was about content-negotiation not being just a nice-to-have feature.  
+When it comes to server **declaring** the resource format, providing a `Content-type` header should **always** be done to ensure the client knows how to manage the payload. For example you can proxy an image or other form of binary data by an endpoint of your application.  
+To add another bit, I never asked myself if a REST client library I used was trying to perform content-type sniffing... if your does, avoid relying on it and always provide your payload's mime-type!
 
 | Right | Wrong |
 |---|---|
