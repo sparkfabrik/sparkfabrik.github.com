@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crack on Tech @ SparkFabrik</title>
+    <link>http://sparkfabrik.github.io/tags/crack/</link>
+    <description>Recent content in Crack on Tech @ SparkFabrik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
+    <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
+    <lastBuildDate>Mon, 11 Feb 2019 08:51:09 +0200</lastBuildDate>
+    <atom:link href="http://sparkfabrik.github.io/tags/crack/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Crack the CKAD exam in first attempt</title>
+      <link>http://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</link>
+      <pubDate>Mon, 11 Feb 2019 08:51:09 +0200</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>http://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</guid>
+      <description>
+
+&lt;h1 id=&#34;intro:0f519f6e735a0b1a1ae6a66045f923af&#34;&gt;Intro &lt;/h1&gt;
+
+&lt;p&gt;It all started when I decided to learn Kubernetes few months ago.
+Then, Paolo M, asked me if I want to take the CKAD exam. 
+And, as someone who loves challenges, on 20th December 2019, I took the Certified Kubernetes Application Developer (CKAD) exam, and 1 day later I got certified. 😄&lt;/p&gt;
+
+&lt;p&gt;It was one of the most striking exams that I have ever taken, because you need to be quick and manage &lt;strong&gt;19&lt;/strong&gt; hands-on questions in &lt;strong&gt;2&lt;/strong&gt; hours (6.315789474 min / task 🔥).&lt;/p&gt;
+
+&lt;p&gt;So, you need to solve them by using only a terminal and an editor in a specific cluster. And you really need to familiarize yourself with K8s for that. 🙂
+But, no worries; in my opinion, I think it is not that complicated as an exam. Having also a &lt;strong&gt;66%&lt;/strong&gt; passing score, to me it&amp;rsquo;s achievable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/logo_ckad.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;crack:0f519f6e735a0b1a1ae6a66045f923af&#34;&gt;Crack&lt;/h1&gt;
+
+&lt;p&gt;If you have a clear picture of Kubernetes, some of its most important concepts and want to focus in the exam, I think this &lt;strong&gt;&lt;a href=&#34;https://github.com/dgkanatsios/CKAD-exercises&#34;&gt;repository&lt;/a&gt;&lt;/strong&gt; is the best k8s CKAD sample exercises which cover all parts of the exam.
+This &lt;a href=&#34;https://linuxacademy.com/cp/modules/view/id/305&#34;&gt;course&lt;/a&gt; from Linux Academy can also help you prepare for the exam.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; The most important thing that I would like to suggest is using &lt;code&gt;kubectl run&lt;/code&gt; and &lt;code&gt;kubectl create&lt;/code&gt; to create resources, rather than trying to write them on your own. In case you have to edit manifest, use &lt;em&gt;dry-run&lt;/em&gt; and &lt;em&gt;-o yaml&lt;/em&gt; flags to save the yaml file, then edit it. ⚡️&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Save some time using &lt;code&gt;alias k=kubectl&lt;/code&gt; and when typing the resources; use their abbreviated aliases instead. (You can check out &amp;ldquo;&lt;code&gt;kubectl api-resources&lt;/code&gt;&amp;rdquo; for a complete list of supported resources.) ⏳&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Each question refers to a given cluster, so read the question carefully and always remember to execute the context change command. Don&amp;rsquo;t forget to put &lt;em&gt;-n&lt;/em&gt; flag aswell. Otherwise, you will enter commands on the wrong cluster or wrong namespace. ⚠️&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; When you ssh on a node (you would probably need to gain root access using &lt;code&gt;sudo -i&lt;/code&gt;), keep in mind that you may need to exit twice, as the first exit may get you out of the superuser mode and the second one will get you out of the node. :vim:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Get a detailed explanation of resources, as well as the fields you can populate with &lt;code&gt;kubectl explain --recursive&lt;/code&gt;. ℹ️
+️
+&lt;strong&gt;6.&lt;/strong&gt;  This command can help, when you want to get commands on resource creation: &lt;code&gt;kubectl run --help&lt;/code&gt; 🤔&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Use the embedded notepad from the exam system, if you skip a question. (I skipped some long questions having only 2%-3% of weight. In my case, questions got progressively harder, so manage your time carefully.) 🗒️&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;8.&lt;/strong&gt; You should be familiar with navigating around Kubernetes official documentation page. (In the exam, you are allowed to open 1 additional browser tab for Kubernetes docs.) 🧭&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;9.&lt;/strong&gt; I highly recommend using bookmarks from Kubernetes docs for quick access. (I had created a folder structure for each exam curriculum.) 🔖&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;10.&lt;/strong&gt; I would suggest to always test the solutions and make sure what you did is correct. ✔️&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion:0f519f6e735a0b1a1ae6a66045f923af&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Reading and watching for K8s will not be enough, in case you do not practice. Thats the key. 🎯&lt;/p&gt;
+
+&lt;p&gt;Best of luck! 💪&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/Simon-Gjetaj-CKAD.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
