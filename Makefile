@@ -1,4 +1,4 @@
-BASE_URL="http://sparkfabrik.github.io"
+BASE_URL="https://sparkfabrik.github.io"
 DEPLOY_DIR=output
 DEPLOY_BRANCH=master
 DEPLOY_REPO=https://$(GITHUB_TOKEN)@github.com/sparkfabrik/sparkfabrik.github.com.git
