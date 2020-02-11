@@ -86,8 +86,8 @@ title: Team
   </div>
 
   <div class="row row-top-margin">
-      <div class="col-md-12">
-        <h4> Marco Primitivo </h4>
+    <div class="col-md-12">
+      <h4> Marco Primitivo </h4>
         <img src="http://www.sparkfabrik.com/images/team/marco_primitivo.jpg" alt="Marco Primitivo" class="img-rounded pull-left avatar">
         <i> Software Developer </i>
         <p class="small">Software Developer, curious about everything, love to make experiments.</p>
@@ -95,9 +95,20 @@ title: Team
           <li> <i class="fa fa-github"></i> <a href="http://www.github.com/bladedu">Github</a></li>
           <li> <i class="fa fa-twitter"></i> <a href="http://www.twitter.com/BladeduMP">Twitter</a></li>
         </ul>
-      </div>
     </div>
+  </div>
+
+  <div class="row row-top-margin">
+    <div class="col-md-12">
+      <h4> Simon Gjetaj </h4>
+      <img src="https://www.sparkfabrik.com/assets/imgs/facewall/simon_gjetaj_white.jpg" alt="Simon Gjetaj" class="img-rounded pull-left avatar">
+      <i> Software Developer </i>
+      <p class="small">A flexible &amp; pragmatic developer with a passion for beating "best-yets" and unpacking complicated problems.</p>
+      <ul class="list-inline">
+        <li> <i class="fa fa-github"></i> <a href="https://github.com/simongjetaj">Github</a></li>
+        <li> <i class="fa fa-twitter"></i> <a href="https://twitter.com/Simon_Gjetaj">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
 
 </div>
-
-

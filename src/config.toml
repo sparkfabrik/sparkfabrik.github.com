@@ -65,6 +65,14 @@ title = "Tech @ SparkFabrik"
       github = "http://www.github.com/bladedu"
       twitter = "http://www.twitter.com/BladeduMP"
 
+    [Params.Authors.Simon]
+      name = "Simon Gjetaj"
+      role = "Software Developer"
+      picture = "https://www.sparkfabrik.com/assets/imgs/facewall/simon_gjetaj_white.jpg"
+      bio = "A flexible & pragmatic developer with a passion for beating \"best-yets\" and unpacking complicated problems."
+      github = "https://github.com/simongjetaj"
+      twitter = "https://twitter.com/Simon_Gjetaj"
+
 [Author]
   name = "Sparkfabrik"
   email = "info@sparkfabrik.com"
