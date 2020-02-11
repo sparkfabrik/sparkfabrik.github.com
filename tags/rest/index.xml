@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rest on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/rest/</link>
+    <link>https://sparkfabrik.github.io/tags/rest/</link>
     <description>Recent content in Rest on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Sat, 04 Mar 2017 14:47:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>PHP REST tools showdown Series - Part 1: really RESTful APIs</title>
-      <link>http://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</link>
+      <link>https://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</link>
       <pubDate>Sat, 04 Mar 2017 14:47:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</guid>
+      <guid>https://sparkfabrik.github.io/2017/03/04/php-rest-tools-showdown-series---part-1-really-restful-apis</guid>
       <description>
 
 &lt;h2 id=&#34;introduction:7c8715bb330e5cc21c99494376b84830&#34;&gt;Introduction&lt;/h2&gt;
@@ -39,7 +39,7 @@ Is one more opinion on the topic worth a blog-post? I don&amp;rsquo;t think so.&
 
 &lt;p&gt;I actually tackled into this topic yesterday, with a speech at Drupal Day 2017 in Rome - Italy, titled &lt;em&gt;REST in pieces&lt;/em&gt; (an atrocious and ruinous pun). This series aims to dig deeper into the topic so I&amp;rsquo;ll add a bit of information and (most important) a ton of lolcatz, sadly missing from my slides because time and blah blah.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/01-unacceptable-cat.png&#34; alt=&#34;This is unacceptable!&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/01-unacceptable-cat.png&#34; alt=&#34;This is unacceptable!&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;stick-s-10-laws-for-a-perfectly-rest-api:7c8715bb330e5cc21c99494376b84830&#34;&gt;Stick&amp;rsquo;s 10 laws for a perfectly REST API&lt;/h2&gt;
 
@@ -90,7 +90,7 @@ Navigate, press or play the guitar are not resources (whereas navigational skill
 
 &lt;p&gt;Writing RESTful expressions boils down mostly on leveraging &lt;em&gt;by-design&lt;/em&gt; HTTP expressive power.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/02-invariantstate-cat.png&#34; alt=&#34;GET ME OUT!&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/02-invariantstate-cat.png&#34; alt=&#34;GET ME OUT!&#34; /&gt;&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -182,7 +182,7 @@ Well, this really depends on your domain: if you know you need a list of reviews
 
 &lt;p&gt;Just avoid proliferating your endpoint just for the sake of having them at hand. Design is the most important step in API development and declaring resources informs by  itself about the hierarchy, relations and logic the clients are expected to follow.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/04-subres-cat.png&#34; alt=&#34;Sub cat behaving hierarchically&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/04-subres-cat.png&#34; alt=&#34;Sub cat behaving hierarchically&#34; /&gt;&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -282,7 +282,7 @@ Just remember these three things:&lt;/p&gt;
 
 &lt;p&gt;Not bad of a transfer protocol, uh? :)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/06-cachecopy-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/06-cachecopy-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;7-allow-for-collections-filtering-sorting-and-paging:7c8715bb330e5cc21c99494376b84830&#34;&gt;7. Allow for collections filtering, sorting and paging&lt;/h3&gt;
 
@@ -335,7 +335,7 @@ This &lt;em&gt;matters&lt;/em&gt;! If you need to identify a specific resource t
 &lt;p&gt;This is trickier and it really depends on what you need in the domain of your application. Is the collection of books owned by a specific user` a resource by itself? Or in better words, are book collections resources for the users of your system? If so, being a resource, the user&amp;rsquo;s book collection deserves a universal identifier. If not, go with a filtered collection.&lt;br /&gt;
 Mind that nothing stops you to have both, but don&amp;rsquo;t just throw them in for good measure&amp;hellip; think about your domain, how entities are related and what kind of operations you want to perform on a resource.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/07-mindurfilters-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/07-mindurfilters-cat.png&#34; alt=&#34;Copy cat :D&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;OK, back to our filters, sorting and paging. Query parameters are pretty flexible and you can go fancy with expressiveness. Here is some example of how you can empower your clients:&lt;/p&gt;
 
@@ -411,7 +411,7 @@ Of course, the major version of your codebase can be the same as the format vers
 &lt;p&gt;&lt;em&gt;HTTP has response status codes!&lt;/em&gt; This is not a breaking news, it has since its inception and we are all well aware of the (in)famous &lt;code&gt;404 Not found&lt;/code&gt; that pops here and there in our browsers.&lt;br /&gt;
 Still, 20+ years from the devision of HTTP, I still happen to see established professionals going with &lt;code&gt;200 OK&lt;/code&gt; as the unique response code.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/09-senseevil-cat.png&#34; alt=&#34;I sense evil&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/09-senseevil-cat.png&#34; alt=&#34;I sense evil&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you are about to say one of those&lt;/p&gt;
 
@@ -441,7 +441,7 @@ Still, 20+ years from the devision of HTTP, I still happen to see established pr
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;You can haz cats&lt;/strong&gt;: Yes, there are things like &lt;a href=&#34;https://http.cat/&#34;&gt;HTTP Status Cats API&lt;/a&gt; or, if you feel more like you want puppies, &lt;a href=&#34;https://httpstatusdogs.com/&#34;&gt;HTTP Status Dogs&lt;/a&gt;. I can&amp;rsquo;t state how important is you make use of this bleeding edge technologies! &lt;strong&gt;World can be saved, after all&amp;hellip;&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/09-notfound-cat.jpg&#34; alt=&#34;Toy resource not found&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/09-notfound-cat.jpg&#34; alt=&#34;Toy resource not found&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;good:7c8715bb330e5cc21c99494376b84830&#34;&gt;Good&lt;/h4&gt;
 
@@ -492,7 +492,7 @@ Other specific agents may instead manage private resources by gaining an &lt;str
 &lt;li&gt;&lt;em&gt;Authorization can be revoked&lt;/em&gt;: Revoking authentication means losing memory of the identity of someone, since authentication boils down to identifying someone. Denying access to a resource instead means you are revoking an authorization to someone you can identify.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/20170304-rest-series/10-nomoremetaphors-cat.png&#34; alt=&#34;Please, move on...&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/20170304-rest-series/10-nomoremetaphors-cat.png&#34; alt=&#34;Please, move on...&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Uoookkey, enough metaphors; in the context of our service layer we can say the user can authenticate by providing credentials and be authorized to access resources by a permissions framework.&lt;/p&gt;
 

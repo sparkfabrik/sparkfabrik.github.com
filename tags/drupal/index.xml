@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Drupal on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/drupal/</link>
+    <link>https://sparkfabrik.github.io/tags/drupal/</link>
     <description>Recent content in Drupal on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Tue, 22 Nov 2016 11:02:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/drupal/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/drupal/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Avoid bottlenecks on a Drupal web application and how identify it with profiling</title>
-      <link>http://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</link>
+      <link>https://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</link>
       <pubDate>Tue, 22 Nov 2016 11:02:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</guid>
+      <guid>https://sparkfabrik.github.io/2016/11/22/avoid-bottlenecks-on-a-drupal-web-application-and-how-identify-it-with-profiling</guid>
       <description>
 
 &lt;h2 id=&#34;introdution:85ecb63f3cadea5d1c4d918e23974e4c&#34;&gt;Introdution&lt;/h2&gt;
@@ -198,10 +198,10 @@ that are the same things.
     
     <item>
       <title>Brown bag happy-hour, May 4th 2016</title>
-      <link>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</link>
+      <link>https://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</link>
       <pubDate>Tue, 10 May 2016 08:51:09 +0200</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</guid>
+      <guid>https://sparkfabrik.github.io/2016/05/10/brown-bag-happy-hour-2016-05-04</guid>
       <description>
 
 &lt;p&gt;News about Drupal, Backtrac Casestudy, Drupal Developer Days and PHP for this new appointment of BBH!&lt;/p&gt;
@@ -259,10 +259,10 @@ Nette Framework is an Open Source framework for creating web applications in PHP
     
     <item>
       <title>Drush Make overwrites your custom .gitignore file</title>
-      <link>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</link>
+      <link>https://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</link>
       <pubDate>Fri, 08 Apr 2016 01:00:00 -0400</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</guid>
+      <guid>https://sparkfabrik.github.io/2016/04/08/drush-make-gitignore</guid>
       <description>
 
 &lt;h1 id=&#34;managing-a-customized-gitignore-file-across-drush-make-builds:a0167166354a1579d70789b020f359e4&#34;&gt;Managing a customized .gitignore file across drush make builds&lt;/h1&gt;

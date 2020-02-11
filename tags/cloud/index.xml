@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cloud on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/cloud/</link>
+    <link>https://sparkfabrik.github.io/tags/cloud/</link>
     <description>Recent content in Cloud on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Mon, 11 Feb 2019 08:51:09 +0200</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/cloud/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/cloud/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Crack the CKAD exam in first attempt</title>
-      <link>http://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</link>
+      <link>https://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</link>
       <pubDate>Mon, 11 Feb 2019 08:51:09 +0200</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</guid>
+      <guid>https://sparkfabrik.github.io/2019/02/11/crack-ckad-exam</guid>
       <description>
 
 &lt;h1 id=&#34;intro:0f519f6e735a0b1a1ae6a66045f923af&#34;&gt;Intro &lt;/h1&gt;
@@ -30,7 +30,7 @@ And, as someone who loves challenges, on 20th December 2019, I took the Certifie
 &lt;p&gt;So, you need to solve them by using only a terminal and an editor in a specific cluster. And you really need to familiarize yourself with K8s for that. 🙂
 But, no worries; in my opinion, I think it is not that complicated as an exam. Having also a &lt;strong&gt;66%&lt;/strong&gt; passing score, to me it&amp;rsquo;s achievable.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/logo_ckad.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/logo_ckad.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;crack:0f519f6e735a0b1a1ae6a66045f923af&#34;&gt;Crack&lt;/h1&gt;
 
@@ -63,7 +63,7 @@ This &lt;a href=&#34;https://linuxacademy.com/cp/modules/view/id/305&#34;&gt;cou
 
 &lt;p&gt;Best of luck! 💪&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/Simon-Gjetaj-CKAD.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/Simon-Gjetaj-CKAD.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

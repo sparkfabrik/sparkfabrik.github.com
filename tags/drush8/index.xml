@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Drush8 on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/drush8/</link>
+    <link>https://sparkfabrik.github.io/tags/drush8/</link>
     <description>Recent content in Drush8 on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Tue, 19 Apr 2016 08:51:09 +0200</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/drush8/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/drush8/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Brown bag happy-hour, April 19th 2016</title>
-      <link>http://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</link>
+      <link>https://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</link>
       <pubDate>Tue, 19 Apr 2016 08:51:09 +0200</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</guid>
+      <guid>https://sparkfabrik.github.io/2016/04/19/brown-bag-happy-hour</guid>
       <description>
 
 &lt;p&gt;News about Drupal, Telegram and Youtube for this new appointment of BBH!&lt;/p&gt;
@@ -44,7 +44,7 @@
 
 &lt;h3 id=&#34;a-drupal-distribution-for-publishers-thunder:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;A drupal distribution for publishers: Thunder&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_thunder.jpg&#34; alt=&#34;Thunder distribution&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/2016_thunder.jpg&#34; alt=&#34;Thunder distribution&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Media group &lt;a href=&#34;http://www.hubert-burda-media.com/&#34;&gt;Huber Burda Media&lt;/a&gt; released its Drupal 8 distribution, &lt;a href=&#34;http://www.thunder.org/&#34;&gt;Thunder&lt;/a&gt;, that includes contrib and custom modules selected for publisher’s world. This distribution is born thanks to a strong collaboration between publishers and developers and the final product shows a particularly care to UX that soothes the publisher’s workflow.
 And, last but not least, it is built on Drupal 8!&lt;/p&gt;
@@ -53,7 +53,7 @@ And, last but not least, it is built on Drupal 8!&lt;/p&gt;
 
 &lt;h3 id=&#34;telegram-bot-api-2-0:7d67e1a9fe6dd17323871a367af8d8a3&#34;&gt;Telegram Bot API 2.0&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_telegram.jpg&#34; alt=&#34;Telegram Bot API 2.0&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/2016_telegram.jpg&#34; alt=&#34;Telegram Bot API 2.0&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One year after the the first release of its Bot Platform, Telegram announces new tools for it: Bot Platform 2.0&lt;/p&gt;
 
@@ -96,10 +96,10 @@ And, last but not least, it is built on Drupal 8!&lt;/p&gt;
     
     <item>
       <title>Brown bag happy-hour, April 5th 2016</title>
-      <link>http://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</link>
+      <link>https://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</link>
       <pubDate>Wed, 06 Apr 2016 08:51:09 +0200</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</guid>
+      <guid>https://sparkfabrik.github.io/2016/04/06/brown-bag-happy-hour</guid>
       <description>
 
 &lt;p&gt;In the first BBH of spring 2016 Marcello Testi discussed about Drush Make related issues within Drush8, and Paolo Mainardi introduced the Hugo static site generator to the team in order to kickstart the &lt;a href=&#34;http://www.sparkfabrik.com/&#34; title=&#34;SparkFabrik&#34;&gt;SparkFabrik&lt;/a&gt; Tech Blog. We also talked a little about design thanks to our weekly news digest.&lt;/p&gt;
@@ -110,7 +110,7 @@ And, last but not least, it is built on Drupal 8!&lt;/p&gt;
 
 &lt;h3 id=&#34;adobe-xd:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;Adobe XD&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_adobexd.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/2016_adobexd.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Originally know as “Project Comet&amp;rdquo;, Adobe has released the preview of &lt;a href=&#34;http://blogs.adobe.com/creativecloud/introducing-adobe-experience-design-cc-preview/&#34;&gt;Adobe XD&lt;/a&gt;, it&amp;rsquo;s own tool intended for design and prototyping of user experience projects. The tool it&amp;rsquo;s an early stage release that still does not offer a full stack of features as we are used to with more advanced (and mature) softwares like Sketch or Adobe Photoshop, but there&amp;rsquo;s a &lt;a href=&#34;https://www.youtube.com/playlist?list=PLD8AMy73ZVxXvBQcZAnOcu57JCFxLi7bQ&#34;&gt;lot of stuff moving on&lt;/a&gt; and we think it&amp;rsquo;s worth trying.&lt;/p&gt;
 
@@ -127,7 +127,7 @@ And, last but not least, it is built on Drupal 8!&lt;/p&gt;
 
 &lt;h3 id=&#34;olo-reached-founding-goal:9c444aa2dfdea4e5244e9f58da10b482&#34;&gt;OLO reached founding goal&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/2016_olo.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/2016_olo.jpg&#34; alt=&#34;Adobe XD&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The Italian Kickstarter project &lt;a href=&#34;https://www.kickstarter.com/projects/olo3d/olo-the-first-ever-smartphone-3d-printer&#34;&gt;Olo&lt;/a&gt;, a 3D printer suited for the smartphones screen, has reached the funding goal and is running fast towards more stellar ones. Promising very good print resolution at low costs, this 3D printer could be a step forward to unchain the potential of personal projects prototyping and experimentation, but also a new frontier to many other unexplored fields like the home-productions of games.&lt;/p&gt;
 

@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/blog/</link>
+    <link>https://sparkfabrik.github.io/tags/blog/</link>
     <description>Recent content in Blog on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Tue, 05 Apr 2016 11:02:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>A nerdy editorial experiment</title>
-      <link>http://sparkfabrik.github.io/2016/04/05/a-nerdy-editorial-experiment</link>
+      <link>https://sparkfabrik.github.io/2016/04/05/a-nerdy-editorial-experiment</link>
       <pubDate>Tue, 05 Apr 2016 11:02:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/04/05/a-nerdy-editorial-experiment</guid>
+      <guid>https://sparkfabrik.github.io/2016/04/05/a-nerdy-editorial-experiment</guid>
       <description>
 
-&lt;p&gt;OK, I admit there&amp;rsquo;s nothing more &lt;a href=&#34;http://sparkfabrik.github.io/img/hipster.png&#34;&gt;hipster&lt;/a&gt; than describe themselves as &lt;a href=&#34;http://sparkfabrik.github.io/img/nerd.png&#34;&gt;nerds&lt;/a&gt;. But I had to draw your attention somehow.&lt;/p&gt;
+&lt;p&gt;OK, I admit there&amp;rsquo;s nothing more &lt;a href=&#34;https://sparkfabrik.github.io/img/hipster.png&#34;&gt;hipster&lt;/a&gt; than describe themselves as &lt;a href=&#34;https://sparkfabrik.github.io/img/nerd.png&#34;&gt;nerds&lt;/a&gt;. But I had to draw your attention somehow.&lt;/p&gt;
 
 &lt;h3 id=&#34;would-you-ever-say-there-is-still-room-to-evolve-the-concept-of-blogging:aa8805dea155bcaea150b85f7d77fe7a&#34;&gt;Would you ever say there is still room to evolve the concept of blogging?&lt;/h3&gt;
 

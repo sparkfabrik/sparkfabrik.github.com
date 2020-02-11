@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/javascript/</link>
+    <link>https://sparkfabrik.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Wed, 01 Mar 2017 14:47:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Espruino on NodeMCU (step-by-step guide)</title>
-      <link>http://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</link>
+      <link>https://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</link>
       <pubDate>Wed, 01 Mar 2017 14:47:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</guid>
+      <guid>https://sparkfabrik.github.io/2017/03/01/espruino-nodemcu-step-by-step</guid>
       <description>
 
 &lt;h2 id=&#34;introduction:181902d417846fa121f0e69f03cf2870&#34;&gt;Introduction&lt;/h2&gt;
@@ -129,7 +129,7 @@ wifi.save()
 &lt;p&gt;NodeMCU GPIO label don&amp;rsquo;t match the actual GPIO pin. With Espruino, there is a NodeMCU class that allows an easy mapping between Espruino and NodeMCU pins.
 Please refer to the &lt;a href=&#34;http://www.espruino.com/Reference#NodeMCU&#34;&gt;espruino reference&lt;/a&gt; for it.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/espruino-dht11-min.jpg&#34; alt=&#34;NodeMCU DHT11 connection&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/espruino-dht11-min.jpg&#34; alt=&#34;NodeMCU DHT11 connection&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On &lt;a href=&#34;https://www.espruino.com/IoT+Services&#34;&gt;&lt;em&gt;IoT Services&lt;/em&gt;&lt;/a&gt; section on Espruino.com there are few examples of how to use external services to push data.&lt;/p&gt;
 

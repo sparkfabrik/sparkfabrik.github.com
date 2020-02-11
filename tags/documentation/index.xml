@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Documentation on Tech @ SparkFabrik</title>
-    <link>http://sparkfabrik.github.io/tags/documentation/</link>
+    <link>https://sparkfabrik.github.io/tags/documentation/</link>
     <description>Recent content in Documentation on Tech @ SparkFabrik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>info@sparkfabrik.com (Sparkfabrik)</managingEditor>
     <webMaster>info@sparkfabrik.com (Sparkfabrik)</webMaster>
     <lastBuildDate>Tue, 14 Jun 2016 11:02:30 +0000</lastBuildDate>
-    <atom:link href="http://sparkfabrik.github.io/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sparkfabrik.github.io/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Wait a minute, Doc</title>
-      <link>http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</link>
+      <link>https://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</link>
       <pubDate>Tue, 14 Jun 2016 11:02:30 +0000</pubDate>
       <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>http://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</guid>
+      <guid>https://sparkfabrik.github.io/2016/06/14/wait-a-minute-doc</guid>
       <description>
 
 &lt;p&gt;Only the brave can be web developers today.
@@ -34,7 +34,7 @@ It may not be a panacea but surely it will streamline the process of documentati
 
 &lt;h3 id=&#34;hey-doc-this-is-heavy:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Hey doc, this is heavy!&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-thisisheavy-meme.jpg&#34; alt=&#34;This is heavy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/wamd-thisisheavy-meme.jpg&#34; alt=&#34;This is heavy&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So let&amp;rsquo;s start listing our pains with project documentation:&lt;/p&gt;
 
@@ -80,7 +80,7 @@ This in turn makes some people the SPOF for important information, which is neve
 
 &lt;h3 id=&#34;back-to-the-future:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Back to the future&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-gigawatts-meme.jpg&#34; alt=&#34;I got gigawatts&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/wamd-gigawatts-meme.jpg&#34; alt=&#34;I got gigawatts&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And it happened.
 A customer asked our CTO to write guidelines on how to ensure maximum performance on the project before committing new contributions.&lt;/p&gt;
@@ -174,7 +174,7 @@ _And here is an even more silly meme_
 &lt;p&gt;Yes! It is THAT simple! :)&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-wasfast-meme.jpg&#34; alt=&#34;Whew... this was fast&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/wamd-wasfast-meme.jpg&#34; alt=&#34;Whew... this was fast&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;hey-you-get-your-damn-hands-off-it:cb7242210f870347cebbc9c2f1daff46&#34;&gt;Hey, you! Get your damn hands off it!&lt;/h3&gt;
 
@@ -204,7 +204,7 @@ Actually there are a lot of potential reasons, but leave me my drama and follow 
 &lt;p&gt;Want to go the easy way?
 You can test the all of the above cloning this repo: &lt;a href=&#34;https://github.com/stickgrinder/spark-docker-raneto-demo&#34;&gt;https://github.com/stickgrinder/spark-docker-raneto-demo&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://sparkfabrik.github.io/posts/wamd-calculations-meme.jpg&#34; alt=&#34;You did almost nothing...&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sparkfabrik.github.io/posts/wamd-calculations-meme.jpg&#34; alt=&#34;You did almost nothing...&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Mind that you have to have dnsdock in place &lt;em&gt;OR&lt;/em&gt; create an entry in the hostfile to resolve &lt;code&gt;docs.demo.sparkfabrik.loc&lt;/code&gt; to the IP of the container started by docker-compose.&lt;/p&gt;
 
