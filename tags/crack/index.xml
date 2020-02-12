@@ -45,8 +45,9 @@ This &lt;a href=&#34;https://linuxacademy.com/cp/modules/view/id/305&#34;&gt;cou
 
 &lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; When you ssh on a node (you would probably need to gain root access using &lt;code&gt;sudo -i&lt;/code&gt;), keep in mind that you may need to exit twice, as the first exit may get you out of the superuser mode and the second one will get you out of the node. :vim:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Get a detailed explanation of resources, as well as the fields you can populate with &lt;code&gt;kubectl explain --recursive&lt;/code&gt;. ℹ️
-️
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Get a detailed explanation of resources, as well as the fields you can populate with &lt;code&gt;kubectl explain --recursive&lt;/code&gt;. ℹ️&lt;/p&gt;
+
+&lt;p&gt;️
 &lt;strong&gt;6.&lt;/strong&gt;  This command can help, when you want to get commands on resource creation: &lt;code&gt;kubectl run --help&lt;/code&gt; 🤔&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;7.&lt;/strong&gt; Use the embedded notepad from the exam system, if you skip a question. (I skipped some long questions having only 2%-3% of weight. In my case, questions got progressively harder, so manage your time carefully.) 🗒️&lt;/p&gt;
