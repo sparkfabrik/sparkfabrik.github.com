@@ -5,7 +5,7 @@ tags        = ['ckad', 'exam', 'crack', 'kubernetes', 'cloud', 'devops']
 topics      = ['Certified Kubernetes Application Developer (CKAD) Exam']
 description = "Tips for cracking the CKAD exam in first attempt"
 slug        = 'crack-ckad-exam'
-author      = "Simon Gjetaj"
+author      = "Simon"
 +++
 
 # Intro 
