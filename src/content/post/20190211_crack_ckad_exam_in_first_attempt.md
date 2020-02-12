@@ -39,6 +39,7 @@ This [course](https://linuxacademy.com/cp/modules/view/id/305) from Linux Academ
 
 
 **5.** Get a detailed explanation of resources, as well as the fields you can populate with `kubectl explain --recursive`. ℹ️
+
 ️
 **6.**  This command can help, when you want to get commands on resource creation: `kubectl run --help` 🤔
 
