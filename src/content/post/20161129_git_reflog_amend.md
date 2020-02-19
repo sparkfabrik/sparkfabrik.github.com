@@ -7,7 +7,7 @@ description = "Personal experience on getting in trouble with a common git comma
 slug        = 'trapped-by-amend-saved-by-reflog'
 author      = "Marcello"
 +++
-[SparkFabrik]: http://www.sparkfabrik.com/  "SparkFabrik"
+[SparkFabrik]: https://www.sparkfabrik.com/  "SparkFabrik"
 
 We use Git on a daily basis, and most of the time we always enter the same commands.
 It can happen to found ourselves trapped by one of them, sometimes because we forgot a side-effect, other times because we confused the right option.

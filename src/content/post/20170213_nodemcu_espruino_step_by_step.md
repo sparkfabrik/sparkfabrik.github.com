@@ -7,7 +7,7 @@ description = "How to flash NodeMCU with Espruino firmware and basic examples on
 slug        = "espruino-nodemcu-step-by-step"
 author      = "Bladedu"
 +++
-[SparkFabrik]: http://www.sparkfabrik.com/  "SparkFabrik"
+[SparkFabrik]: https://www.sparkfabrik.com/  "SparkFabrik"
 
 ## Introduction
 This step-by-step guide is going to help you setting up and use [Espruino](https://www.espruino.com/ "A firmware JavaScript Interpreter for Microcontrollers that runs on a variety of different chipsets") on NodeMCU device.
