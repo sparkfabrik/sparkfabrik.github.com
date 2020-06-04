@@ -1,6 +1,6 @@
 ---
 type: archive
-title: "Blog archive"
+title: "Tech archive"
 ---
 
-Blog archive
+Tech archive
