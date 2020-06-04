@@ -1735,16 +1735,6 @@ Both entities core businesses were founded on Drupal and other strategic tools a
     </item>
     
     <item>
-      <title>Blog archive</title>
-      <link>https://sparkfabrik.github.io/archive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>info@sparkfabrik.com (Sparkfabrik)</author>
-      <guid>https://sparkfabrik.github.io/archive/</guid>
-      <description>&lt;p&gt;Blog archive&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Team</title>
       <link>https://sparkfabrik.github.io/page/team/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1849,6 +1839,16 @@ Both entities core businesses were founded on Drupal and other strategic tools a
   &lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tech archive</title>
+      <link>https://sparkfabrik.github.io/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>info@sparkfabrik.com (Sparkfabrik)</author>
+      <guid>https://sparkfabrik.github.io/archive/</guid>
+      <description>&lt;p&gt;Tech archive&lt;/p&gt;
 </description>
     </item>
     
