@@ -10,25 +10,25 @@ slug  = 'laravel-dispatching-events'
 
 We've been using Laravel in one of our long term projects as an API backend, and we've found that its Event layer became more useful as development went on and the project grew in complexity. The earlier you design and utilize the Event layer, the more you can decouple the various processes within your application, and development will become far more manageable.
 
-Laravel's Event layer is a basic event and listener system. Listener and Event classes are stored in their respective app/Listener and app/Events directories
+Laravel's Event layer is a basic event and listener system. Listener and Event classes are stored in their respective `app/Listeners` and `app/Events` directories
 
 # Why use Events?
 
 Events are a fantastic way of decoupling actions and business logic, removing complexity and spaghetti code. 
 
-I'll start with an example of a problem we encountered recently which was solved with an Event. Within one of our service classes, we needed to update the names of all of a Shop's products whenever the shop itself changed name. We had a ShopService, which updated the Shop's name, and a ProductService. 
+I'll start with an example of a problem we encountered recently which was solved with an Event. Within one of our service classes, we needed to update the names of all of a Shop's products whenever the shop itself changed name. We had a `ShopService`, which updated the Shop's name, and a `ProductService`. 
 
-The ProductService was already initializing the ShopService within its constructor, and so initialising the ShopService within the ProductService's constructor would cause an infinite loop and rightfully die on execution.
+The `ProductService` was already initializing the `ShopService` within its constructor, and so initialising the `ShopService` within the `ProductService`'s constructor would cause an infinite loop and rightfully die on execution.
 
 The solution was create an Event whenever a Shop's name was updated, with a listener that would update the names of all products within that shop. 
 
-Laravel's handy CLI Artisan allows for easy generation of Events and Listeners classes with the following commands:
+Laravel's handy Artisan CLI allows for easy generation of Events and Listeners classes with the following commands:
 
 `php artisan make:event ShopUpdated`
 
 `php artisan make:listener UpdateProductName --event ShopUpdated`
 
-These classes should now be bound to each other within `listen` array of the EventServiceProvider class found under the `app/Providers` directory:
+These classes should now be bound to each other within `listen` array of the `EventServiceProvider` class found under the `app/Providers` directory:
 
 ```php
 ShopUpdated::class => [ // Event
@@ -62,7 +62,7 @@ class ShopUpdated
     use Dispatchable, SerializesModels;
 
     public $shop;
-
+pass
     /**
      * Create a new event instance.
      *
@@ -124,17 +124,17 @@ class ChangeProductName implements ShouldQueue
 
 # Dispatching Events
 
-This is done simply by calling the `dispatch` static method of the event (Laravel 8. For other versions of Laravel, you have to pass an instance of the event). In our case, we want to dispatch the event within the `edit` method of our `ShopService` when the shop's name is changed:
+This is done simply by calling the `dispatch` static method of the event (Laravel 8 and up. For other versions of Laravel, you have to pass a new instance of the event). In our case, we want to dispatch the event within the `edit` method of our `ShopService` when the shop's name is changed:
 
 
-** Laravel > 8 **
+**Laravel > 8:**
 ```php
-if ($request->get('name')) {
-    ShopUpdated::dispatch($shop);        
+if ($request->get('name')) { // If the name is being changed
+    ShopUpdated::dispatch($shop); // We trigger the event
 }
 ```
 
-** Laravel < 8 **
+**Laravel < 8:**
 ```php
 if ($request->get('name')) {
     event(new ShopUpdated($shop));
@@ -155,7 +155,10 @@ Event::assertListening(
 );
 ```
 
-* Dispatch the event
+* Dispatch the event:
+```php
+ShopUpdated::dispatch($shop);
+```
 * Assert the event was dispatched:
 ```php
 Event::assertDispatched(ShopUpdated::class)
@@ -170,8 +173,7 @@ If instead you'd prefer to mock an event, preventing it the listener from execut
 
 `Event::fake()`
 
-`Event::assertDispatched(OrderShipped::class)`
-`true`
+`Event::assertDispatched(ShopUpdated::class)` **=>** `true`
 
 See more about Mocking in Laravel on the official documentation: https://laravel.com/docs/8.x/mocking
 
